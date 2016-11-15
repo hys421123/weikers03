@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/ll_msg"
+    android:clickable="true"
+    >
+
+        <!--头像姓名-->
+        <LinearLayout
+            android:layout_marginLeft="@dimen/tendency_item_leftmargin"
+            android:layout_marginTop="@dimen/tendency_item_topmargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/roundIv_tendComment_head"
+                android:layout_marginRight="16dp"
+                android:layout_width="@dimen/tendency_item_head_height"
+                android:layout_height="@dimen/tendency_item_head_height"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/default_head"
+                app:riv_oval="true"
+                />
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_tendComment"
+                    android:textSize="@dimen/tendency_item_font_big"
+                    android:gravity="center_vertical"
+                    android:text="abc评论了你：写的不错"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
+
+                <TextView
+                    android:textColor="@color/font_gray_color"
+                    android:id="@+id/tv_tendCommentPubtime"
+                    android:textSize="@dimen/tendency_item_font_small"
+                    android:gravity="center_vertical"
+                    android:text="2分钟前"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!--  上面是头像姓名-->
+    <View
+        android:layout_marginTop="6dp"
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/division_line"
+        />
+    <!--</LinearLayout>-->
+</LinearLayout>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <!--android:fitsSystemWindows="true"-->
+
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+        android:id="@+id/clayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/login_gray_background"
+        >
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/login_gray_background"
+            >
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/registerToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/login_blue_toolbar"
+                app:navigationIcon="@drawable/ic_back_arrow"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                android:theme="@style/AppTheme"
+
+                >
+                <!--?attr/actionBarSize-->
+                <TextView
+                    android:paddingLeft="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height= "wrap_content"
+                    android:text="注册"
+                    android:textSize="20sp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white"
+                    />
+
+            </android.support.v7.widget.Toolbar>
+
+            <!--这是用户名、密码、登录合成的linearlayout-->
+            <LinearLayout
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/login_layout"
+                android:background="@drawable/ic_card_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+                android:padding="@dimen/padding_half">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    >
+
+
+                    <ImageView
+                        android:clickable="true"
+                        android:layout_marginLeft="10dp"
+                       android:id="@+id/iv_add_photo"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/ic_camera"
+
+                        />
+
+                    <com.team.witkers.views.KeyEditText
+                        android:layout_alignBottom="@id/iv_add_photo"
+                        android:layout_toLeftOf="@id/iv_add_photo"
+                        android:layout_alignParentLeft="true"
+                        android:id="@+id/et_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_edit_text_default"
+                        android:drawableLeft="@drawable/ic_person_outline_white2_24dp"
+                        android:drawablePadding="@dimen/padding_half"
+                        android:hint="用户名注册后无法更改"
+                        android:padding="@dimen/padding_half"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@drawable/edittext_cursor"
+                        app:backgroundTint="@color/selector_focus"
+                        app:drawableLeftTint="@color/selector_focus"
+                        android:textSize="14sp"
+                        />
+                </RelativeLayout>
+
+
+                <!--android:background="@drawable/ic_edit_text_default"                -->
+                <com.team.witkers.views.KeyEditText
+                    android:id="@+id/et_phonenum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/ic_edit_text_default"
+                    android:drawableLeft="@drawable/ic_phone11"
+                    android:drawablePadding="@dimen/padding_half"
+                    android:hint="您的手机号码"
+                    android:inputType="phone"
+                    android:padding="@dimen/padding_half"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="14sp"
+                    app:backgroundTint="@color/selector_focus"
+                    app:drawableLeftTint="@color/selector_focus" />
+
+                <com.team.witkers.views.KeyEditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/ic_edit_text_default"
+                    android:drawableLeft="@drawable/ic_lock_outline_white_24dp"
+                    android:drawablePadding="@dimen/padding_half"
+                    android:hint="填写登录密码"
+                    android:inputType="textPassword"
+                    android:padding="@dimen/padding_half"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="14sp"
+                    app:backgroundTint="@color/selector_focus"
+                    app:drawableLeftTint="@color/selector_focus" />
+
+                <!--android:gravity="center_horizontal"-->
+                <!--android:hint="edit"-->
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    />
+
+                <com.bilibili.magicasakura.widgets.TintButton
+                    android:id="@+id/btn_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/selector_bg_register_btn"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:text="注 册"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textsize_large" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击注册按钮，即表示你同意"
+                android:textSize="12sp"
+                android:textColor="@color/register_terms1"
+                />
+                <TextView
+                    android:id="@+id/tv_register_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="《微客生活服务协议》"
+                    android:textSize="12sp"
+                    android:textColor="@color/register_terms2"
+
+                    />
+            </LinearLayout>
+        </android.support.design.widget.AppBarLayout>
+    </android.support.design.widget.CoordinatorLayout>

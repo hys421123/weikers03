@@ -1,0 +1,9 @@
+1. zs 打车->开车  choose->hys3
+claimItem:  别怂,0.1; hys3,0.01
+
+
+2.zs 家政->家务事  无choose
+claimItem:  abc,0.1;  别怂,0.1;   thorn,0.01;  ls,0.01
+
+3.hys3 打架->上来就是打  choose->别怂
+claimItem: 别怂,0.01; abc,0.01

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f3f3f3"
+    android:orientation="vertical"
+    >
+
+    <com.team.witkers.views.MyPubItem
+        android:layout_marginTop="@dimen/me_frm__item_bigmargin"
+        android:clickable="true"
+        android:background="@color/selector_pub_item"
+        android:id="@+id/customView_like_tendencies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:rightIconVisibility="false"
+        app:leftIcon="@drawable/fragment_find_tend"
+        android:paddingLeft="5dp"
+        app:myPubTitle="动态"
+
+        />
+
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/me_frm__item_bigmargin"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+    <com.team.witkers.views.MyPubItem
+        android:clickable="true"
+        android:paddingLeft="5dp"
+        android:background="@color/selector_pub_item"
+        android:id="@+id/customView_like_hotLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:rightIconVisibility="false"
+        app:leftIcon="@drawable/fragment_find_lable"
+        app:myPubTitle="热门标签"
+        />
+        <View
+            android:layout_height="1px"
+            android:layout_width="match_parent"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@color/division_line"
+            />
+        <com.team.witkers.views.MyPubItem
+            android:clickable="true"
+            android:paddingLeft="5dp"
+            android:background="@color/selector_pub_item"
+            android:id="@+id/customView_like_nearWke"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:rightIconVisibility="false"
+            app:leftIcon="@drawable/fragment_find_nearby"
+            app:myPubTitle="附近微客"
+            />
+    </LinearLayout>
+    <com.team.witkers.views.MyPubItem
+        android:layout_marginTop="@dimen/me_frm__item_bigmargin"
+        android:paddingLeft="5dp"
+        android:clickable="true"
+        android:background="@color/selector_pub_item"
+        android:id="@+id/customView_like_events"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:rightIconVisibility="false"
+        app:leftIcon="@drawable/fragment_find_activity"
+        app:myPubTitle="活动"
+        />
+
+    <com.team.witkers.views.MyPubItem
+        android:layout_marginTop="@dimen/me_frm__item_bigmargin"
+        android:paddingLeft="5dp"
+        android:clickable="true"
+        android:background="@color/selector_pub_item"
+        android:id="@+id/customView_like_advice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:rightIconVisibility="false"
+        app:myPubTitle="意见反馈"
+        app:leftIcon="@drawable/fragment_find_opinion"
+        />
+</LinearLayout>

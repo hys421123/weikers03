@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="D:\Android\Android Studio\gradle\gradle-2.14.1" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/addressSelect-library" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/frescoimageviewer-library" />
+            <option value="$PROJECT_DIR$/magicasukura-library" />
+            <option value="$PROJECT_DIR$/ninegrid-library" />
+            <option value="$PROJECT_DIR$/scissors-library" />
+            <option value="$PROJECT_DIR$/slideDateTimePicker-library" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

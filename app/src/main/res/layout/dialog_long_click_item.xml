@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_stick"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="15dp"
+            android:text="置顶该消息"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            android:background="@drawable/selector_fragment_orders_item"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/gray_light" />
+
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="15dp"
+            android:text="删除该消息"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            android:background="@drawable/selector_fragment_orders_item" />
+    </LinearLayout>
+</LinearLayout> 

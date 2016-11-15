@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.team.witkers">
+
+    <!-- 允许联网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 获取wifi网络状态的信息 -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> -->
+    <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 获取sd卡写的权限，用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 允许读取手机状态 用于创建BmobInstallation -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 获取sd卡的读权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- 用于访问网络，网络定位需要上网 -->
+    <!-- 用于读取手机当前的状态 -->
+    <!-- 写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据 -->
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/appicon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.PublishMissionActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.CropActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.RegisterVerifyActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- settingActivity相关 -->
+        <activity
+            android:name=".activity.setting.SettingActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.setting.AccountSafeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.setting.AboutActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.setting.ChangePwdActivity"
+            android:theme="@style/ThemeChnagePwd" />
+        <activity
+            android:name=".activity.find.TendencyActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.find.AddTendActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!-- 九宫格 添加多张图片，以九宫格显示，在AddTendActivity中调用 -->
+        <activity
+            android:name="com.zfdang.multiple_images_selector.ImagesSelectorActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".activity.find.TendDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.address.AddressSelectActivity"
+            android:label="@string/title_activity_address_select"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.homeitem.TaskDetailsActivity"
+            android:label="@string/title_activity_address_select"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.homeitem.PersonalHomePageActivity2"
+            android:label="@string/title_activity_personal_home_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!-- android:windowSoftInputMode="adjustResize"        view不被键盘遮挡 -->
+        <activity
+            android:name=".activity.homeitem.TaskDetailsActivity2"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service android:name=".service.MyService" />
+        <!-- 定位相关 -->
+        <service android:name="com.amap.api.location.APSService" />
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="e70ee7b023de09604e5fe41e09cf40e2" />
+        <!-- 4cb89e93340a2da116bf2ea9d6f04d11  后来weike 的key -->
+        <!-- b73a3f9bb4f52979c34beb26df9eda14   原来的key -->
+        <activity
+            android:name=".activity.orders.OrdersShowActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.editInfo.EditPersonalInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.editInfo.EditDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.orders.OrdersDoingShowActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.orders.OrdersEvaluateShowActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.orders.OrdersPayActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.find.UserComplaintActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.find.HotLableActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.find.SearchActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.CategorySelectActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.address.MapLocation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.HomeAddressSelectActivity"></activity>
+        <activity android:name=".activity.FindMissionPageActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <!--我的发布与认领-->
+        <activity android:name=".activity.pubclaim.MyClaimActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".activity.pubclaim.MyPubActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".activity.pubclaim.AllOrdersActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+
+    </application>
+
+</manifest>

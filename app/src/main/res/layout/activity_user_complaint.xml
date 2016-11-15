@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.find.UserComplaintActivity">
+
+    <include layout="@layout/topbar_back"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+    <EditText
+        android:id="@+id/et_complaint_resume"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_user_complaint"
+        android:hint="请用一句话描述您的意见"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:id="@+id/et_complaint_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_user_complaint"
+        android:gravity="left"
+        android:hint="请输入您的宝贵意见或建议！(200字以内)"
+        android:minLines="10"
+        android:padding="10dp"
+        android:maxLength="200"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="欢迎您为我们提出宝贵的意见或建议，您留下的任何信息都将用来改善我们的软件!"
+        android:textSize="@dimen/textsize_normal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="注：订单相关问题或紧急问题请拨打xxxxxxxxx获得及时帮助，意见反馈无法处理订单相关问题！"
+        android:textColor="@color/black"
+        android:textSize="@dimen/textsize_normal" />
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/selector_complaint_button_bg"
+        android:text="提交"
+        android:textColor="@color/white"
+        android:textSize="@dimen/tendency_item_font_big" />
+    </LinearLayout>
+</LinearLayout>

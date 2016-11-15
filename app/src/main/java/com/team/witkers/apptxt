@@ -1,0 +1,26 @@
+   //一个mission 发布任务需要分为有三种分类，
+            // 0.没人认领的，跳过封装；  mission.getClaimItemList()==null
+            // 1.有认领人数的，没有确定认领人的；  mission.getChooseClaimant()==null(大多数) ,msgOrdersBean.getClaimFlag=1
+            // 2.有确定认领人的，任务正在进行中的； mission.isFinished==false ,msgOrdersBean.getClaimFlag=2
+            // 3.有确定认领人的，任务已经完成的；   mission.isFinished==true ,msgOrdersBean.getClaimFlag=3
+
+missionTaker是认领任务的人，不一定是选中的人。
+
+
+   针对missionTaker的 我的认领，任务分类
+   1.有人领的，没有确定认领人的
+
+   2.已经确定由你认领，任务正在进行的
+if(mission.getChooseClaimant()!=null&&mission.getChooseClaimant().getClaimName().equals(MyApplication.mUser.getUsername())&&!mission.getFinished()){
+
+   3.由你认领，任务已经完成的
+
+    出现在我的认领页面的订单信息是  待完成即正在进行的任务
+
+    分割线
+      <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@color/division_line" />

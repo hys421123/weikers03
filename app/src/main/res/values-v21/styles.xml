@@ -1,0 +1,13 @@
+<resources>
+
+    <!--<item name="android:windowTranslucentStatus">true</item>-->
+    <style name="AppTheme.NoActionBar">
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@color/toolbar_color</item>
+    </style>
+    <!--<item name="android:statusBarColor">@color/toolbar_color</item>-->
+
+</resources>

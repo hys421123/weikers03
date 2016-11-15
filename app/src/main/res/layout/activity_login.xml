@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/ll_root_login"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/login_gray_background"
+    android:orientation="vertical"
+    >
+    <!--android:fitsSystemWindows="true"-->
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/clayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/login_gray_background"
+        >
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/login_gray_background"
+            >
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/loginToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/login_blue_toolbar"
+                app:navigationIcon="@drawable/ic_back_arrow"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                android:theme="@style/AppTheme"
+
+                >
+                <!--?attr/actionBarSize-->
+                <TextView
+                    android:paddingLeft="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height= "wrap_content"
+                    android:text="登录"
+                    android:textSize="20sp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white"
+                    />
+
+            </android.support.v7.widget.Toolbar>
+
+            <!--这是用户名、密码、登录合成的linearlayout-->
+            <LinearLayout
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/login_layout"
+                android:background="@drawable/ic_card_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+                android:padding="@dimen/padding_half">
+
+                <!--<com.team.witkers.views.KeyEditText-->
+                    <!--android:id="@+id/et_username"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@drawable/ic_edit_text_default"-->
+                    <!--android:drawableLeft="@drawable/ic_person_outline_white2_24dp"-->
+                    <!--android:drawablePadding="@dimen/padding_half"-->
+                    <!--android:hint="用户名/手机号"-->
+                    <!--android:padding="@dimen/padding_half"-->
+                    <!--android:singleLine="true"-->
+                    <!--android:textCursorDrawable="@drawable/edittext_cursor"-->
+                    <!--app:backgroundTint="@color/selector_login_focus"-->
+                    <!--app:drawableLeftTint="@color/selector_login_focus"-->
+                    <!--android:textSize="14sp"-->
+                    <!--/>-->
+
+                <com.team.witkers.views.MyEditText
+                    android:padding="@dimen/padding_half"
+                    android:id="@+id/et_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:isTextChangeListener="true"
+                    app:leftDrawable="@drawable/ic_person_gray333"
+                    app:leftDrawableBlue="@drawable/ic_person_blue22"
+                    />
+
+                <com.team.witkers.views.MyEditText
+                    app:isInputPwd="true"
+                    android:padding="@dimen/padding_half"
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:isTextChangeListener="true"
+                    app:hint="请输入密码"
+                    app:leftDrawable="@drawable/ic_lock_gray333"
+                    app:leftDrawableBlue="@drawable/ic_lock_blue22"
+                    />
+
+                <!--app:leftDrawable="@drawable/ic_lock_blue22"-->
+                <!--app:leftDrawableBlue="@drawable/ic_lock_blue22"-->
+
+                <!--android:background="@drawable/ic_edit_text_default"                -->
+                <!--<com.team.witkers.views.KeyEditText-->
+                    <!--android:id="@+id/et_password"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="15dp"-->
+                    <!--android:background="@drawable/ic_edit_text_default"-->
+                    <!--android:drawableLeft="@drawable/ic_lock_outline_white_24dp"-->
+                    <!--android:drawablePadding="@dimen/padding_half"-->
+                    <!--android:hint="请输入密码"-->
+                    <!--android:inputType="textPassword"-->
+                    <!--android:padding="@dimen/padding_half"-->
+                    <!--android:singleLine="true"-->
+                    <!--android:textCursorDrawable="@drawable/edittext_cursor"-->
+                    <!--android:textSize="14sp"-->
+                    <!--app:backgroundTint="@color/selector_login_focus"-->
+                    <!--app:drawableLeftTint="@color/selector_login_focus" />-->
+
+                <!--android:gravity="center_horizontal"-->
+                <!--android:hint="edit"-->
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    />
+
+                <com.bilibili.magicasakura.widgets.TintButton
+                    android:id="@+id/btn_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/selector_bg_login_btn"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:text="登 录"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textsize_large" />
+
+
+            </LinearLayout>
+
+        </android.support.design.widget.AppBarLayout>
+    </android.support.design.widget.CoordinatorLayout>
+    <TextView
+        android:id="@+id/tv_register"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="注册成为新用户"
+        android:textSize="14sp"
+        android:textColor="@color/register_gray_text"
+
+        />
+</LinearLayout>
