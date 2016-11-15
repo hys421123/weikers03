@@ -46,6 +46,7 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListListener;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    //let me see
     public static final String BmobID = "01e6a3045fb017cddbc2b79ee38a705c";
     private static final int REQUESTCODE_MELOG = 1;//从Mefragment中登录进去，若返回，则至主界面
     private static final int REQUESTCODE_LOCATION = 3;
