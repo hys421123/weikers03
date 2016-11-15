@@ -1,5 +1,9 @@
 [
     {
+        "merged": "D:\\Repository\\weikers03\\slideDateTimePicker-library\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\selection_divider.9.png",
+        "source": "D:\\Repository\\weikers03\\slideDateTimePicker-library\\src\\main\\res\\drawable-mdpi\\selection_divider.9.png"
+    },
+    {
         "merged": "E:\\ASprojects\\weikers\\Witkers\\slideDateTimePicker-library\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\selection_divider.9.png",
         "source": "E:\\ASprojects\\weikers\\Witkers\\slideDateTimePicker-library\\src\\main\\res\\drawable-mdpi\\selection_divider.9.png"
     }

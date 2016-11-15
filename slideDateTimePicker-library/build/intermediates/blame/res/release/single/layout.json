@@ -1,5 +1,9 @@
 [
     {
+        "merged": "D:\\Repository\\weikers03\\slideDateTimePicker-library\\build\\intermediates\\res\\merged\\release\\layout\\custom_tab.xml",
+        "source": "D:\\Repository\\weikers03\\slideDateTimePicker-library\\src\\main\\res\\layout\\custom_tab.xml"
+    },
+    {
         "merged": "E:\\ASprojects\\weikers\\Witkers\\slideDateTimePicker-library\\build\\intermediates\\res\\merged\\release\\layout\\fragment_time.xml",
         "source": "E:\\ASprojects\\weikers\\Witkers\\slideDateTimePicker-library\\src\\main\\res\\layout\\fragment_time.xml"
     },
@@ -10,6 +14,18 @@
     {
         "merged": "E:\\ASprojects\\weikers\\Witkers\\slideDateTimePicker-library\\build\\intermediates\\res\\merged\\release\\layout\\custom_tab.xml",
         "source": "E:\\ASprojects\\weikers\\Witkers\\slideDateTimePicker-library\\src\\main\\res\\layout\\custom_tab.xml"
+    },
+    {
+        "merged": "D:\\Repository\\weikers03\\slideDateTimePicker-library\\build\\intermediates\\res\\merged\\release\\layout\\slide_date_time_picker.xml",
+        "source": "D:\\Repository\\weikers03\\slideDateTimePicker-library\\src\\main\\res\\layout\\slide_date_time_picker.xml"
+    },
+    {
+        "merged": "D:\\Repository\\weikers03\\slideDateTimePicker-library\\build\\intermediates\\res\\merged\\release\\layout\\fragment_date.xml",
+        "source": "D:\\Repository\\weikers03\\slideDateTimePicker-library\\src\\main\\res\\layout\\fragment_date.xml"
+    },
+    {
+        "merged": "D:\\Repository\\weikers03\\slideDateTimePicker-library\\build\\intermediates\\res\\merged\\release\\layout\\fragment_time.xml",
+        "source": "D:\\Repository\\weikers03\\slideDateTimePicker-library\\src\\main\\res\\layout\\fragment_time.xml"
     },
     {
         "merged": "E:\\ASprojects\\weikers\\Witkers\\slideDateTimePicker-library\\build\\intermediates\\res\\merged\\release\\layout\\slide_date_time_picker.xml",

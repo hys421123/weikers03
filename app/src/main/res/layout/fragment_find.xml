@@ -50,30 +50,70 @@
             android:layout_marginLeft="8dp"
             android:background="@color/division_line"
             />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+            <com.team.witkers.views.MyPubItem
+                android:clickable="true"
+                android:paddingLeft="5dp"
+                android:background="@color/selector_pub_item"
+                android:id="@+id/customView_like_nearWke"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:rightIconVisibility="false"
+                app:leftIcon="@drawable/fragment_find_nearby"
+                app:myPubTitle="附近微客"
+                />
+            <TextView
+                android:textColor="#bcdaed"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="（敬请期待）"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/me_frm__item_bigmargin"
+        >
+
+
+
         <com.team.witkers.views.MyPubItem
-            android:clickable="true"
+
             android:paddingLeft="5dp"
+            android:clickable="true"
             android:background="@color/selector_pub_item"
-            android:id="@+id/customView_like_nearWke"
+            android:id="@+id/customView_like_events"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:rightIconVisibility="false"
-            app:leftIcon="@drawable/fragment_find_nearby"
-            app:myPubTitle="附近微客"
+            app:leftIcon="@drawable/fragment_find_activity"
+            app:myPubTitle="活动"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:gravity="center"
+            android:textColor="#bcdaed"
+            android:layout_marginRight="10dp"
+            android:textSize="15sp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="（敬请期待）"
             />
-    </LinearLayout>
-    <com.team.witkers.views.MyPubItem
-        android:layout_marginTop="@dimen/me_frm__item_bigmargin"
-        android:paddingLeft="5dp"
-        android:clickable="true"
-        android:background="@color/selector_pub_item"
-        android:id="@+id/customView_like_events"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:rightIconVisibility="false"
-        app:leftIcon="@drawable/fragment_find_activity"
-        app:myPubTitle="活动"
-        />
+    </RelativeLayout>
 
     <com.team.witkers.views.MyPubItem
         android:layout_marginTop="@dimen/me_frm__item_bigmargin"

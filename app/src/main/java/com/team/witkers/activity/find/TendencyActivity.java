@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import com.gc.materialdesign.widgets.ProgressDialog;
 import com.hys.mylog.MyLog;
 import com.team.witkers.R;
+import com.team.witkers.activity.homeitem.PersonalHomePageActivity2;
 import com.team.witkers.adapter.TendencyAdapter;
 import com.team.witkers.base.BaseActivity;
 import com.team.witkers.bean.Mission;
