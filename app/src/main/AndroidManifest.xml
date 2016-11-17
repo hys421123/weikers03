@@ -112,11 +112,14 @@
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="89754d2e985829107b11bffc08dab2b7" />
+            android:value="b8b459082b24e7b91eb814772644c45d" />
 
         <!-- 4cb89e93340a2da116bf2ea9d6f04d11  后来weike 的key -->
         <!-- b73a3f9bb4f52979c34beb26df9eda14   原来的key -->
         <!--e70ee7b023de09604e5fe41e09cf40e2   彭进的key-->
+        <!--b8b459082b24e7b91eb814772644c45d   dell的key-->
+        <!--89754d2e985829107b11bffc08dab2b7  labtory's key-->
+
         <activity
             android:name=".activity.orders.OrdersShowActivity"
             android:theme="@style/AppTheme.NoActionBar" />

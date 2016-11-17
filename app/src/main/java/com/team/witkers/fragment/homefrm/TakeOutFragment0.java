@@ -95,8 +95,8 @@ public class TakeOutFragment0 extends BaseFragmentForDelayLoad implements SwipeR
         BmobQuery<Mission> query = new BmobQuery<>();
         query.addWhereEqualTo("category","外卖");
         // 按时间降序查询
-        query.addWhereNear("missionLocation",myPoint);
-        query.addWhereWithinKilometers("missionLocation",myPoint,1.0);
+//        query.addWhereNear("missionLocation",myPoint);
+//        query.addWhereWithinKilometers("missionLocation",myPoint,1.0);
         query.order("-createdAt");
         //返回8条数据，
         query.setLimit(LIMIT);
@@ -191,8 +191,8 @@ public class TakeOutFragment0 extends BaseFragmentForDelayLoad implements SwipeR
         query.order("-createdAt");
 //        query.include("myUser");
         // 如果是加载更多
-        query.addWhereNear("missionLocation",myPoint);
-        query.addWhereWithinKilometers("missionLocation",myPoint,1.0);
+//        query.addWhereNear("missionLocation",myPoint);
+//        query.addWhereWithinKilometers("missionLocation",myPoint,1.0);
         if (actionType == STATE_MORE) {
             // 处理时间查询
             Date date = null;
