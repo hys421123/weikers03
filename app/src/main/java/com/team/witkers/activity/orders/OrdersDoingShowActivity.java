@@ -1,7 +1,11 @@
 package com.team.witkers.activity.orders;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
@@ -23,6 +27,7 @@ import com.team.witkers.bean.ChooseClaimant;
 import com.team.witkers.bean.ClaimItems;
 import com.team.witkers.bean.Mission;
 import com.team.witkers.bean.MsgOrdersBean;
+import com.team.witkers.bean.MyUser;
 import com.team.witkers.utils.MyToast;
 import com.team.witkers.utils.TimeUtils2;
 
@@ -32,15 +37,16 @@ import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.UpdateListener;
 
-public class OrdersDoingShowActivity extends BaseActivity implements View.OnClickListener{
+public class OrdersDoingShowActivity extends BaseActivity implements View.OnClickListener {
 //任务详情，任务正在进行中的界面
 
-    private ImageView ivHead,iv_topBack,iv_selectedhead;
-    private TextView tvName,tvDistance,tvTime,tvDetail,tvMaxPrice,
-            tvCompleteTime,tvAddress,tv_selectedname,tv_selectedprice;
+    private ImageView ivHead, iv_topBack, iv_selectedhead;
+    private TextView tvName, tvDistance, tvTime, tvDetail, tvMaxPrice,
+            tvCompleteTime, tvAddress, tv_selectedname, tv_selectedprice;
     private Button btnSelect;
     private MsgOrdersBean msgOrdersBean;
     private Mission mission;
@@ -48,6 +54,8 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
     private int claimPosition;
     private String stateStr;
     private ImageButton ib_call;
+    //    private ChooseClaimant claimant;
+    private String phoneNum;
 
     @Override
     protected int setContentId() {
@@ -56,7 +64,7 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
 
     @Override
     protected void initView() {
-        ib_call= (ImageButton) findViewById(R.id.ib_call);
+        ib_call = (ImageButton) findViewById(R.id.ib_call);
         btnSelect = (Button) findViewById(R.id.btn_confirm);
         ivHead = (ImageView) findViewById(R.id.iv_head);
         iv_topBack = (ImageView) findViewById(R.id.iv_topBack);
@@ -67,9 +75,9 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
         tvMaxPrice = (TextView) findViewById(R.id.tv_maxprice);
         tvCompleteTime = (TextView) findViewById(R.id.tv_completetime);
         tvAddress = (TextView) findViewById(R.id.tv_address);
-        iv_selectedhead=(ImageView)findViewById(R.id.iv_selectedhead);
-        tv_selectedname= (TextView) findViewById(R.id.tv_selectedname);
-        tv_selectedprice= (TextView) findViewById(R.id.tv_selectedprice);
+        iv_selectedhead = (ImageView) findViewById(R.id.iv_selectedhead);
+        tv_selectedname = (TextView) findViewById(R.id.tv_selectedname);
+        tv_selectedprice = (TextView) findViewById(R.id.tv_selectedprice);
     }
 
     @Override
@@ -80,19 +88,19 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
     }
 
     @Override
-    protected void getIntentData(){
+    protected void getIntentData() {
         msgOrdersBean = (MsgOrdersBean) getIntent().getSerializableExtra("fromMsgOrdersBeanAdapter");
-        MyLog.i("content-->"+msgOrdersBean.getOrderContent()+"--stateInfo-->"+getIntent().getStringExtra("stateInfo"));
+        MyLog.i("content-->" + msgOrdersBean.getOrderContent() + "--stateInfo-->" + getIntent().getStringExtra("stateInfo"));
         Mission mission = queryMission(msgOrdersBean.getMissionId());//得到mission对象，设置mission详情的显示
         stateStr = getIntent().getStringExtra("stateInfo");
-        if(stateStr==null){
+        if (stateStr == null) {
             stateStr = "default";
         }
     }
 
     @Override
     protected void showView() {
-        switch (stateStr){
+        switch (stateStr) {
             case "任务正在进行中":
                 btnSelect.setBackgroundResource(R.color.Orders_confirmed);
                 btnSelect.setClickable(false);
@@ -109,8 +117,8 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
         }
     }
 
-    private Mission queryMission(final String missionId){
-        BmobQuery<Mission> query = new BmobQuery<Mission>();
+    private Mission queryMission(final String missionId) {
+        final BmobQuery<Mission> query = new BmobQuery<Mission>();
         query.getObject(missionId, new QueryListener<Mission>() {
             @Override
             public void done(final Mission mission, BmobException e) {
@@ -120,9 +128,9 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
                     @Override
                     public void run() {
                         String headUrl = mission.getPubUserHeadUrl();
-                        if(headUrl==null||headUrl.equals("")){
+                        if (headUrl == null || headUrl.equals("")) {
                             Glide.with(OrdersDoingShowActivity.this).load(R.drawable.default_head).into(ivHead);
-                        }else{
+                        } else {
                             Glide.with(OrdersDoingShowActivity.this).load(headUrl).into(ivHead);
                         }
                         tvName.setText(mission.getPubUserName());
@@ -131,31 +139,50 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
                                 TimeUtils2.stringToLong(mission.getCreatedAt(), TimeUtils2.FORMAT_DATE_TIME_SECOND));
                         tvTime.setText(pubTime);
                         SetDetails(mission.getInfo());//设置信息详情
-                        tvMaxPrice.setText(mission.getCharges()+"");
+                        tvMaxPrice.setText(mission.getCharges() + "");
                         tvCompleteTime.setText(mission.getFinishTime());
                         tvAddress.setText(mission.getAddress());
-                       ChooseClaimant claimant= mission.getChooseClaimant();
+                        ChooseClaimant claimant = mission.getChooseClaimant();
                         Glide.with(OrdersDoingShowActivity.this).load(claimant.getClaimHeadUrl()).into(iv_selectedhead);
                         tv_selectedname.setText(claimant.getClaimName());
-                        tv_selectedprice.setText(claimant.getClaimMoney()+"");
+                        tv_selectedprice.setText(claimant.getClaimMoney() + "");
+                        queryClaimant(claimant);
+
                     }
                 });
             }
 
+            private void queryClaimant(ChooseClaimant claimant) {
+                BmobQuery<MyUser> query2 = new BmobQuery<MyUser>();
+                query2.addWhereEqualTo("username", claimant.getClaimName());
+                query2.findObjects(new FindListener<MyUser>() {
+                    @Override
+                    public void done(List<MyUser> list, BmobException e) {
+                        if (e == null) {
+                            MyLog.i("查询唯一认领人成功");
+                            phoneNum = list.get(0).getMobilePhoneNumber();
+                            MyLog.v("phoneNum_ " + phoneNum);
+                        } else {
+                            MyLog.e("查询唯一认领人失败" + e.getMessage());
+                        }//else
+                    }//done
+                });
+            }//queryClaimant
+
             private void SetDetails(String info) {
                 SpannableString spannableString = new SpannableString(info);
                 int index1 = info.indexOf("#");
-                if (index1!=-1){
+                if (index1 != -1) {
                     int index2 = info.indexOf("#", index1 + 1);
-                    if(index2!=-1){
+                    if (index2 != -1) {
                         //NoUnderlineClickableSpan 设置为不要下划线的类
                         spannableString.setSpan(new NoUnderlineClickableSpan() {
                             @Override
-                            public void onClick(View widget){
+                            public void onClick(View widget) {
                                 //TODO 这里修改跳转的目标activity
-                                Intent intent = new Intent(OrdersDoingShowActivity.this,TaskDetailsActivity2.class);
+                                Intent intent = new Intent(OrdersDoingShowActivity.this, TaskDetailsActivity2.class);
                        /* intent.putExtra("fromTakeOutMissionAdapterLIN",dataList.get(position));*/
-                                Toast.makeText(OrdersDoingShowActivity.this,"label has been clicked",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(OrdersDoingShowActivity.this, "label has been clicked", Toast.LENGTH_SHORT).show();
                                 OrdersDoingShowActivity.this.startActivity(intent);
                             }
                         }, index1, index2 + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -171,8 +198,8 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
 
     //有问题
     private Boolean isSelected(List<ClaimItems> claimItemsList) {
-        for(int i=0;i<claimItemsList.size();i++){
-            if(claimItemsList.get(i).getClaimFlag()!=0){
+        for (int i = 0; i < claimItemsList.size(); i++) {
+            if (claimItemsList.get(i).getClaimFlag() != 0) {
                 claimPosition = i;
                 return true;
             }
@@ -187,30 +214,46 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
                 finish();
                 break;
             case R.id.btn_confirm:
-                MyToast.showToast(this,"确定已完成！");
-                List<ClaimItems> claimItemsList =mission.getClaimItemList();
+                MyToast.showToast(this, "确定已完成！");
+                List<ClaimItems> claimItemsList = mission.getClaimItemList();
                 isSelected(claimItemsList);
                 //有问题
                 mission.getClaimItemList().get(claimPosition).setClaimFlag(0);
-                SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss ");
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss ");
                 mission.setDealTime(new Date(System.currentTimeMillis()));
                 mission.update(mission.getObjectId(), new UpdateListener() {
                     @Override
                     public void done(BmobException e) {
-                        if(e==null){
+                        if (e == null) {
                             MyLog.i("更新成功");
                             btnSelect.setBackgroundResource(R.color.Orders_confirmed);
                             btnSelect.setClickable(false);
                             btnSelect.setText("任务已完成，等待评价");
-                        }else{
-                            MyLog.i("更新失败："+e.getMessage()+","+e.getErrorCode());
+                        } else {
+                            MyLog.i("更新失败：" + e.getMessage() + "," + e.getErrorCode());
                         }
                     }
                 });
                 break;
             case R.id.ib_call:
                 MyLog.i("ib_call");
-
+                if (phoneNum != null) {
+                    MyLog.i(phoneNum);
+                    Intent intent3 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+phoneNum));
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
+                    startActivity(intent3);
+                }
+                else
+                   MyLog.e("phone_null");
                 break;
         }
     }

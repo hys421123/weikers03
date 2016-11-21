@@ -239,13 +239,13 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
             }
             //第1种,有认领人数，没确定具体认领人
             if(mission.getChooseClaimant()==null){
-                MyLog.e("有人认领");
+//                MyLog.e("有人认领");
 
                 List<ClaimItems> claimItemsList =mission.getClaimItemList();
                 String missionId = mission.getObjectId();
                 int  takerNum = mission.getClaimItemList().size();
                 String content=mission.getInfo();
-                MyLog.e(content);
+//                MyLog.e(content);
                 String time =mission.getClaimItemList().get(takerNum-1).getClaimTime();
 //                MyLog.i("takerNum--->"+takerNum+"time--->"+mission.getClaimItemList().get(takerNum-1).getClaimTime());
                 String headUrl = mission.getClaimItemList().get(0).getClaimHeadUrl();
