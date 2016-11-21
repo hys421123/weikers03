@@ -7,11 +7,12 @@ import com.hys.mylog.MyLog;
 import com.team.witkers.R;
 import com.team.witkers.base.BaseFragment;
 import com.team.witkers.bean.MyUser;
+import com.team.witkers.eventbus.OrdersMsgEvent2;
 import com.team.witkers.utils.MyToast;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
-
+import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,8 +45,6 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
        mPullLoadMoreRecyclerView= (PullLoadMoreRecyclerView) view.findViewById(R.id.pullLoadMoreRecyclerView);
         mPullLoadMoreRecyclerView.setLinearLayout();
         mRecyclerViewAdapter = new RecyclerViewAdapter(getActivity());
-//        mRecyclerViewAdapter.addAllData(setList());
-
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         getData();
@@ -83,6 +82,11 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
         mRecyclerViewAdapter.notifyDataSetChanged();
     }
 
+    @Subscribe
+    public void onEventMainThread(OrdersMsgEvent2 event) {
+
+        MyLog.i("有数据发生了改变22 ----》");
+    }
 
 
     @Override
