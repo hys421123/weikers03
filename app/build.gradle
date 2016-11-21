@@ -63,5 +63,5 @@ dependencies {
     compile files('libs/Amap_2DMap_V2.9.1_20160825.jar')
     compile files('libs/AMap_Search_V3.2.1_20160308.jar')
     compile 'com.wuxiaolong.pullloadmorerecyclerview:library:1.1.1'
-
+    compile 'com.android.support:cardview-v7:23.2.1'
 }

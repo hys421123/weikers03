@@ -1,7 +1,9 @@
 package com.team.witkers.fragment.msgfrm;
 
+import android.os.Handler;
 import android.view.View;
 
+import com.hys.mylog.MyLog;
 import com.team.witkers.R;
 import com.team.witkers.base.BaseFragment;
 import com.team.witkers.bean.MyUser;
@@ -10,17 +12,22 @@ import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.bmob.v3.BmobUser;
 
 /**
  * Created by dell on 2016/11/21.
  */
 
-public class OrdersFragment2 extends BaseFragment {
+public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecyclerView.PullLoadMoreListener{
     private MyUser myUser;
 
-    PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
+    private  PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
+    private RecyclerViewAdapter mRecyclerViewAdapter;
 
+    private int mCount = 1;
 
     @Override
     protected int setContentId() {
@@ -36,7 +43,44 @@ public class OrdersFragment2 extends BaseFragment {
     protected void initView(View view) {
        mPullLoadMoreRecyclerView= (PullLoadMoreRecyclerView) view.findViewById(R.id.pullLoadMoreRecyclerView);
         mPullLoadMoreRecyclerView.setLinearLayout();
+        mRecyclerViewAdapter = new RecyclerViewAdapter(getActivity());
+//        mRecyclerViewAdapter.addAllData(setList());
 
+        mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
+        mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
+        getData();
+    }
+
+    private List<String> setList() {
+        List<String> dataList = new ArrayList<>();
+        int start = 20 * (mCount - 1);
+        for (int i = start; i < 20 * mCount; i++) {
+            dataList.add("Second" + i);
+        }
+        return dataList;
+
+    }
+
+    private void getData() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mRecyclerViewAdapter.addAllData(setList());
+                        mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+                    }
+                });
+
+            }
+        }, 1000);
+
+    }
+
+    public void clearData() {
+        mRecyclerViewAdapter.clearData();
+        mRecyclerViewAdapter.notifyDataSetChanged();
     }
 
 
@@ -55,5 +99,27 @@ public class OrdersFragment2 extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    //刷新
+    @Override
+    public void onRefresh() {
+
+        MyLog.v("onRefresh");
+        setRefresh();
+        getData();
+    }
+
+    // 加载更多
+    @Override
+    public void onLoadMore() {
+        MyLog.v("onLoadMore");
+        mCount = mCount + 1;
+        getData();
+    }
+
+    private void setRefresh() {
+        mRecyclerViewAdapter.clearData();
+        mCount = 1;
     }
 }
