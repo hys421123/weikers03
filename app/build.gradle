@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "24.0.1"
+    buildToolsVersion '24.0.1'
 
     defaultConfig {
         applicationId "com.team.witkers"
@@ -62,4 +62,6 @@ dependencies {
     compile files('libs/BmobPay_v3.0.3_160621.jar')
     compile files('libs/Amap_2DMap_V2.9.1_20160825.jar')
     compile files('libs/AMap_Search_V3.2.1_20160308.jar')
+    compile 'com.wuxiaolong.pullloadmorerecyclerview:library:1.1.1'
+
 }

@@ -53,9 +53,7 @@ import cn.bmob.v3.listener.FindListener;
  * Created by shanyao on 2016/6/17.
  */
 public class OrdersFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener{
-    private TextView tvTime,tvDetails;
-    private ImageView ivPubUser;
-    private  RelativeLayout rlItem;
+
     private RecyclerView mRecyclerView;
     private MsgOrdersBeanAdapter msgOrdersBeanAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -89,10 +87,7 @@ public class OrdersFragment extends BaseFragment implements SwipeRefreshLayout.O
     @Override
     protected void initView(View view) {
 
-        tvDetails = (TextView) view.findViewById(R.id.tv_details);
-        tvTime = (TextView) view.findViewById(R.id.tv_time);
-        ivPubUser = (ImageView) view.findViewById(R.id.iv_pubUser);
-        rlItem = (RelativeLayout) view.findViewById(R.id.rel_item);
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_item);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.mSwipeRefreshLayout);
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(90,173,241));
@@ -203,17 +198,21 @@ public class OrdersFragment extends BaseFragment implements SwipeRefreshLayout.O
                                     if (mSwipeRefreshLayout != null) {mSwipeRefreshLayout.setRefreshing(false);}
                                     return;
                                 }else {
-                                    MyLog.i("list size大于零");
-                                    MyLog.i("第一次加载数据");
-                                    List<Mission> missionList = takeMissionList;
-                                    if (pubMissionList != null) {
-                                        for (int i = 0; i < pubMissionList.size(); i++) {
-                                            missionList.add(pubMissionList.get(i));
-                                        }
-                                    }
-                                    lastTime = missionList.get(missionList.size() - 1).getCreatedAt();
-                                    MyLog.i("两个list的和----》" + missionList.size());
-                                    dataListMsgBean = getBeanList(missionList);
+//                                    MyLog.i("list size大于零");
+//                                    MyLog.i("第一次加载数据");
+//                                    List<Mission> missionList = takeMissionList;
+//                                    if (pubMissionList != null) {
+//                                        for (int i = 0; i < pubMissionList.size(); i++) {
+//                                            missionList.add(pubMissionList.get(i));
+//                                        }
+//                                    }
+//                                    lastTime = missionList.get(missionList.size() - 1).getCreatedAt();
+//                                    MyLog.i("两个list的和----》" + missionList.size());
+
+//                                    MyLog.i("pubMissionList_size: "+pubMissionList.size());
+                                    lastTime=pubMissionList.get(pubMissionList.size()-1).getCreatedAt();
+                                    dataListMsgBean = getBeanList(pubMissionList);
+                                    MyLog.v("dataListMsg_size: "+dataListMsgBean.size());
                                     msgOrdersBeanAdapter = new MsgOrdersBeanAdapter(getActivity(), dataListMsgBean);
                                     mRecyclerView.setAdapter(msgOrdersBeanAdapter);
                                     MyLog.i("去掉对话框，去掉刷新");
@@ -289,6 +288,7 @@ public class OrdersFragment extends BaseFragment implements SwipeRefreshLayout.O
                     //查询这个用户作为发布者
                     BmobQuery<Mission> query=new BmobQuery<>();
                     query.order("-createdAt");
+                    MyLog.v("myUserName_ "+myUser.getUsername());
                     query.addWhereEqualTo("pubUserName",myUser.getUsername());
                     query.findObjects(new FindListener<Mission>() {
                         @Override
@@ -308,27 +308,30 @@ public class OrdersFragment extends BaseFragment implements SwipeRefreshLayout.O
                                     MyLog.i("list size大于零");
                                     if (actionType == STATE_REFRESH){//刷新界面
                                         MyLog.i("刷新数据");
-                                        List<Mission> missionList = takeMissionList;
-                                        if(pubMissionList!=null){
-                                            for(int i = 0;i<pubMissionList.size();i++){
-                                                missionList.add(pubMissionList.get(i));
-                                            }
-                                        }
-                                        lastTime = missionList.get(missionList.size() - 1).getCreatedAt();
-                                        MyLog.i("两个list的和----》"+missionList.size());
-                                        dataListMsgBean = getBeanList(missionList);
+//                                        List<Mission> missionList = takeMissionList;
+//                                        if(pubMissionList!=null){
+//                                            for(int i = 0;i<pubMissionList.size();i++){
+//                                                missionList.add(pubMissionList.get(i));
+//                                            }
+//                                        }
+//                                        lastTime = missionList.get(missionList.size() - 1).getCreatedAt();
+//                                        MyLog.i("两个list的和----》"+missionList.size());
+//                                        dataListMsgBean.clear();
+                                      dataListMsgBean  =new ArrayList<MsgOrdersBean>();
+                                        lastTime=pubMissionList.get(pubMissionList.size()-1).getCreatedAt();
+                                        dataListMsgBean = getBeanList(pubMissionList);
                                         msgOrdersBeanAdapter.notifyDataSetChanged();
                                     }else if (actionType == STATE_NONE){//adapter为空时
-                                        List<Mission> missionList = takeMissionList;
-                                        if(pubMissionList!=null){
-                                            for(int i = 0;i<pubMissionList.size();i++){
-                                                missionList.add(pubMissionList.get(i));
-                                            }
-                                        }
-                                        lastTime = missionList.get(missionList.size() - 1).getCreatedAt();
-                                        MyLog.i("两个list的和----》"+missionList.size());
-//                                        dataListMsgBean.clear();
-                                        dataListMsgBean = getBeanList(missionList);
+//                                        List<Mission> missionList = takeMissionList;
+//                                        if(pubMissionList!=null){
+//                                            for(int i = 0;i<pubMissionList.size();i++){
+//                                                missionList.add(pubMissionList.get(i));
+//                                            }
+//                                        }
+//                                        lastTime = missionList.get(missionList.size() - 1).getCreatedAt();
+//                                        MyLog.i("两个list的和----》"+missionList.size());
+                                        lastTime=pubMissionList.get(pubMissionList.size()-1).getCreatedAt();
+                                        dataListMsgBean = getBeanList(pubMissionList);
                                         msgOrdersBeanAdapter = new MsgOrdersBeanAdapter(getActivity(), dataListMsgBean);
                                         mRecyclerView.setAdapter(msgOrdersBeanAdapter);
                                     }//refresh
@@ -356,6 +359,7 @@ public class OrdersFragment extends BaseFragment implements SwipeRefreshLayout.O
         queryBmobData(0, STATE_REFRESH);
     }
 
+    //将数据封装到 MsgOrdersBean里
     private List<MsgOrdersBean>  getBeanList(List<Mission> list){
         MyLog.i("getBeanList里面");
         List<MsgOrdersBean> beanList = new ArrayList<MsgOrdersBean>();

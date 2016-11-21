@@ -7,6 +7,7 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +47,7 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
     private Handler mHandler = new Handler();
     private int claimPosition;
     private String stateStr;
+    private ImageButton ib_call;
 
     @Override
     protected int setContentId() {
@@ -54,6 +56,7 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
 
     @Override
     protected void initView() {
+        ib_call= (ImageButton) findViewById(R.id.ib_call);
         btnSelect = (Button) findViewById(R.id.btn_confirm);
         ivHead = (ImageView) findViewById(R.id.iv_head);
         iv_topBack = (ImageView) findViewById(R.id.iv_topBack);
@@ -73,6 +76,7 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
     protected void setListener() {
         btnSelect.setOnClickListener(this);
         iv_topBack.setOnClickListener(this);
+        ib_call.setOnClickListener(this);
     }
 
     @Override
@@ -203,6 +207,10 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
                         }
                     }
                 });
+                break;
+            case R.id.ib_call:
+                MyLog.i("ib_call");
+
                 break;
         }
     }
