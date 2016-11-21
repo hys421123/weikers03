@@ -44,6 +44,17 @@
         android:text="17小时前"
         android:textSize="@dimen/recycleview_item_fontsmall"
         />
+
+
 </LinearLayout>
 
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="6dp"
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/division_line"
+        />
 </RelativeLayout>
