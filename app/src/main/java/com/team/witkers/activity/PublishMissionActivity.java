@@ -441,10 +441,11 @@ public class PublishMissionActivity extends AppCompatActivity implements View.On
             }else{
                 return;
             }//else
-        }else if(requestCode == REQUESTCODE_LABLE){
+        }else if(requestCode == REQUESTCODE_LABLE){//已经选好 标签了
             if(data!=null) {
                 String LableSelectStr =data.getExtras().getString("fromCategorySelect");
-                infoEt.setText("#"+LableSelectStr+"#");
+                String str=infoEt.getText().toString();
+                infoEt.setText(str+"#"+LableSelectStr+"#");
             }else{
                 return;
             }//else

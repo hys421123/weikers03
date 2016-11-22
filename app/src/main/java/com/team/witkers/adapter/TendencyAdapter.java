@@ -85,6 +85,7 @@ public class TendencyAdapter extends RecyclerView.Adapter<TendencyAdapter.Tendcy
         else  //若该用户点赞，则为红
             holder.iv_like.setImageResource(R.drawable.ic_tendency_liker);
 
+//        MyLog.e("tendHeadUrl_ "+tend.getPubUser().getHeadUrl());
         Glide.with(context).load(tend.getPubUser().getHeadUrl()).into(holder.roundIv_tendency_head);
 
 

@@ -107,7 +107,7 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.TakeOutV
                     .into(holder.round_head);
         }
 
-        //TODO 设置图像点击事件
+        //TODO 设置头像点击事件
         holder.round_head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

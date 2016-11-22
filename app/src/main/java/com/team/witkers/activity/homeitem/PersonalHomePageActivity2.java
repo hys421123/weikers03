@@ -201,11 +201,14 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
         else
             query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ONLY);
 
+        query.include("pubUser");
         query.findObjects(new FindListener<TendItems>() {
             @Override
             public void done(List<TendItems> list, BmobException e) {
                 if(e==null){
                     MyLog.i("查询成功");
+//                    MyLog.e("HomePageAct_tendHeadUrl_ "+list.get(0).getPubUser().getHeadUrl());
+
                     //mAdapter属于 下面的正文主体,即发布人的动态项
                     mAdapter=new TendencyAdapter(PersonalHomePageActivity2.this, list);
                     boolean isNothing=false;
