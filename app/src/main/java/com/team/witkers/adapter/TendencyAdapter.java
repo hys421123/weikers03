@@ -61,6 +61,7 @@ public class TendencyAdapter extends RecyclerView.Adapter<TendencyAdapter.Tendcy
 
     @Override
     public void onBindViewHolder(final TendcyViewHolder holder, final int position) {
+
         TendItems tend = new TendItems();
         tend = dataList.get(position);
 
@@ -84,7 +85,7 @@ public class TendencyAdapter extends RecyclerView.Adapter<TendencyAdapter.Tendcy
         else  //若该用户点赞，则为红
             holder.iv_like.setImageResource(R.drawable.ic_tendency_liker);
 
-        Glide.with(context).load(tend.getFriendHeadUrl()).into(holder.roundIv_tendency_head);
+        Glide.with(context).load(tend.getPubUser().getHeadUrl()).into(holder.roundIv_tendency_head);
 
 
         // 设置tend对象 的 tag，以便获取该对象

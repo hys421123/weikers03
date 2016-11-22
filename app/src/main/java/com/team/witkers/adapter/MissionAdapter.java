@@ -94,7 +94,9 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.TakeOutV
 
         //TODO 设置头像
         if(mission.getPubUserHeadUrl()!=null){
-            String headUrl=dataList.get(position).getPubUserHeadUrl();
+            String headUrl=dataList.get(position).getPubUser().getHeadUrl();
+
+//         MyLog.e(dataList.get(position).getPubUser().getHeadUrl());
 //            MyLog.d("headUrl__"+headUrl);
             Glide.with(context)
                     .load(headUrl)
