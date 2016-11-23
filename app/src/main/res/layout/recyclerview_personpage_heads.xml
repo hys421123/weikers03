@@ -139,7 +139,7 @@
             </LinearLayout>
 
             <RelativeLayout
-                android:id="@+id/rel_concern"
+                android:id="@+id/rl_concern"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_alignParentBottom="true"

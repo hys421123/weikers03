@@ -135,15 +135,15 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                     .into(((MyViewHolder)holder).roundIv_personpage_head);
             MyLog.i(pubMissionNum+"---"+concernNum+"----"+fansNum+"---"+isConcerned);
             if(isConcerned){//关注中
-                ((MyViewHolder)holder).rel_concern.setBackgroundResource(R.drawable.img_cancel_concern);
+                ((MyViewHolder)holder).rl_concern.setBackgroundResource(R.drawable.img_cancel_concern);
             }else{//加关注
-                ((MyViewHolder)holder).rel_concern.setBackgroundResource(R.drawable.img_add_concern);
+                ((MyViewHolder)holder).rl_concern.setBackgroundResource(R.drawable.img_add_concern);
             }
             ((MyViewHolder)holder).tv_fans.setText(fansNum+"");
             ((MyViewHolder)holder).tv_focus.setText(concernNum+"");
             ((MyViewHolder)holder).tv_tendencies.setText(pubMissionNum+"");
             ((MyViewHolder) holder).tv_introduce.setText(person.getIntroduce());
-            ((MyViewHolder)holder).rel_concern.setOnClickListener(new View.OnClickListener() {
+            ((MyViewHolder)holder).rl_concern.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     MyUser myself = BmobUser.getCurrentUser(MyUser.class);
@@ -157,12 +157,13 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                     }
                     MyLog.i("myself-->"+myself.getUsername());////////////////
                     if(isConcerned){//点击  关注中    将图片换为  加关注
-                        ((MyViewHolder)holder).rel_concern.setBackgroundResource(R.drawable.img_add_concern);
-                        unConcernPerson(person,myself);
+                        ((MyViewHolder)holder).rl_concern.setBackgroundResource(R.drawable.img_add_concern);
+//                        unConcernPerson(person,myself);
                         isConcerned = false;
                         MyToast.showToast(context,"onClick  "+isConcerned);
                     }else{//点击  加关注    将图片换为  关注中
-                        ((MyViewHolder)holder).rel_concern.setBackgroundResource(R.drawable.img_cancel_concern);
+                        MyLog.i(" 加关注啊11");
+                        ((MyViewHolder)holder).rl_concern.setBackgroundResource(R.drawable.img_cancel_concern);
                         concernPerson(person,myself);
                         isConcerned = true;
                         MyToast.showToast(context,"onClick  "+isConcerned);
@@ -192,6 +193,7 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
             @Override
             public void done(List<ConcernBean> list, BmobException e) {
                 if(e == null){
+                    MyLog.v("concernPerson__");
                      concernBean = list.get(0);
                 }else{
                     MyLog.i("e-->"+e);
@@ -271,12 +273,12 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
     class MyViewHolder extends RecyclerView.ViewHolder{
         RoundedImageView roundIv_personpage_head;
         TextView tv_tendencies,tv_focus,tv_fans,tv_introduce;
-        RelativeLayout rel_concern;
+        RelativeLayout rl_concern;
         public MyViewHolder(View itemView,int viewType) {
             super(itemView);
             if(viewType==BASE_ITEM_TYPE_HEADER){
                 roundIv_personpage_head= (RoundedImageView) itemView.findViewById(R.id.roundIv_personpage_head);
-                rel_concern = (RelativeLayout) itemView.findViewById(R.id.rel_concern);
+                rl_concern = (RelativeLayout) itemView.findViewById(R.id.rl_concern);
                 tv_fans = (TextView) itemView.findViewById(R.id.tv_fans);
                 tv_focus  = (TextView) itemView.findViewById(R.id.tv_focus);
                 tv_tendencies = (TextView) itemView.findViewById(R.id.tv_tendencies);
