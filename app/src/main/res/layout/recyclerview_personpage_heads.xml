@@ -20,7 +20,7 @@
             android:layout_marginLeft="@dimen/me_frm_head_leftmargin"
             android:layout_marginRight="16dp"
             android:layout_marginTop="@dimen/me_frm_head_topmargin"
-            android:src="@drawable/default_head"
+            android:src="@drawable/ic_default_null_gray"
             app:riv_oval="true" />
 
         <RelativeLayout
@@ -50,7 +50,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="17"
+
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="#4a4f53"
                         android:textSize="@dimen/me_frm_font_big" />
@@ -86,7 +86,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="17"
+
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="#4a4f53"
                         android:textSize="@dimen/me_frm_font_big" />
@@ -120,7 +120,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="17"
+
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="#4a4f53"
                         android:textSize="@dimen/me_frm_font_big" />
@@ -181,7 +181,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="@dimen/me_frm_head_leftmargin"
         android:layout_marginTop="12dp"
-        android:text="我就是钢铁侠！"
+
         android:maxLines="1"
         android:ellipsize="end"
         android:textColor="#4a4f53"

@@ -38,7 +38,7 @@
         android:layout_width="@dimen/tendency_item_head_height"
         android:layout_height="@dimen/tendency_item_head_height"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/default_head"
+        android:src="@drawable/ic_default_null_gray"
         app:riv_oval="true"
         />
     </RelativeLayout>
@@ -53,7 +53,7 @@
             android:id="@+id/tv_tendName"
         android:textSize="@dimen/tendency_item_font_big"
         android:gravity="center_vertical"
-        android:text="托尼斯塔克"
+
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -64,7 +64,7 @@
             android:id="@+id/tv_tendPubtime"
             android:textSize="@dimen/tendency_item_font_small"
             android:gravity="center_vertical"
-            android:text="2分钟前"
+
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -85,7 +85,6 @@
         android:layout_marginTop="@dimen/tendency_item_topmargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="你可以夺走我的装备，我的房子和玩具，但你夺不走的是：我就是钢铁侠！"
         />
 
 
@@ -165,7 +164,7 @@
                 android:id="@+id/tv_commentNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="25"
+
                 android:textSize="@dimen/tendency_item_font_small"
                 android:layout_marginRight="2dp"
                 />
@@ -198,7 +197,7 @@
                 android:id="@+id/tv_likeNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="97"
+
                 android:textSize="@dimen/tendency_item_font_small"
 
                 />

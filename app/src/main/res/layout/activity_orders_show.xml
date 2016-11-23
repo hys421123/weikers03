@@ -76,7 +76,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/head" />
+                    android:src="@drawable/ic_default_null_gray" />
 
                 <!--用户名 距离 发布时间-->
 
@@ -87,7 +87,6 @@
                     android:layout_alignTop="@+id/iv_head"
                     android:layout_marginLeft="14dp"
                     android:layout_toRightOf="@+id/iv_head"
-                    android:text="苏伟平"
                     android:textColor="#4a4f53"
                     android:textSize="@dimen/recycleview_item_fontbig" />
 
@@ -97,7 +96,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/iv_head"
                     android:layout_alignLeft="@+id/tv_name"
-                    android:text="100米内"
                     android:textSize="@dimen/recycleview_item_fontsmall" />
 
                 <TextView
@@ -140,7 +138,6 @@
                     android:layout_marginTop="12dp"
                     android:lineSpacingMultiplier="1.1"
                     android:minLines="2"
-                    android:text="#购物# 中百超市购物，清单在备注，下午两点前完成"
                     android:textColor="#4a4f53"
                     android:textSize="@dimen/recycleview_item_fontbig" />
 
@@ -169,7 +166,6 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="16dp"
                         android:gravity="center_horizontal"
-                        android:text="20.00元"
                         android:textColor="#4a4f53"
                         android:textSize="@dimen/recycleview_item_fontbig" />
                 </RelativeLayout>
@@ -208,7 +204,6 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="16dp"
                         android:gravity="center_horizontal"
-                        android:text="下午 13:10"
                         android:textColor="#4a4f53"
                         android:textSize="@dimen/recycleview_item_fontbig" />
                 </RelativeLayout>
@@ -248,7 +243,6 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginTop="5dp"
-                        android:text="海军工程大学"
                         android:textColor="#4a4f53"
                         android:textSize="@dimen/recycleview_item_fontbig" />
 
