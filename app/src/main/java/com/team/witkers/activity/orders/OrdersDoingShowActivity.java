@@ -21,7 +21,7 @@ import com.hys.mylog.MyLog;
 import com.team.witkers.R;
 import com.team.witkers.activity.homeitem.NoUnderlineClickableSpan;
 //import com.team.witkers.activity.homeitem.TaskDetailsActivity;
-import com.team.witkers.activity.homeitem.TaskDetailsActivity2;
+import com.team.witkers.activity.homeitem.ClaimTaskActivity2;
 import com.team.witkers.base.BaseActivity;
 import com.team.witkers.bean.ChooseClaimant;
 import com.team.witkers.bean.ClaimItems;
@@ -180,7 +180,7 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
                             @Override
                             public void onClick(View widget) {
                                 //TODO 这里修改跳转的目标activity
-                                Intent intent = new Intent(OrdersDoingShowActivity.this, TaskDetailsActivity2.class);
+                                Intent intent = new Intent(OrdersDoingShowActivity.this, ClaimTaskActivity2.class);
                        /* intent.putExtra("fromTakeOutMissionAdapterLIN",dataList.get(position));*/
                                 Toast.makeText(OrdersDoingShowActivity.this, "label has been clicked", Toast.LENGTH_SHORT).show();
                                 OrdersDoingShowActivity.this.startActivity(intent);

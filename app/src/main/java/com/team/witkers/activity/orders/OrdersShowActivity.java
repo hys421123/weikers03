@@ -19,7 +19,7 @@ import com.bumptech.glide.Glide;
 import com.hys.mylog.MyLog;
 import com.team.witkers.R;
 import com.team.witkers.activity.homeitem.NoUnderlineClickableSpan;
-import com.team.witkers.activity.homeitem.TaskDetailsActivity2;
+import com.team.witkers.activity.homeitem.ClaimTaskActivity2;
 import com.team.witkers.adapter.OrdersShowAdapter;
 import com.team.witkers.base.BaseActivity;
 import com.team.witkers.bean.ClaimItems;
@@ -155,7 +155,7 @@ public class OrdersShowActivity extends BaseActivity implements View.OnClickList
                             @Override
                             public void onClick(View widget){
                                 //TODO 这里修改跳转的目标activity
-                                Intent intent = new Intent(OrdersShowActivity.this,TaskDetailsActivity2.class);
+                                Intent intent = new Intent(OrdersShowActivity.this,ClaimTaskActivity2.class);
                        /* intent.putExtra("fromTakeOutMissionAdapterLIN",dataList.get(position));*/
                                 Toast.makeText(OrdersShowActivity.this,"label has been clicked",Toast.LENGTH_SHORT).show();
                                 OrdersShowActivity.this.startActivity(intent);

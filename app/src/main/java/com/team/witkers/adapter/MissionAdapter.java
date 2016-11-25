@@ -3,7 +3,6 @@ package com.team.witkers.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -21,10 +20,9 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.team.witkers.MyApplication;
 import com.team.witkers.R;
 import com.team.witkers.activity.FindMissionPageActivity;
-import com.team.witkers.activity.find.SearchActivity;
+import com.team.witkers.activity.homeitem.ClaimTaskActivity2;
 import com.team.witkers.activity.homeitem.NoUnderlineClickableSpan;
 import com.team.witkers.activity.homeitem.PersonalHomePageActivity2;
-import com.team.witkers.activity.homeitem.TaskDetailsActivity2;
 import com.team.witkers.bean.Mission;
 import com.team.witkers.bean.MyUser;
 import com.team.witkers.utils.DigitsUtils;
@@ -238,7 +236,7 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.TakeOutV
                         return;
                     }
                     Mission mission=dataList.get(getLayoutPosition());
-                    Intent intent = new Intent(context, TaskDetailsActivity2.class);
+                    Intent intent = new Intent(context, ClaimTaskActivity2.class);
                     intent.putExtra("fromTakeOutMissionAdapterLIN",mission);
                     context.startActivity(intent);
                     break;

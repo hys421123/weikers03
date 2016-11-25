@@ -11,13 +11,17 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.hys.mylog.MyLog;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.team.witkers.MyApplication;
 import com.team.witkers.R;
 import com.team.witkers.bean.ConcernBean;
+import com.team.witkers.bean.ConcernFans;
 import com.team.witkers.bean.MyUser;
 import com.team.witkers.utils.MyToast;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobRelation;
@@ -43,7 +47,7 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
     private int pubMissionNum,concernNum,fansNum;
     private Boolean isConcerned;
     private ConcernBean concernBean;
-    private ConcernBean concernBean2;
+    private ConcernBean fansBean;
 
 
     public HeaderAndFooterWrapperPersonalPage(Context context, MyUser person, RecyclerView.Adapter adapter){
@@ -133,7 +137,7 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
         {
             Glide.with(context).load(person.getHeadUrl()).error(R.drawable.ic_default_null_gray)
                     .into(((MyViewHolder)holder).roundIv_personpage_head);
-            MyLog.i(pubMissionNum+"---"+concernNum+"----"+fansNum+"---"+isConcerned);
+//            MyLog.i(pubMissionNum+"---"+concernNum+"----"+fansNum+"---"+isConcerned);
             if(isConcerned){//关注中
                 ((MyViewHolder)holder).rl_concern.setBackgroundResource(R.drawable.img_cancel_concern);
             }else{//加关注
@@ -156,15 +160,15 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                         return;
                     }
                     MyLog.i("myself-->"+myself.getUsername());////////////////
-                    if(isConcerned){//点击  关注中    将图片换为  加关注
+                    if(isConcerned){//点击  关注中    将图片换为  加关注(取消关注状态)
                         ((MyViewHolder)holder).rl_concern.setBackgroundResource(R.drawable.img_add_concern);
-//                        unConcernPerson(person,myself);
+                        unConcernPerson(person,myself);
                         isConcerned = false;
                         MyToast.showToast(context,"onClick  "+isConcerned);
-                    }else{//点击  加关注    将图片换为  关注中
+                    }else{//点击  加关注(取消关注状态)    将图片换为  关注中
                         MyLog.i(" 加关注啊11");
                         ((MyViewHolder)holder).rl_concern.setBackgroundResource(R.drawable.img_cancel_concern);
-                        concernPerson(person,myself);
+                        concernPerson3(person,myself);
                         isConcerned = true;
                         MyToast.showToast(context,"onClick  "+isConcerned);
                     }
@@ -185,6 +189,106 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
         return getHeadersCount()+mInnerAdapter.getItemCount()+getFootersCount();
     }
 
+//    private void concernPerson2(final MyUser other,final MyUser myself){
+//        BmobRelation relation=new BmobRelation();
+//        MyUser other2=new MyUser();
+//        other2.setObjectId(MyApplication.objId);
+//
+//        MyLog.i("other2");
+//        relation.add(other2);
+//        MyApplication.mUser.setConcernPerson(relation);
+//        MyApplication.mUser.update(new UpdateListener() {
+//            @Override
+//            public void done(BmobException e) {
+//                if(e==null){
+//                    MyLog.v("关注更新成功");
+//
+//                }else{
+//                    //主要更新失败原因，只有登录用户才能修改与自己相关的信息
+//                    MyLog.e("关注更新失败"+e.getMessage());
+//                }
+//            }//done
+//        });
+//
+//    }//concernPerson2
+
+    //点击 关注 他人
+    private  void concernPerson3(final MyUser person, final MyUser myself){
+        BmobQuery<ConcernBean> query = new BmobQuery<ConcernBean>();
+        // 修改myself的关注者信息
+        query.addWhereEqualTo("name",myself.getUsername());
+        query.findObjects(new FindListener<ConcernBean>() {
+            @Override
+            public void done(List<ConcernBean> list, BmobException e) {
+                if(e == null){
+                    MyLog.v("concernPerson__");
+                    concernBean = list.get(0);
+                    List<ConcernFans> concernsList;
+                    ConcernFans concern=new ConcernFans(person.getHeadUrl(),person.getUsername(),person.getIntroduce(),true);
+
+                    if(concernBean.getConcernsList()==null){
+                        concernsList=new ArrayList<ConcernFans>();
+                        concernsList.add(concern);
+                        concernBean.setConcernsList(concernsList);
+                    }else {
+                         concernBean.getConcernsList().add(concern);
+                    }
+
+                    concernBean.update(new UpdateListener() {
+                        @Override
+                        public void done(BmobException e) {
+                            if(e==null){
+                                MyLog.i("用户关注1成功");
+                            }else{
+                                MyLog.i("用户关注1失败："+e.getMessage());
+                            }
+                        }
+                    });
+
+                }else{
+                    MyLog.i("e-->"+e);
+                }
+            }
+        });
+
+        // 修改被关注者(其他人)的 粉丝信息
+        BmobQuery<ConcernBean> query2 = new BmobQuery<ConcernBean>();
+        query2.addWhereEqualTo("name",person.getUsername());
+        query2.findObjects(new FindListener<ConcernBean>() {
+            @Override
+            public void done(List<ConcernBean> list, BmobException e) {
+                if(e == null){
+                    fansBean = list.get(0);
+                    List<ConcernFans> fansList;
+                    ConcernFans fans=new ConcernFans(myself.getHeadUrl(),myself.getUsername(),myself.getIntroduce(),true);
+
+                    if(fansBean.getFansList()==null){
+                        fansList=new ArrayList<ConcernFans>();
+                        fansList.add(fans);
+                        fansBean.setFansList(fansList);
+                    }else {
+                        fansBean.getFansList().add(fans);
+                    }
+
+                    fansBean.update(new UpdateListener() {
+                        @Override
+                        public void done(BmobException e) {
+                            if(e==null){
+                                MyLog.i("用户成为粉丝1成功");
+                            }else{
+                                MyLog.i("用户成为粉丝1失败："+e.getMessage());
+                            }
+                        }//done
+                    });
+                }else{
+                    MyLog.i("e-->"+e);
+                }
+            }
+        });
+
+    }
+
+
     private void concernPerson(final MyUser person, final MyUser myself) {
 
 //        MyLog.v("concernPerson");
@@ -196,14 +300,18 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                 if(e == null){
                     MyLog.v("concernPerson__");
                      concernBean = list.get(0);
-                    concernBean.setConcerns(person);
+                    BmobRelation relation=new BmobRelation();
+                    relation.add(person);
+
+                    concernBean.setConcerns(relation);
+                    concernBean.increment("concernsNum");
                     concernBean.update(new UpdateListener() {
                         @Override
                         public void done(BmobException e) {
                             if(e==null){
-                                MyLog.i("用户关注成功");
+                                MyLog.i("用户关注1成功");
                             }else{
-                                MyLog.i("用户关注失败："+e.getMessage());
+                                MyLog.i("用户关注1失败："+e.getMessage());
                             }
                         }
                     });
@@ -213,21 +321,26 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                 }
             }
         });
+
         BmobQuery<ConcernBean> query2 = new BmobQuery<ConcernBean>();
         query2.addWhereEqualTo("name",person.getUsername());
         query2.findObjects(new FindListener<ConcernBean>() {
             @Override
             public void done(List<ConcernBean> list, BmobException e) {
                 if(e == null){
-                     concernBean2 = list.get(0);
-                    concernBean2.setFans(myself);
-                    concernBean2.update(new UpdateListener() {
+                     fansBean = list.get(0);
+                    BmobRelation relation=new BmobRelation();
+                    relation.add(myself);
+
+                    fansBean.increment("fansNum");
+                    fansBean.setFans(relation);
+                    fansBean.update(new UpdateListener() {
                         @Override
                         public void done(BmobException e) {
                             if(e==null){
-                                MyLog.i("用户被关注成功");
+                                MyLog.i("用户被关注1成功");
                             }else{
-                                MyLog.i("用户被关注失败："+e.getMessage());
+                                MyLog.i("用户被关注1失败："+e.getMessage());
                             }
                         }
                     });
@@ -242,6 +355,25 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
 
     }//concernPerson
 
+    private void unConcernPerson2(MyUser other, MyUser myself) {
+
+        BmobRelation relation=new BmobRelation();
+        relation.remove(other);
+        myself.setConcernPerson(relation);
+        myself.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if(e==null){
+                    MyLog.v("取消_关注更新成功");
+
+                }else{
+                    MyLog.e("取消_关注更新失败"+e.getMessage());
+                }
+            }//done
+        });
+
+    }
+
     private void unConcernPerson(MyUser person, MyUser myself) {
         BmobRelation relation = new BmobRelation();
         BmobRelation relation2 = new BmobRelation();
@@ -251,6 +383,7 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
         person.setObjectId(person.getObjectId());
         myself.setConcernPerson(relation);//我取消关注别人
         person.setFansPerson(relation2);//别人减少我这个fans
+        myself.increment("concernsNum",-1);
         myself.update(myself.getObjectId(),new UpdateListener() {
             @Override
             public void done(BmobException e) {
@@ -262,6 +395,7 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
             }
         });
 
+        person.increment("fansNum",-1);
         person.update(person.getObjectId(),new UpdateListener() {
             @Override
             public void done(BmobException e) {

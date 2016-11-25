@@ -41,7 +41,7 @@ import cn.bmob.v3.listener.UpdateListener;
 /**
  * Created by hys on 2016/9/6.
  */
-public class TaskDetailsActivity2 extends BaseActivity implements View.OnClickListener{
+public class ClaimTaskActivity2 extends BaseActivity implements View.OnClickListener{
 // 任务详情，认领任务
     private Mission myMission;
     private MyUser myUser;
@@ -152,9 +152,9 @@ public class TaskDetailsActivity2 extends BaseActivity implements View.OnClickLi
                 spannableString.setSpan(new NoUnderlineClickableSpan() {
                     @Override
                     public void onClick(View widget) {
-                        MyToast.showToast(TaskDetailsActivity2.this,"onclick lable");
+                        MyToast.showToast(ClaimTaskActivity2.this,"onclick lable");
                         //TODO 这里修改跳转的目标activity
-                        Intent intent = new Intent(TaskDetailsActivity2.this, SearchActivity.class);
+                        Intent intent = new Intent(ClaimTaskActivity2.this, SearchActivity.class);
                         String lableStr = infoTemp.substring(index1+1, index2 );
                         intent.putExtra("ToHotLableDetails",lableStr);
                         startActivity(intent);
@@ -255,13 +255,13 @@ public class TaskDetailsActivity2 extends BaseActivity implements View.OnClickLi
                         MyToast.showToast(this,"您的认领金额不能大于佣金");
                         return;
                     }
-                    new AlertDialog.Builder(TaskDetailsActivity2.this).setTitle("确定认领此任务吗？")
+                    new AlertDialog.Builder(ClaimTaskActivity2.this).setTitle("确定认领此任务吗？")
                             .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 
                                     //TODO 添加一个标志，用来判断任务是否被认领
-                                    Toast.makeText(TaskDetailsActivity2.this, "确定认领此任务", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ClaimTaskActivity2.this, "确定认领此任务", Toast.LENGTH_SHORT).show();
 
                                     //认领此任务，向服务器提交数据
                                     claimMission();
@@ -272,12 +272,12 @@ public class TaskDetailsActivity2 extends BaseActivity implements View.OnClickLi
                             .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(TaskDetailsActivity2.this, "取消", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ClaimTaskActivity2.this, "取消", Toast.LENGTH_SHORT).show();
                                 }
                             }).show();
 
                 }else{
-                    Toast.makeText(TaskDetailsActivity2.this, "请填入认领金额", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ClaimTaskActivity2.this, "请填入认领金额", Toast.LENGTH_SHORT).show();
                 }
 
                 break;
@@ -297,6 +297,7 @@ public class TaskDetailsActivity2 extends BaseActivity implements View.OnClickLi
         SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         String curTime = formatter.format(curDate);
+
         if(myMission.getClaimItemList()==null){
           MyLog.e("claimItemList null");
           List<ClaimItems> claimItemList=new ArrayList<>();

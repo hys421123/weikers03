@@ -1,7 +1,6 @@
 package com.team.witkers.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +13,7 @@ import com.hys.mylog.MyLog;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.team.witkers.MyApplication;
 import com.team.witkers.R;
-import com.team.witkers.activity.homeitem.TaskDetailsActivity2;
 import com.team.witkers.bean.Mission;
-import com.team.witkers.utils.MyToast;
 
 import java.util.List;
 
@@ -116,7 +113,7 @@ public class MissionStateAdapter extends RecyclerView.Adapter<MissionStateAdapte
 //                        return;
 //                    }
 //                    Mission mission=dataList.get(getLayoutPosition());
-//                    Intent intent = new Intent(context, TaskDetailsActivity2.class);
+//                    Intent intent = new Intent(context, ClaimTaskActivity2.class);
 //                    intent.putExtra("fromTakeOutMissionAdapterLIN",mission);
 //                    context.startActivity(intent);
                     break;

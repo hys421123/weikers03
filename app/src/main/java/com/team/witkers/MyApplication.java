@@ -38,6 +38,8 @@ public class MyApplication extends Application implements ThemeUtils.switchColor
     public static final String BmobID = "01e6a3045fb017cddbc2b79ee38a705c";
     public static boolean   SETLOGOUT=false;
     public static MyUser mUser;//当前登录用户
+    public static String objId;
+
 
     @Override
     public void onCreate() {
