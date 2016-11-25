@@ -40,6 +40,9 @@
 
                 <!--动态-->
                 <LinearLayout
+                    android:id="@+id/ll_rv_pubMissions"
+                    android:clickable="true"
+                    android:background="@color/selector_pub_item"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -76,6 +79,9 @@
 
                 <!--关注-->
                 <LinearLayout
+                    android:id="@+id/ll_rv_concerns"
+                    android:clickable="true"
+                    android:background="@color/selector_pub_item"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -110,6 +116,9 @@
 
                 <!--粉丝-->
                 <LinearLayout
+                    android:id="@+id/ll_rv_fans"
+                    android:clickable="true"
+                    android:background="@color/selector_pub_item"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

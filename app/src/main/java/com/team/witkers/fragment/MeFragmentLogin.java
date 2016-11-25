@@ -3,12 +3,14 @@ package com.team.witkers.fragment;
 import android.content.Intent;
 import android.os.Handler;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hys.mylog.MyLog;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.team.witkers.MyApplication;
 import com.team.witkers.R;
 import com.team.witkers.activity.LoginActivity;
 import com.team.witkers.activity.editInfo.EditPersonalInfoActivity;
@@ -16,6 +18,8 @@ import com.team.witkers.activity.pubclaim.MyClaimActivity;
 import com.team.witkers.activity.pubclaim.MyPubActivity;
 import com.team.witkers.activity.setting.SettingActivity;
 import com.team.witkers.base.BaseFragment;
+import com.team.witkers.bean.ConcernBean;
+import com.team.witkers.bean.ConcernFans;
 import com.team.witkers.bean.Mission;
 import com.team.witkers.bean.MyUser;
 import com.team.witkers.utils.MyToast;
@@ -41,6 +45,8 @@ public class MeFragmentLogin extends BaseFragment implements View.OnClickListene
     private MyUser myUser;
     private RelativeLayout rel_editDetail;
     private TextView tv_introduce,tv_tendencies,tv_focus,tv_fans;
+    private LinearLayout ll_pubMissions,ll_concerns,ll_fans;
+
     private int pubMissionNum,concernNum,fansNum;
     private Handler myHandler = new Handler();
 
@@ -64,6 +70,10 @@ public class MeFragmentLogin extends BaseFragment implements View.OnClickListene
         tv_tendencies = (TextView) view.findViewById(R.id.tv_tendencies);
         tv_focus = (TextView) view.findViewById(R.id.tv_focus);
         tv_fans = (TextView) view.findViewById(R.id.tv_fans);
+
+        ll_pubMissions= (LinearLayout) view.findViewById(R.id.ll_pubMissions);
+        ll_concerns=(LinearLayout) view.findViewById(R.id.ll_concerns);
+        ll_fans= (LinearLayout) view.findViewById(R.id.ll_fans);
     }
 
     private void setUserHead(){
@@ -86,6 +96,10 @@ public class MeFragmentLogin extends BaseFragment implements View.OnClickListene
         customView_setting.setOnClickListener(this);
         customView_logout.setOnClickListener(this);
         rel_editDetail.setOnClickListener(this);
+
+        ll_pubMissions.setOnClickListener(this);
+        ll_concerns.setOnClickListener(this);
+        ll_fans.setOnClickListener(this);
     }
 
     @Override
@@ -124,6 +138,17 @@ public class MeFragmentLogin extends BaseFragment implements View.OnClickListene
                 MyLog.i("edit detail");
                 break;
 
+            case R.id.ll_pubMissions:
+                MyLog.i("ll_pubMissions");
+                break;
+
+            case R.id.ll_concerns:
+                MyLog.i("ll_concerns");
+                break;
+
+            case R.id.ll_fans:
+                MyLog.i("ll_fans");
+                break;
         }//switch
     }//onClick
 
@@ -162,50 +187,52 @@ public class MeFragmentLogin extends BaseFragment implements View.OnClickListene
                 }else {
                     MyLog.i("查询任务数成功" + list.size());
                     pubMissionNum = list.size();
-                    getConcernNum();
+                    getConcernNumAndFansNum();
                 }
             }//done
         });
     }
 
-    private void getConcernNum(){
-        BmobQuery<MyUser> query = new BmobQuery<MyUser>();
-        query.addWhereRelatedTo("concernPerson", new BmobPointer(myUser));
-        query.findObjects(new FindListener<MyUser>() {
-            @Override
-            public void done(List<MyUser> list, BmobException e) {
-                if(e!=null){
-                    MyToast.showToast(getActivity(),"查询失败"+e);
-                }
-                MyLog.i("查询关注数成功"+list.size());
-                concernNum = list.size();
-                getFansNum();
+    private  void getConcernNumAndFansNum(){
+        BmobQuery<ConcernBean> query=new BmobQuery<>();
+        query.addWhereEqualTo("name",myUser.getUsername());
 
-            }
-        });
-    }
-    private void getFansNum(){
-        MyLog.i("开始查询fans数");
-        BmobQuery<MyUser> query = new BmobQuery<MyUser>();
-        query.addWhereRelatedTo("fansPerson", new BmobPointer(myUser));
-        query.findObjects(new FindListener<MyUser>() {
+        query.findObjects(new FindListener<ConcernBean>() {
             @Override
-            public void done(List<MyUser> list, BmobException e) {
-                if(e!=null){
-                    MyToast.showToast(getActivity(),"查询失败"+e);
-                }
-                MyLog.i("查询粉丝数成功"+list.size());
-                fansNum = list.size();
-                myHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        tv_tendencies.setText(pubMissionNum+"");
-                        tv_focus.setText(concernNum+"");
-                        tv_fans.setText(fansNum+"");
+            public void done(List<ConcernBean> list, BmobException e) {
+                if(e==null){
+                    MyLog.v("查询关注成功");
+
+                    ConcernBean concernBean=list.get(0);
+
+                    if(concernBean.getFansList()==null)
+                        fansNum=0;
+                    else {
+                        List<ConcernFans> fansList=concernBean.getFansList();
+                        fansNum = fansList.size();
                     }
-                });
-            }
+
+                    if(concernBean.getConcernsList()==null)
+                        concernNum=0;
+                    else
+                        concernNum=concernBean.getConcernsList().size();
+                    MyLog.v("粉丝数ff和关注数_ 自己是否已经关注"+fansNum+"/// "+concernNum+"/// ");
+
+                    myHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            tv_tendencies.setText(pubMissionNum+"");
+                            tv_focus.setText(concernNum+"");
+                            tv_fans.setText(fansNum+"");
+                        }
+                    });
+
+                }else{
+                    MyLog.e("查询关注失败"+e.getMessage());
+                }
+
+            }//done
         });
-    }
+    }//getConcernAndFans
 
 }//MeFrm_cls

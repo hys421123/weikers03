@@ -5,6 +5,7 @@ import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -408,10 +409,11 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
         });
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         RoundedImageView roundIv_personpage_head;
         TextView tv_tendencies,tv_focus,tv_fans,tv_introduce;
         RelativeLayout rl_concern;
+        LinearLayout ll_rv_pubMissions,ll_rv_concerns,ll_rv_fans;
         public MyViewHolder(View itemView,int viewType) {
             super(itemView);
             if(viewType==BASE_ITEM_TYPE_HEADER){
@@ -421,7 +423,32 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                 tv_focus  = (TextView) itemView.findViewById(R.id.tv_focus);
                 tv_tendencies = (TextView) itemView.findViewById(R.id.tv_tendencies);
                 tv_introduce = (TextView) itemView.findViewById(R.id.tv_introduce);
+
+                ll_rv_pubMissions= (LinearLayout) itemView.findViewById(R.id.ll_rv_pubMissions);
+                ll_rv_concerns= (LinearLayout) itemView.findViewById(R.id.ll_rv_concerns);
+                ll_rv_fans= (LinearLayout) itemView.findViewById(R.id.ll_rv_fans);
+
+                ll_rv_pubMissions.setOnClickListener(this);
+                ll_rv_fans.setOnClickListener(this);
+                ll_rv_concerns.setOnClickListener(this);
             }
+        }
+
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()){
+                case R.id.ll_rv_pubMissions:
+                    MyLog.i("ll_rv_pubMissions");
+                    break;
+
+                case R.id.ll_rv_concerns:
+                    MyLog.i("ll_rv_concerns");
+                    break;
+
+                case R.id.ll_rv_fans:
+                    MyLog.i("ll_rv_fans");
+                    break;
+            }//switch
         }
     }//MyViewHolder_cls
 }
