@@ -190,13 +190,7 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
         });
     }//getPubMissionNum()
 
-    //查询 这个人otherPerson 是否已经关注
-    private void getIsConcerned(){
-        BmobQuery<ConcernBean> query=new BmobQuery<>();
 
-        query.include("fans");
-
-    }
 
     private  void getConcernNumAndFansNum(){
         BmobQuery<ConcernBean> query=new BmobQuery<>();
@@ -220,6 +214,9 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
                         // 判断我自己是否在 粉丝之中
                        isConcerned= fansList.contains(new ConcernFans(mUser2.getHeadUrl(),mUser2.getUsername(),mUser2.getIntroduce(),true));
                         MyLog.d("isConcerned_ "+isConcerned);
+
+                      String info=  fansList.get(0).getInfo();
+                        MyLog.d("info_ "+info);
                     }
 
                     if(concernBean.getConcernsList()==null)
@@ -244,47 +241,6 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
     }//getConcernAndFans
 
 
-
-
-//    private Boolean getConcernNum(final Boolean isNothing){
-//        BmobQuery<MyUser> query = new BmobQuery<MyUser>();
-//        query.addWhereRelatedTo("concernPerson", new BmobPointer(otherPerson));
-//        query.findObjects(new FindListener<MyUser>() {
-//            @Override
-//            public void done(List<MyUser> list, BmobException e) {
-////                MyLog.i("查询关注数成功"+list.size());
-//                concernNum = list.size();
-//                getFansNum(isNothing);
-//            }
-//        });
-//        return isNothing;
-//    }
-//    private void getFansNum(final Boolean isNothing){
-////        MyLog.i("开始查询fans数");
-//        BmobQuery<MyUser> query = new BmobQuery<MyUser>();
-//        query.addWhereRelatedTo("fansPerson", new BmobPointer(otherPerson));
-//        query.findObjects(new FindListener<MyUser>() {
-//            @Override
-//            public void done(List<MyUser> list, BmobException e) {
-////                MyLog.i("查询粉丝数成功"+list.size());
-//                fansNum = list.size();
-//                if(list.size()==0){
-//                    isConcerned = false;
-//                }else{
-//                    for(int i=0;i<list.size();i++){
-//                        //我是别人的fans，说明我关注了他
-//                        if(list.get(i).getUsername().equals(myUser.getUsername())){
-//                            isConcerned = true;
-//                        }
-//                    }
-//                }
-////                MyLog.i(pubMissionNum+"---"+concernNum+"----"+fansNum+"---"+isConcerned);
-//                setHeadAndFootViewWrapper(isNothing);
-//            }
-//        });
-//    }
-
-
     @Override
     protected void getIntentData() {
         otherPerson = (MyUser) this.getIntent().getSerializableExtra("fromTakeOutMissionAdapterTV");
@@ -292,30 +248,8 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
         MyLog.i("name ---->"+otherPerson.getUsername());
 //       String userName = this.getIntent().getStringExtra("fromOrdersShowAdapter");
 //        MyLog.i("userName-->"+userName);
-        queryUser(otherPerson.getUsername());
+//        queryUser(otherPerson.getUsername());
     }
-
-
-    private void queryUser(String userName){
-        BmobQuery<MyUser> query = new BmobQuery<MyUser>();
-        query.addWhereEqualTo("username", userName);
-
-        query.findObjects(new FindListener<MyUser>() {
-            @Override
-            public void done(List<MyUser> list, BmobException e) {
-                if(e==null){
-                    MyUser myUser = list.get(0);
-//                    MyApplication.objId=myUser.getObjectId();
-//                    MyLog.e("objId_ "+MyApplication.objId);
-                    PersonalHomePageActivity2.this.otherPerson = myUser;
-                }else{
-                    MyLog.i("erro");
-                }
-            }
-        });
-    }
-
-
 
     private void setHeadAndFootViewWrapper(){
         //添加头部，尾部
@@ -423,11 +357,6 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
                                 MyLog.e("第" + i + "个数据批量更新失败：" + ex.getMessage() + "," + ex.getErrorCode());
                             }
                         }//for
-//                        if(isRefresh) {
-//                            MyLog.v("要刷新啦");
-//                            isRefresh=false;
-//                            queryBmobData(0, STATE_REFRESH);
-//                        }
                     } else
                         MyLog.e("批更新失败");
                 }

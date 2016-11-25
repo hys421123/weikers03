@@ -15,7 +15,6 @@ public class ConcernFans implements Serializable {
     private Boolean isConcerned;//是否关注或成为粉丝
 
 
-
     public ConcernFans(String headUrl, String userName, String info, Boolean isConcerned) {
         this.headUrl = headUrl;
         this.userName = userName;
@@ -56,5 +55,17 @@ public class ConcernFans implements Serializable {
     }
 
 
+    // 重写equals 方法，保证能检查到相同属性的对象
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof ConcernFans) {
+            ConcernFans fans = (ConcernFans) obj;
+            if(fans.getHeadUrl().equals(getHeadUrl())&&fans.getUserName().equals(getUserName())
+                    &&fans.getInfo().equals(getInfo())&&fans.getConcerned()==getConcerned()){
+                return true;
+            }//内if
 
+        }
+        return super.equals(obj);
+    }
 }
