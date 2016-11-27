@@ -17,19 +17,19 @@ public class TendItems extends BmobObject implements Serializable{
     private String content;
     private List<String> picUrlList;
     private Integer commentNum;
-    private Integer likeNum;
-    private boolean isLike=false;//判断用户本人是否点过赞,
-//    private List<TendComments> commentsList;
-    private String LikeName="0";//标记某用户是否点赞，若点赞留下用户名,默认无点赞字符串"0"
-//    private BmobRelation likeUsers;//记录点赞的用户
-    private String createTime="";
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
+    private boolean isLike=false;//判断用户本人是否点过赞,
+
+
+    // 与点赞 相关的 List, list中存储 的是 点赞者的 userName
+    private List<String> likeList;
+
+    public void setLikeList(List<String> likeList) {
+        this.likeList = likeList;
     }
 
-    public String getCreateTime() {
-        return createTime;
+    public List<String> getLikeList() {
+        return likeList;
     }
 
     public void setPubUser(MyUser pubUser) {
@@ -47,13 +47,7 @@ public class TendItems extends BmobObject implements Serializable{
 //    public void setLikeUsers(BmobRelation likeUsers) {
 //        this.likeUsers = likeUsers;
 //    }
-    public String getLikeName() {
-        return LikeName;
-    }
 
-    public void setLikeName(String likeName) {
-        LikeName = likeName;
-    }
     public boolean isLike() {
         return isLike;
     }
@@ -98,14 +92,6 @@ public class TendItems extends BmobObject implements Serializable{
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public Integer getLikeNum() {
-        return likeNum;
-    }
-
-    public void setLikeNum(Integer likeNum) {
-        this.likeNum = likeNum;
     }
 
 //    public List<TendComments> getCommentsList() {

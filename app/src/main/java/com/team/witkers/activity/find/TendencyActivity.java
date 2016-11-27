@@ -367,31 +367,50 @@ public class TendencyActivity extends BaseActivity implements SwipeRefreshLayout
         TendItems tend=dataList.get(itemPosition1);
 //        isLike=isLikeList.get(itemPosition1);
 //        isLike=tend.isLike();
-        if(tend.isLike()){//若为红色，点击即变为白色，点赞数减1，取消点赞
-            tend.setLike(false);
 
-            tend.setLikeNum(tend.getLikeNum()-1);
-            //删除关联
-            relation=new BmobRelation();
-            relation.remove(tend);
-            myUser.setLikeTendItems(relation);
-
-        }else {// 点赞变红，增加点赞
-            tend.setLike(true);
-
-            tend.setLikeNum(tend.getLikeNum() + 1);
-
-            relation=new BmobRelation();
-            relation.add(tend);
-//多对多关联指向`user`的`likeTendItems`字段
-            myUser.setLikeTendItems(relation);
-
-        }
-//        tend.setLike(!isLike);
-//        isLike=!isLike;
-//        mAdapter.notifyItemChanged(itemPosition1);
+        String userName=myUser.getUsername();
+        // 点赞列表初始 无值，点击即 增加点赞
+        if(tend.getLikeList()==null){
+            List<String > likeList1=new ArrayList<>();
+            likeList1.add(userName);
+            tend.setLikeList(likeList1);
+        }else{
+            if(tend.getLikeList().contains(userName)){//若为红色，点击即变为白色，点赞数减1，取消点赞
+                    tend.getLikeList().remove(userName);
+            }else{
+                tend.getLikeList().add(userName);
+            }//内else
+        }//外 else
         mAdapter.notifyDataSetChanged();
-    }
+
+
+
+//
+//        if(tend.isLike()){//若为红色，点击即变为白色，点赞数减1，取消点赞
+//            tend.setLike(false);
+//
+//            tend.setLikeNum(tend.getLikeNum()-1);
+//            //删除关联
+//            relation=new BmobRelation();
+//            relation.remove(tend);
+//            myUser.setLikeTendItems(relation);
+//
+//        }else {// 点赞变红，增加点赞
+//            tend.setLike(true);
+//
+//            tend.setLikeNum(tend.getLikeNum() + 1);
+//
+//            relation=new BmobRelation();
+//            relation.add(tend);
+////多对多关联指向`user`的`likeTendItems`字段
+//            myUser.setLikeTendItems(relation);
+//
+//        }
+////        tend.setLike(!isLike);
+////        isLike=!isLike;
+////        mAdapter.notifyItemChanged(itemPosition1);
+//        mAdapter.notifyDataSetChanged();
+    }//onItemClick
 
 //    //设置头像点击事件
 //    @Override
@@ -462,15 +481,16 @@ public class TendencyActivity extends BaseActivity implements SwipeRefreshLayout
 
             //只更新当前用户的关联关系
 //            myUser.setValue("username",myUser.getUsername());
-            myUser.update(new UpdateListener() {
-                @Override
-                public void done(BmobException e) {
-                    if(e==null){
-                        MyLog.i("用户关联关系更新成功");
-                    }else
-                        MyLog.e("用户关联关系更新失败");
-                }
-            });//update myUser
+//            myUser.update(new UpdateListener() {
+//                @Override
+//                public void done(BmobException e) {
+//                    if(e==null){
+//                        MyLog.i("用户关联关系更新成功");
+//                    }else
+//                        MyLog.e("用户关联关系更新失败");
+//                }
+//            });//update myUser
+
         }else {//if treeSet not 0
             if(isRefresh) {
                 MyLog.v("要刷新啦");

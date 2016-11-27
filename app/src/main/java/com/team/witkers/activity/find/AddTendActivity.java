@@ -331,7 +331,7 @@ public class AddTendActivity extends BaseActivity2 {
 //        tend.setCommentsList(list);
 
         tend.setCommentNum(0);
-        tend.setLikeNum(0);
+
 //        tend.setCreateTime("");
 
         if(imgList.size()==0){

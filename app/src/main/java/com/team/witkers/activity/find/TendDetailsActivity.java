@@ -155,7 +155,9 @@ public class TendDetailsActivity extends BaseActivity implements View.OnClickLis
         parentTend = (TendItems) getIntent().getSerializableExtra("TendItems");
 //        itemPosition=getIntent().getIntExtra("ItemPosition",0);
 
-        int num = parentTend.getLikeNum();
+//        if(parentTend.getLikeList()==null)
+//
+//        int num = parentTend.getLikeNum();
 //        MyLog.i("likeNum_ "+num);
 
         isItemComment = getIntent().getBooleanExtra("IsItemComment", false);
@@ -368,28 +370,20 @@ public class TendDetailsActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onItemLikeClick(View v) {
-//        MyLog.v("like click");
-        // 直接递增，让TendCommentAdapter2 直接增加item
-//        parentTend.setCommentNum(parentTend.getCommentNum()+1);
-//        dataList.add(subtendComments);
-        if (parentTend.isLike()) {//若为红色，点击即变为白色，点赞数减1
-            parentTend.setLikeNum(parentTend.getLikeNum() - 1);
-            parentTend.setLike(false);
 
-            //删除关联
-            relation = new BmobRelation();
-            relation.remove(parentTend);
-            myUser.setLikeTendItems(relation);
-        } else {
-            parentTend.setLikeNum(parentTend.getLikeNum() + 1);
-
-            parentTend.setLike(true);
-
-            relation = new BmobRelation();
-            relation.add(parentTend);
-//多对多关联指向`user`的`likeTendItems`字段
-            myUser.setLikeTendItems(relation);
-        }
+        String userName=myUser.getUsername();
+        // 点赞列表初始 无值，点击即 增加点赞
+        if(parentTend.getLikeList()==null){
+            List<String > likeList1=new ArrayList<>();
+            likeList1.add(userName);
+            parentTend.setLikeList(likeList1);
+        }else{
+            if(parentTend.getLikeList().contains(userName)){//若为红色，点击即变为白色，点赞数减1，取消点赞
+                parentTend.getLikeList().remove(userName);
+            }else{
+                parentTend.getLikeList().add(userName);
+            }//内else
+        }//外 else
 
 
         mHeaderAndFooterWrapper.notifyDataSetChanged();

@@ -78,7 +78,7 @@ public class MonitorData {
             final TendItems tend=JSON.parseObject(jsonData.toString(), TendItems.class);
             MyLog.v("经过fastJson");
 //            MyLog.i("11MonitorData_tendTime_ "+tend.getCreatedAt());
-            tend.setCreateTime(createTime);
+//            tend.setCreateTime(createTime);
 
             BmobQuery<TendComments> query2 = new BmobQuery<>();
             query2.addWhereEqualTo("tendItems",tend);

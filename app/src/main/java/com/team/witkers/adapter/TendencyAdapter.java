@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.hys.mylog.MyLog;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.stfalcon.frescoimageviewer.ImageViewer;
+import com.team.witkers.MyApplication;
 import com.team.witkers.R;
 import com.team.witkers.bean.TendItems;
 import com.team.witkers.utils.TimeUtils2;
@@ -73,17 +74,30 @@ public class TendencyAdapter extends RecyclerView.Adapter<TendencyAdapter.Tendcy
         holder.tv_tendName.setText(tend.getFriendName());
         holder.tv_tendPubcontent.setText(tend.getContent());
         holder.tv_commentNum.setText("" + tend.getCommentNum());
-        holder.tv_likeNum.setText("" + tend.getLikeNum());
+//        holder.tv_likeNum.setText("" + tend.getLikeNum());
 //        isLike=tend.isLike();
 
-
-        if(!tend.isLike()) {
-//            MyLog.d("tendFriendName_ "+tend.getFriendName());
-//            MyLog.i("tendLikeName_ "+tend.getLikeName());
+        //   设置是否已经 点赞 和 点赞人数
+        if(tend.getLikeList()==null){
+            holder.tv_likeNum.setText(0+"");
             holder.iv_like.setImageResource(R.drawable.ic_tendency_likew1);
-        }
-        else  //若该用户点赞，则为红
-            holder.iv_like.setImageResource(R.drawable.ic_tendency_liker);
+        }else{
+            holder.tv_likeNum.setText(tend.getLikeList().size()+"");
+            if(tend.getLikeList().contains(MyApplication.mUser.getUsername())){
+                holder.iv_like.setImageResource(R.drawable.ic_tendency_liker);
+            }else{
+                holder.iv_like.setImageResource(R.drawable.ic_tendency_likew1);
+            }
+        }//外 else
+
+
+//        if(!tend.isLike()) {
+////            MyLog.d("tendFriendName_ "+tend.getFriendName());
+////            MyLog.i("tendLikeName_ "+tend.getLikeName());
+//            holder.iv_like.setImageResource(R.drawable.ic_tendency_likew1);
+//        }
+//        else  //若该用户点赞，则为红
+//            holder.iv_like.setImageResource(R.drawable.ic_tendency_liker);
 
 //        MyLog.e("tendHeadUrl_ "+tend.getPubUser().getHeadUrl());
         Glide.with(context).load(tend.getPubUser().getHeadUrl()).into(holder.roundIv_tendency_head);

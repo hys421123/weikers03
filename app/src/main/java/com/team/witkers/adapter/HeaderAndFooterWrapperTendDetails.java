@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.stfalcon.frescoimageviewer.ImageViewer;
+import com.team.witkers.MyApplication;
 import com.team.witkers.R;
 import com.team.witkers.bean.TendItems;
 import com.team.witkers.utils.TimeUtils2;
@@ -124,9 +125,9 @@ public class HeaderAndFooterWrapperTendDetails<T> extends RecyclerView.Adapter<R
             ((MyViewHolder)holder).tvContent.setText(data.getContent());
 
             String timeStr="";
-            if(data.getCreatedAt()==null)
-                timeStr=data.getCreateTime();
-            else
+//            if(data.getCreatedAt()==null)
+//                timeStr=data.getCreateTime();
+//            else
                 timeStr=data.getCreatedAt();
 //            MyLog.v("HeadFootDetails_before pubTime");
             String pubTime = TimeUtils2.getDescriptionTimeFromTimestamp(TimeUtils2
@@ -136,11 +137,27 @@ public class HeaderAndFooterWrapperTendDetails<T> extends RecyclerView.Adapter<R
 //            MyLog.v("after pubTime");
             ((MyViewHolder)holder).tvPubTime.setText(pubTime);
             ((MyViewHolder)holder).tvCommentNum.setText(data.getCommentNum()+"");
-            ((MyViewHolder)holder).tvLikeNum.setText(data.getLikeNum()+"");
-            if(data.isLike())//true为红
-                ((MyViewHolder) holder).iv_like .setImageResource(R.drawable.ic_tendency_liker);
-            else//false为白
-                ((MyViewHolder) holder).iv_like.setImageResource(R.drawable.ic_tendency_likew1);
+
+            //   设置是否已经 点赞 和 点赞人数
+            if(data.getLikeList()==null){
+                ((MyViewHolder)holder).tvLikeNum.setText(0+"");
+                ((MyViewHolder)holder).iv_like.setImageResource(R.drawable.ic_tendency_likew1);
+            }else{
+                ((MyViewHolder)holder).tvLikeNum.setText(data.getLikeList().size()+"");
+                if(data.getLikeList().contains(MyApplication.mUser.getUsername())){
+                    ((MyViewHolder)holder).iv_like.setImageResource(R.drawable.ic_tendency_liker);
+                }else{
+                    ((MyViewHolder)holder).iv_like.setImageResource(R.drawable.ic_tendency_likew1);
+                }
+            }//外 else
+            
+            
+            
+//            ((MyViewHolder)holder).tvLikeNum.setText(data.getLikeNum()+"");
+//            if(data.isLike())//true为红
+//                ((MyViewHolder) holder).iv_like .setImageResource(R.drawable.ic_tendency_liker);
+//            else//false为白
+//                ((MyViewHolder) holder).iv_like.setImageResource(R.drawable.ic_tendency_likew1);
 
 
             Glide.with(context).load(data.getFriendHeadUrl()).error(R.drawable.ic_default_null_gray)
