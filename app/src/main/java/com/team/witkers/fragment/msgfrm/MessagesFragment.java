@@ -2,8 +2,10 @@ package com.team.witkers.fragment.msgfrm;
 
 import android.content.Context;
 import android.content.Intent;
+
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -66,11 +68,11 @@ public class MessagesFragment extends BaseFragment implements SwipeRefreshLayout
     }
 
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        MyLog.i("MsgFrm create");
-    }
+//    @Override
+//    public void onCreate( Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        MyLog.i("MsgFrm create");
+//    }
 
     @Override
     public void onResume() {
@@ -100,6 +102,9 @@ public class MessagesFragment extends BaseFragment implements SwipeRefreshLayout
         linearLayoutManager=new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.msgSwipeRefreshLayout);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.swipe_refresh_color);
+
+
 //        Button btn= (Button) view.findViewById(R.id.btn_add);
     }
 

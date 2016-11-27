@@ -1,5 +1,6 @@
 package com.team.witkers.fragment.msgfrm;
 
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -73,6 +74,8 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
         mPullLoadMoreRecyclerView.setLinearLayout();
         mRecyclerViewAdapter = new RecyclerViewAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
+        //设置下拉刷新颜色
+        mPullLoadMoreRecyclerView.setColorSchemeResources(R.color.swipe_refresh_color);
 
     }
 
@@ -168,40 +171,6 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
 //                                        }
 
                                     }// 刷新或初始化
-
-//                                    if (actionType == STATE_REFRESH){//刷新界面
-//                                        MyLog.i("刷新数据");
-////                                        List<Mission> missionList = takeMissionList;
-////                                        if(pubMissionList!=null){
-////                                            for(int i = 0;i<pubMissionList.size();i++){
-////                                                missionList.add(pubMissionList.get(i));
-////                                            }
-////                                        }
-////                                        lastTime = missionList.get(missionList.size() - 1).getCreatedAt();
-////                                        MyLog.i("两个list的和----》"+missionList.size());
-////                                        dataListMsgBean.clear();
-//                                        dataListMsgBean  =new ArrayList<MsgOrdersBean>();
-//                                        lastTime=pubMissionList.get(pubMissionList.size()-1).getCreatedAt();
-//                                        dataListMsgBean = getBeanList(pubMissionList);
-//                                        if(msgOrdersBeanAdapter==null){
-//                                            msgOrdersBeanAdapter=new  MsgOrdersBeanAdapter(getActivity(),dataListMsgBean);
-//                                            mPullLoadMoreRecyclerView.setAdapter(msgOrdersBeanAdapter);
-//                                        }else
-//                                            msgOrdersBeanAdapter.notifyDataSetChanged();
-//                                    }else if (actionType == STATE_FIRST){//adapter为空时
-////                                        List<Mission> missionList = takeMissionList;
-////                                        if(pubMissionList!=null){
-////                                            for(int i = 0;i<pubMissionList.size();i++){
-////                                                missionList.add(pubMissionList.get(i));
-////                                            }
-////                                        }
-////                                        lastTime = missionList.get(missionList.size() - 1).getCreatedAt();
-////                                        MyLog.i("两个list的和----》"+missionList.size());
-//                                        lastTime=pubMissionList.get(pubMissionList.size()-1).getCreatedAt();
-//                                        dataListMsgBean = getBeanList(pubMissionList);
-//                                        msgOrdersBeanAdapter = new MsgOrdersBeanAdapter(getActivity(), dataListMsgBean);
-//                                        mPullLoadMoreRecyclerView.setAdapter(msgOrdersBeanAdapter);
-//                                    }// first_state
 
 
                                     MyLog.i("去掉对话框，去掉刷新");

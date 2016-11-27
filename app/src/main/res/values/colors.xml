@@ -4,18 +4,18 @@
     <!--<color name="colorPrimaryDark">#303F9F</color>-->
     <!--<color name="colorAccent">#FF4081</color>-->
     <color name="colorPrimary">#FF03A9F4</color>
-    <color name="colorPrimaryDark">#ff0171c9</color>
-    <color name="colorAccent">#FF00E5FF</color>
+    <color name="colorPrimaryDark">#4497dd</color>
+    <color name="colorAccent">#86c9f6</color>
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
 
 
-    <color name="firstColor">#00BCD4</color>
+    <color name="firstColor">#00bcd4</color>
     <color name="secondColor">#E91E63</color>
     <color name="thirdColor">#FF5722</color>
     <color name="fourthColor">#4CAF50</color>
-    <color name="colorLine">#BDBDBD</color>
+    <color name="colorLine">#b4b4b4</color>
 
 
     <color name="overlay_light">#F8F8F8</color>
@@ -45,7 +45,7 @@
     <color name="text_primary_color">#2d2d2d</color>
     <color name="window_background">#eaeaea</color>
 
-    <color name="black_light">#333333</color>
+    <color name="black_light">#555555</color>
 
     <color name="white">#ffffff</color>
     <color name="white_trans">#99ffffff</color>
@@ -55,7 +55,7 @@
     <!-- theme color -->
     <color name="pink">#fb7299</color>
     <color name="pink_dark">#b85671</color>
-    <color name="pink_trans">#99f0486c</color>
+    <color name="pink_trans">#99ef6683</color>
 
     <!--#2196F3   blue原-->
     <color name="blue">#2196F3</color>
@@ -72,34 +72,33 @@
 
     <color name="green_light">#8BC34A</color>
     <color name="green_light_dark">#558B2F</color>
-    <color name="green_light_trans">#998BC34A</color>
+    <color name="green_light_trans">#998bc34a</color>
 
-    <color name="yellow">#FDD835</color>
-    <color name="yellow_dark">#FBC02D</color>
-    <color name="yellow_trans">#99FDD835</color>
+    <color name="yellow">#fdd835</color>
+    <color name="yellow_dark">#fbc02d</color>
+    <color name="yellow_trans">#99fdd835</color>
 
-    <color name="orange">#FF9800</color>
+    <color name="orange">#ff9800</color>
     <color name="orange_dark">#EF6C00</color>
-    <color name="orange_trans">#99FF9800</color>
+    <color name="orange_trans">#99ff9800</color>
 
     <color name="red">#F44336</color>
-    <color name="red_dark">#C62828</color>
-    <color name="red_trans">#99F44336</color>
+    <color name="red_dark">#de8989</color>
+    <color name="red_trans">#99ad4d46</color>
 
-    <!--自定义颜色-->
+    <!--自定义颜色-->-->
 
-    <!--主界面-->
-    <!--toolbar主蓝色-->
+    <!--主界面toolbar主蓝色-->
     <color name="toolbar_color">#5AADF1</color>
 
     <!--登录界面的颜色-->
-    <color name="login_gray_background">#EAEAEA</color>
+    <color name="login_gray_background">#eaeaea</color>
     <color name="login_blue_toolbar">#5AADF1</color>
 
     <!--注册界面-->
     <color name="register_gray_text">#B1B1B1</color>
     <color name="register_terms1">#a2a6a7</color>
-    <color name="register_terms2"> #4d7dae</color>
+    <color name="register_terms2">#4d7dae</color>
     <color name="register_verify_num">#f7c041</color>
     <color name="register_verify_text">#929290</color>
     <color name="register_verify_resend">#4d7dae</color>
@@ -114,13 +113,13 @@
     <color name="gray_color">#c4c5c6</color>
     <color name="font_black_color">#4a4f53</color>
     <!--Me_fragment-->
-       <color name="mypub_item_background"> #d9d9d9</color>
-        <color name="division_line">#cbcbcb</color>
+    <color name="mypub_item_background">#d9d9d9</color>
+    <color name="division_line">#cbcbcb</color>
     <!--#e6e6e6-->
     <!--Me_fragment-->
 
     <!--修改登录密码activity界面-->
-    <color name="changepwd_hint_color">#a2a6a7</color>
+    <color name="changepwd_hint_color">#454747</color>
 
     <!--消息界面-->
     <color name="msg_slidebar_color">#86c9f6</color>
@@ -134,6 +133,8 @@
     <color name="complete_take_mission_bg">#c2c2c2</color>
 
     <color name="orders_select_color">#86c9f6</color>
-    <color name="orders_price_color">#65bd29</color>
+    <color name="orders_price_color">#97c777</color>
     <color name="Orders_confirmed">#e9e9e9</color>
+
+    <color name="swipe_refresh_color">#5AADF1</color>
 </resources>
