@@ -80,6 +80,7 @@ public class ConcernsActivity extends BaseActivity implements PullLoadMoreRecycl
         mPullLoadMoreRecyclerView= (PullLoadMoreRecyclerView) findViewById(R.id.pullLoadMoreRecyclerView);
         mPullLoadMoreRecyclerView.setLinearLayout();
         mRecyclerViewAdapter = new RecyclerViewAdapter(this);
+        mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
         //设置下拉刷新颜色
         mPullLoadMoreRecyclerView.setColorSchemeResources(R.color.swipe_refresh_color);
@@ -150,45 +151,31 @@ public class ConcernsActivity extends BaseActivity implements PullLoadMoreRecycl
                     MyLog.i("查询关注者3成功");
 
                     ConcernBean concernBean=list.get(0);
-                    if(isFans){
-                        if(concernBean.getFansList()==null){
+                    String no="";
+                    if(isFans){// 如果选择粉丝选项
+                        if(concernBean.getFansList()==null||concernBean.getFansList().size()==0){
                             tv_no.setText("还没有任何粉丝");
                             tv_no.setVisibility(View.VISIBLE);
                             if(mDialog!=null){
                                 mDialog.dismiss();
                             }
                             return;
-
-                        }else {//粉丝中 有粉丝列表
-                            dataListConcernFans = concernBean.getFansList();
-                            concernsList=concernBean.getConcernsList();
-                            if(concernsList!=null){
-                                concernsList.retainAll(dataListConcernFans);
-                                if(concernsList.size()!=0){// 粉丝、关注 两者有交集
-                                    dataListConcernFans.removeAll(concernsList);//取 差集
-                                    // 修改 交集的 isconcerned 属性
-                                    for(ConcernFans fans:concernsList){
-                                        fans.setConcerned(true);
-                                    }
-                                    //修改属性后，  并集
-                                    dataListConcernFans.addAll(concernsList);
-                                }//有交集
-                            }//concernsList not null
-                        }//粉丝中 有粉丝列表
-                    }else{// isConcerns
-                        if(concernBean.getConcernsList()==null) {
+                        }else{//getFansList.size() !=0
+                            dataListConcernFans=concernBean.getFansList();
+                        }
+                    }else {// 选择有粉丝  isFans
+                        if(concernBean.getConcernsList()==null||concernBean.getConcernsList().size()==0){
                             tv_no.setText("还没有关注任何人");
                             tv_no.setVisibility(View.VISIBLE);
-                            if (mDialog != null) {
+                            if(mDialog!=null){
                                 mDialog.dismiss();
                             }
                             return;
-                        }else {//getConcernsList not null
+                        }else{//getFansList.size() !=0
                             dataListConcernFans=concernBean.getConcernsList();
-                        }//getConcernsList not null
-                    }//isConcerns
+                        }
+                    }// 选择 关注者
 
-                       MyLog.v("concernsList_size_ "+concernBean.getConcernsList().size());
                         if(actionType==STATE_MORE){
                             mAdapter.notifyDataSetChanged();
                         }else{//下拉刷新或初始化

@@ -202,12 +202,14 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
                 if(e==null){
                     MyLog.v("查询关注成功");
 
+
                     ConcernBean concernBean=list.get(0);
 
-                    if(concernBean.getFansList()==null)
+
+                    if(concernBean.getFansList()==null||concernBean.getFansList().size()==0)
                         fansNum=0;
                     else {
-                        List<ConcernFans> fansList=concernBean.getFansList();
+                        List<ConcernFans> fansList = concernBean.getFansList();
                         fansNum = fansList.size();
                         // 我自己
                         MyUser mUser2=MyApplication.mUser;
@@ -219,10 +221,15 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
                         MyLog.d("info_ "+info);
                     }
 
+
                     if(concernBean.getConcernsList()==null)
                         concernNum=0;
                     else
                         concernNum=concernBean.getConcernsList().size();
+
+
+
+                    MyLog.v("粉丝数ff和关注数_ 自己是否已经关注"+fansNum+"/// "+concernNum+"/// "+isConcerned);
 
                     //设置 顶部视图
                     setHeadAndFootViewWrapper();
@@ -231,9 +238,16 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
 //                BmobPointer myUser=  concernBean.getFans().getObjects().get(0);
 //                 MyLog.v("objId_ "+myUser.getObjectId());
 
-                    MyLog.v("粉丝数ff和关注数_ 自己是否已经关注"+fansNum+"/// "+concernNum+"/// "+isConcerned);
+//                    MyLog.v("粉丝数ff和关注数_ 自己是否已经关注"+fansNum+"/// "+concernNum+"/// "+isConcerned);
+
+//                    */
+                    if(mDialog!=null)
+                        mDialog.dismiss();
+
                 }else{
                     MyLog.e("查询关注失败"+e.getMessage());
+                    if(mDialog!=null)
+                        mDialog.dismiss();
                 }
 
             }//done

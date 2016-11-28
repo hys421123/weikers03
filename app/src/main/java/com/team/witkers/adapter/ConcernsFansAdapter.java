@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -59,6 +60,16 @@ public class ConcernsFansAdapter extends RecyclerView.Adapter< ConcernsFansAdapt
         holder.tv_concerns2_name.setText(concernFans.getUserName());
         holder.tv_concerns2_info.setText(concernFans.getInfo());
 
+        // TODO: 2016/11/29  设置 关注图片
+            if(concernFans.getConcerned()){// 若处于互相 关注
+                Glide.with(context)
+                        .load(R.drawable.concerned2)
+                        .into(holder.iv_isConcerned);
+            }else{//不是互相关注
+                Glide.with(context)
+                        .load(R.drawable.unconcerned2)
+                        .into(holder.iv_isConcerned);
+            }
 
     }//onBindViewHolder
 
@@ -71,6 +82,7 @@ public class ConcernsFansAdapter extends RecyclerView.Adapter< ConcernsFansAdapt
 
         private RoundedImageView concerns2_head;
         private TextView tv_concerns2_name,   tv_concerns2_info;
+        private ImageView iv_isConcerned;
         LinearLayout itemView;
 
         public ConcernsFansViewHolder(View itemView) {
@@ -78,7 +90,7 @@ public class ConcernsFansAdapter extends RecyclerView.Adapter< ConcernsFansAdapt
             concerns2_head= (RoundedImageView) itemView.findViewById(R.id.concerns2_head);
             tv_concerns2_name= (TextView) itemView.findViewById(R.id.tv_concerns2_name);
             tv_concerns2_info= (TextView) itemView.findViewById(R.id.tv_concerns2_info);
-
+            iv_isConcerned= (ImageView) itemView.findViewById(R.id.iv_isConcerned);
         }
 
         @Override
