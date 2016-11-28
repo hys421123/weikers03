@@ -12,10 +12,10 @@ public class ConcernFans implements Serializable {
     private String headUrl;
     private String userName;
     private String info;
-    private Boolean isConcerned;//是否  互相 关注
+    private Boolean isConcerned=false;//是否  互相 关注, 默认 不是 互关
 
 
-    public ConcernFans(String headUrl, String userName, String info, Boolean isConcerned) {
+    public ConcernFans(String headUrl, String userName, String info) {
         this.headUrl = headUrl;
         this.userName = userName;
         this.info = info;
@@ -61,7 +61,7 @@ public class ConcernFans implements Serializable {
         if (obj instanceof ConcernFans) {
             ConcernFans fans = (ConcernFans) obj;
             if(fans.getHeadUrl().equals(getHeadUrl())&&fans.getUserName().equals(getUserName())
-                    &&fans.getInfo().equals(getInfo())&&fans.getConcerned()==getConcerned()){
+                    &&fans.getInfo().equals(getInfo())){
                 return true;
             }//内if
 

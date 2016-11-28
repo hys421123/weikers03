@@ -45,6 +45,9 @@ public class ConcernsActivity extends BaseActivity implements PullLoadMoreRecycl
     private int mCount = 1;
     private List<ConcernFans> dataListConcernFans=new ArrayList<ConcernFans>();
 
+    //把关注 列表取出来，作交集，得到 互关 粉丝
+    private List<ConcernFans> concernsList=new ArrayList<>();
+
     private int lastVisibleItem;
     private ProgressDialog mDialog;
     private static final int STATE_FIRST = 0;// 第一次载入
@@ -156,8 +159,22 @@ public class ConcernsActivity extends BaseActivity implements PullLoadMoreRecycl
                             }
                             return;
 
-                        }else
-                            dataListConcernFans=concernBean.getFansList();
+                        }else {//粉丝中 有粉丝列表
+                            dataListConcernFans = concernBean.getFansList();
+                            concernsList=concernBean.getConcernsList();
+                            if(concernsList!=null){
+                                concernsList.retainAll(dataListConcernFans);
+                                if(concernsList.size()!=0){// 粉丝、关注 两者有交集
+                                    dataListConcernFans.removeAll(concernsList);//取 差集
+                                    // 修改 交集的 isconcerned 属性
+                                    for(ConcernFans fans:concernsList){
+                                        fans.setConcerned(true);
+                                    }
+                                    //修改属性后，  并集
+                                    dataListConcernFans.addAll(concernsList);
+                                }//有交集
+                            }//concernsList not null
+                        }//粉丝中 有粉丝列表
                     }else{// isConcerns
                         if(concernBean.getConcernsList()==null) {
                             tv_no.setText("还没有关注任何人");

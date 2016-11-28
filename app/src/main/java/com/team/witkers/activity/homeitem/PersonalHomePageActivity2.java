@@ -212,7 +212,7 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
                         // 我自己
                         MyUser mUser2=MyApplication.mUser;
                         // 判断我自己是否在 粉丝之中
-                       isConcerned= fansList.contains(new ConcernFans(mUser2.getHeadUrl(),mUser2.getUsername(),mUser2.getIntroduce(),true));
+                       isConcerned= fansList.contains(new ConcernFans(mUser2.getHeadUrl(),mUser2.getUsername(),mUser2.getIntroduce()));
                         MyLog.d("isConcerned_ "+isConcerned);
 
                       String info=  fansList.get(0).getInfo();

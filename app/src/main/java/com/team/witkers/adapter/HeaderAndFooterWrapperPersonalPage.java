@@ -47,7 +47,8 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
     private MyUser person;
     private Context context;
     private int pubMissionNum,concernNum,fansNum;
-    private Boolean isConcerned;
+    //判断我是否在粉丝中 ，状态是否为 关注中
+    private Boolean meConcerned;
     private ConcernBean concernBean;
     private ConcernBean fansBean;
 
@@ -65,7 +66,7 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
         this.pubMissionNum = pubMissionNum;
         this.concernNum = concernNum;
         this.fansNum = fansNum;
-        this.isConcerned = isConcerned;
+        this.meConcerned = isConcerned;
     }
 
     @Override
@@ -140,7 +141,7 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
             Glide.with(context).load(person.getHeadUrl()).error(R.drawable.ic_default_null_gray)
                     .into(((MyViewHolder)holder).roundIv_personpage_head);
 //            MyLog.i(pubMissionNum+"---"+concernNum+"----"+fansNum+"---"+isConcerned);
-            if(isConcerned){//关注中
+            if(meConcerned){//关注中
                 ((MyViewHolder)holder).rl_concern.setBackgroundResource(R.drawable.img_cancel_concern);
             }else{//加关注
                 ((MyViewHolder)holder).rl_concern.setBackgroundResource(R.drawable.img_add_concern);
@@ -162,17 +163,17 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                         return;
                     }
                     MyLog.i("myself-->"+myself.getUsername());////////////////
-                    if(isConcerned){//点击  关注中    将图片换为  加关注(取消关注状态)
+                    if(meConcerned){//点击  关注中    将图片换为  加关注(取消关注状态)
                         ((MyViewHolder)holder).rl_concern.setBackgroundResource(R.drawable.img_add_concern);
                         unConcernPerson3(person,myself);
-                        isConcerned = false;
-                        MyToast.showToast(context,"onClick  "+isConcerned);
+                        meConcerned = false;
+                        MyToast.showToast(context,"onClick  "+meConcerned);
                     }else{//点击  加关注(取消关注状态)    将图片换为  关注中
                         MyLog.i(" 加关注啊11");
                         ((MyViewHolder)holder).rl_concern.setBackgroundResource(R.drawable.img_cancel_concern);
                         concernPerson3(person,myself);
-                        isConcerned = true;
-                        MyToast.showToast(context,"onClick  "+isConcerned);
+                        meConcerned = true;
+                        MyToast.showToast(context,"onClick  "+meConcerned);
                     }
                 }
             });
@@ -203,7 +204,7 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                     MyLog.v("concernPerson__");
                     concernBean = list.get(0);
                     List<ConcernFans> concernsList;
-                    ConcernFans concern=new ConcernFans(person.getHeadUrl(),person.getUsername(),person.getIntroduce(),true);
+                    ConcernFans concern=new ConcernFans(person.getHeadUrl(),person.getUsername(),person.getIntroduce());
 
                     if(concernBean.getConcernsList()==null){
                         concernsList=new ArrayList<ConcernFans>();
@@ -212,6 +213,28 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                     }else {
                          concernBean.getConcernsList().add(concern);
                     }
+
+
+                    // 修改myself 的 粉丝信息fansList， 主要是对 isConcerned(是否互相关注) 属性进行修改
+                    //复制 getConcernsList() 值，而不破坏其中的值
+                   List<ConcernFans> concernsList2=new ArrayList<ConcernFans>();
+                    concernsList2.addAll(concernBean.getConcernsList()) ;
+                   List<ConcernFans> fansList2=concernBean.getFansList();
+                    if(fansList2!=null) {
+                        fansList2.retainAll(concernBean.getConcernsList());
+                        if (fansList2.size() != 0) {// 粉丝、关注 两者有交集
+                            concernsList2.removeAll(fansList2);//取 差集
+                            // 修改 交集的 isConcerned 属性
+                            for (ConcernFans fans : fansList2) {
+                                fans.setConcerned(true);
+                            }
+                            //修改属性后，  并集  ,此时 完成 对getConcernsList的修改
+                            fansList2.addAll(concernsList2);
+                        }//有交集
+                    }//fansList2 not null
+
+
+
 
                     concernBean.update(new UpdateListener() {
                         @Override
@@ -239,7 +262,7 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                 if(e == null){
                     fansBean = list.get(0);
                     List<ConcernFans> fansList;
-                    ConcernFans fans=new ConcernFans(myself.getHeadUrl(),myself.getUsername(),myself.getIntroduce(),true);
+                    ConcernFans fans=new ConcernFans(myself.getHeadUrl(),myself.getUsername(),myself.getIntroduce());
 
                     if(fansBean.getFansList()==null){
                         fansList=new ArrayList<ConcernFans>();
@@ -248,6 +271,34 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                     }else {
                         fansBean.getFansList().add(fans);
                     }
+
+
+
+                    // 修改person中 的 粉丝信息fansList， 主要是对 isConcerned(是否互相关注) 属性进行修改
+                    //复制 getConcernsList() 值，而不破坏其中的值
+                    List<ConcernFans> intersectionFansList2=new ArrayList<ConcernFans>();
+                    //得到 关注列表
+                    intersectionFansList2.addAll(fansBean.getFansList()) ;
+
+
+                    if(fansBean.getConcernsList()!=null){
+                        //取 交集
+                    intersectionFansList2.retainAll(concernBean.getConcernsList());
+                        if (intersectionFansList2.size() != 0) {// 粉丝、关注 两者有交集
+                            fansBean.getFansList().removeAll(intersectionFansList2);//取 差集
+
+                            // 修改 交集的 isConcerned 属性
+                            for (ConcernFans fans2:intersectionFansList2) {
+                                fans2.setConcerned(true);
+                            }
+
+                            //修改属性后，  并集  ,此时 完成 对getConcernsList的修改
+                            fansBean.getFansList().addAll(intersectionFansList2);
+                        }//有交集
+
+                    }//getConcernsList not null
+
+
 
                     fansBean.update(new UpdateListener() {
                         @Override
@@ -278,7 +329,7 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                     MyLog.v("unconcernPerson__");
                     concernBean = list.get(0);
                     List<ConcernFans> concernsList;
-                    ConcernFans concern=new ConcernFans(person.getHeadUrl(),person.getUsername(),person.getIntroduce(),true);
+                    ConcernFans concern=new ConcernFans(person.getHeadUrl(),person.getUsername(),person.getIntroduce());
 
                     if(concernBean.getConcernsList()==null){
                         MyLog.e("关注列表 为空，无法取消关注！！");
@@ -314,7 +365,7 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                 if(e == null){
                     fansBean = list.get(0);
                     List<ConcernFans> fansList;
-                    ConcernFans fans=new ConcernFans(myself.getHeadUrl(),myself.getUsername(),myself.getIntroduce(),true);
+                    ConcernFans fans=new ConcernFans(myself.getHeadUrl(),myself.getUsername(),myself.getIntroduce());
 
                     if(fansBean.getFansList()==null){
                         MyLog.e("关注列表 为空，无法取消关注！！");
