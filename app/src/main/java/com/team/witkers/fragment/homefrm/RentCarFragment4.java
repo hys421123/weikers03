@@ -57,7 +57,7 @@ public class RentCarFragment4 extends BaseFragmentForDelayLoad implements SwipeR
     private BmobGeoPoint myPoint;
     @Override
     protected int setContentId() {
-        return R.layout.fragment_index_rentcar;
+        return R.layout.fragment_index_rentcar_2;
     }
 
     @Override

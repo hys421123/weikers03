@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.find.UserComplaintActivity">
+
+    <include layout="@layout/topbar_back_2"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+    <EditText
+        android:id="@+id/et_complaint_resume"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_user_complaint"
+        android:hint="请用一句话描述您的意见"
+        android:paddingLeft="10dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/et_complaint_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_user_complaint"
+        android:gravity="left"
+        android:hint="请输入您的宝贵意见或建议！"
+        android:minLines="10"
+        android:padding="10dp"
+        android:maxLength="200"
+        android:textSize="16sp" />
+
+        <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/selector_complaint_button_bg"
+        android:text="提交"
+        android:textColor="@color/white"
+        android:textSize="@dimen/tendency_item_font_big" />
+    </LinearLayout>
+</LinearLayout>

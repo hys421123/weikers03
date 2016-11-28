@@ -46,7 +46,7 @@ public class MsgTendAdapter extends RecyclerView.Adapter<MsgTendAdapter.MsgTendV
     @Override
     public MsgTendViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         MsgTendViewHolder holder = new MsgTendViewHolder(LayoutInflater.from(
-                context).inflate(R.layout.recyclerview_msg_item, parent,
+                context).inflate(R.layout.recyclerview_msg_item_2, parent,
                 false));
         return holder;
     }

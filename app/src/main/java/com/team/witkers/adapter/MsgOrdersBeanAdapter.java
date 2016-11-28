@@ -50,7 +50,7 @@ public class MsgOrdersBeanAdapter extends RecyclerView.Adapter<MsgOrdersBeanAdap
 
     @Override
     public MsgOrdersBeanAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.fragment_orders_item, parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.fragment_orders_item_2, parent,false);
         return new MyViewHolder(view);
     }
 

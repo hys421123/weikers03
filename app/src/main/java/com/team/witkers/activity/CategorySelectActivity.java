@@ -36,7 +36,7 @@ public class CategorySelectActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_category_select;
+        return R.layout.activity_category_select_2;
     }
 
     @Override

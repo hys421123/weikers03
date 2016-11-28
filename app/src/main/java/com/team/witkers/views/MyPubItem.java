@@ -34,7 +34,7 @@ public class MyPubItem extends RelativeLayout {
 
     public MyPubItem(Context context, AttributeSet attrs) {
         super(context, attrs);
-        View view= View.inflate(context, R.layout.custom_mypub_item,this);
+        View view= View.inflate(context, R.layout.custom_mypub_item_2,this);
         rl_mypub_item = (RelativeLayout) view.findViewById(R.id.rl_mypub_item);
         iv_item_lefticon = (ImageView) view.findViewById(R.id.iv_item_lefticon);
         iv_item_righticon = (ImageView) view.findViewById(R.id.iv_item_righticon);

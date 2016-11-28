@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--上端显示单个动态-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp">
+
+    <View
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:background="#e2e3de"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <!--除评论以外的区域-->
+    <LinearLayout
+        android:id="@+id/ll_topview"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+        <!--头像姓名-->
+        <LinearLayout
+            android:layout_marginLeft="@dimen/tendency_item_leftmargin"
+            android:layout_marginTop="@dimen/tendency_item_topmargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/roundIv_comment_tophead"
+                android:layout_marginRight="10dp"
+                android:layout_width="@dimen/tendency_item_head_height"
+                android:layout_height="@dimen/tendency_item_head_height"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/default_head"
+                app:riv_oval="true"
+                />
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:textColor="#4a4f53"
+                    android:id="@+id/tv_comment_topName"
+                    android:textSize="@dimen/tendency_item_font_big"
+                    android:gravity="center_vertical"
+                    android:text="托尼斯塔克"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
+
+                <TextView
+                    android:textColor="@color/font_gray_color"
+                    android:id="@+id/tv_comment_topPubtime"
+                    android:textSize="@dimen/tendency_item_font_small"
+                    android:gravity="center_vertical"
+                    android:text="2分钟前"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!--  上面是头像姓名-->
+        <!--文字内容-->
+        <TextView
+            android:textColor="#4a4f53"
+            android:id="@+id/tv_comment_topPubcontent"
+            android:textSize="@dimen/tendency_item_font_big"
+            android:layout_marginRight="@dimen/tendency_item_leftmargin"
+            android:layout_marginLeft="@dimen/tendency_item_leftmargin"
+            android:layout_marginTop="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="你可以夺走我的装备，我的房子和玩具，但你夺不走的是：我就是钢铁侠！"
+            android:textScaleX="1.03"
+            android:lineSpacingMultiplier="1.3"
+            />
+
+
+
+
+        <com.team.witkers.views.NineGridImageView
+            android:layout_marginTop="@dimen/tendency_item_topmargin"
+            android:layout_marginRight="@dimen/tendency_item_leftmargin"
+            android:layout_marginLeft="@dimen/tendency_item_leftmargin"
+            android:visibility="visible"
+            android:id="@+id/comment_topninegrid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:imgGap="3dp"
+            app:maxSize="-1"
+            app:showStyle="grid"
+            app:singleImgSize="180dp"/>
+
+    </LinearLayout>
+
+    <!--评论转发区-->
+    <RelativeLayout
+        android:layout_marginRight="@dimen/tendency_item_leftmargin"
+        android:layout_marginLeft="@dimen/tendency_item_leftmargin"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        >
+
+
+        <LinearLayout
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp">
+
+            <!--评论linearlayout-->
+            <LinearLayout
+                android:descendantFocusability="blocksDescendants"
+                android:clickable="true"
+                android:paddingTop="13dp"
+                android:background="@color/selector_pub_item"
+                android:paddingLeft="8dp"
+
+                android:id="@+id/ll_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                >
+                <ImageView
+                    android:id="@+id/iv_comment"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:background="@drawable/ic_tendency_comment2"
+                    />
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/tv_comment_topCommentNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="25"
+                    android:textSize="@dimen/tendency_item_font_small"
+                    android:layout_marginRight="2dp"
+                    />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:descendantFocusability="blocksDescendants"
+                android:paddingTop="13dp"
+                android:clickable="true"
+                android:background="@color/selector_pub_item"
+                android:paddingLeft="8dp"
+
+                android:id="@+id/ll_like"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+                <ImageView
+                    android:id="@+id/iv_like"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:background="@drawable/ic_tendency_likew1"
+                    />
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/tv_comment_toplikeNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="97"
+                    android:textSize="@dimen/tendency_item_font_small"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_height="2px"
+        android:layout_width="match_parent"
+        android:background="#e2e3de" />
+
+    </LinearLayout>
+
+</LinearLayout>

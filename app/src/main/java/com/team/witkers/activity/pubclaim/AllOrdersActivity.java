@@ -36,7 +36,7 @@ public class AllOrdersActivity extends BaseActivity {
     private int LIMIT = 8;        // 每页的数据是8条
     @Override
     protected int setContentId() {
-        return R.layout.activity_all_orders;
+        return R.layout.activity_all_orders_2;
     }
 
     @Override

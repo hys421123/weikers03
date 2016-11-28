@@ -75,7 +75,7 @@ public class UserSearchFragment extends BaseFragment {
 
     @Override
     protected int setContentId() {
-        return R.layout.fragment_user_search;
+        return R.layout.fragment_user_search_2;
     }
 
     @Override

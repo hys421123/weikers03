@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rl1"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+    <ImageView
+        android:id="@+id/iv_takerIcon"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_height="43dp"
+        android:layout_width="43dp" />
+
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/iv_takerIcon"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/iv_takerIcon"
+        android:text="陈玄"
+        android:textColor="@color/black_light"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_ordersNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_name"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@id/iv_takerIcon"
+        android:text="月完成99单"
+        android:textSize="13sp"
+        android:textColor="#a2a6a7" />
+
+
+        <CheckBox
+        android:id="@+id/cb_select"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/selector_checkbox"
+        android:button="@null"
+        android:clickable="false"
+        android:enabled="false" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_marginRight="13dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/cb_select"
+            android:layout_toStartOf="@+id/cb_select">
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥8元"
+                android:textColor="#e99b50"
+                android:textSize="14.8sp"
+                android:layout_weight="90.50" />
+        </LinearLayout>
+
+        <!--android:button="@null"-->
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:background="#e9e9e9"
+        android:layout_height="2px"
+        android:layout_below="@+id/rl1"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="38dp" />
+
+
+</RelativeLayout>

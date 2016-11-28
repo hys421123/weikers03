@@ -81,7 +81,7 @@ public class CropActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_crop);
+        setContentView(R.layout.activity_crop_2);
 
         Uri uri=getIntent().getParcelableExtra("uri");
 

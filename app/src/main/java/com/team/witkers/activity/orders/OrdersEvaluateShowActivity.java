@@ -10,6 +10,6 @@ public class OrdersEvaluateShowActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_orders_evaluate_show);
+        setContentView(R.layout.activity_orders_evaluate_show_2);
     }
 }

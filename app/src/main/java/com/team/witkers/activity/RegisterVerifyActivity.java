@@ -42,7 +42,7 @@ public class RegisterVerifyActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_register_verify;
+        return R.layout.activity_register_verify_2;
     }
 
 

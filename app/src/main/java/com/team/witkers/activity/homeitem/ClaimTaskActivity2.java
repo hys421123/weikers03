@@ -2,9 +2,11 @@ package com.team.witkers.activity.homeitem;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.EditText;
@@ -57,7 +59,7 @@ public class ClaimTaskActivity2 extends BaseActivity implements View.OnClickList
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_task_details;
+        return R.layout.activity_task_details_2;
     }
 
     @Override
@@ -158,6 +160,12 @@ public class ClaimTaskActivity2 extends BaseActivity implements View.OnClickList
                         String lableStr = infoTemp.substring(index1+1, index2 );
                         intent.putExtra("ToHotLableDetails",lableStr);
                         startActivity(intent);
+                    }
+
+                    @Override
+                    public void updateDrawState(TextPaint ds) {
+                        super.updateDrawState(ds);
+                        ds.setColor(Color.rgb(74,125,174));
                     }
                 }, index1, index2 + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spannableString;

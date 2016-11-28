@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <!--<include layout="@layout/topbar" />-->
+    <RelativeLayout
+        android:id="@+id/bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbar_color"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_topBack"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="18dp"
+            android:src="@drawable/ic_main_back" />
+
+        <TextView
+            android:id="@+id/id_topTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/iv_topBack"
+            android:text="@string/title_activity_task_details"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/bar_layout">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                android:paddingBottom="12dp">
+
+                <!--头像-->
+
+                <ImageView
+                    android:id="@+id/iv_head"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/head" />
+
+                <!--用户名 距离 发布时间-->
+
+                <TextView
+                    android:id="@+id/tv_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/iv_head"
+                    android:layout_alignLeft="@+id/tv_name"
+                    android:text="100米内"
+                    android:textSize="@dimen/recycleview_item_fontsmall" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:text="苏伟平"
+                    android:textColor="#4a4f53"
+                    android:textSize="15sp"
+                    android:layout_alignTop="@+id/iv_head"
+                    android:layout_toRightOf="@+id/iv_head"
+                    android:layout_toEndOf="@+id/iv_head"
+                    android:layout_marginStart="14dp" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:gravity="center_horizontal"
+                    android:text="2016-08-19"
+                    android:textColor="#a2a6a7"
+                    android:textSize="@dimen/recycleview_item_fontsmall"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+            </RelativeLayout>
+
+            <!--分割线-->
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/relativeLayout"
+                android:background="#e9e9e9"
+                android:layout_height="2px" />
+
+            <!--任务描述及详情-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="12dp"
+                    android:minLines="2"
+                    android:text="#购物# 中百超市购物，清单在备注，下午两点前完成"
+                    android:textColor="#4a4f53"
+                    android:textSize="15sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:textScaleX="1.03"/>
+
+                <!--最高价格-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:text="最高价格:"
+                        android:textColor="#4a4f53"
+                        android:textSize="@dimen/recycleview_item_fontbig" />
+
+                    <TextView
+                        android:id="@+id/tv_maxprice"
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center_horizontal"
+                        android:text="20.00元"
+                        android:textColor="#4a4f53"
+                        android:textSize="@dimen/recycleview_item_fontbig" />
+                </RelativeLayout>
+
+                <!--分割线-->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="#e9e9e9"
+                    android:layout_height="2px" />
+
+                <!--完成时间-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:text="完成时间:"
+                        android:textColor="#4a4f53"
+                        android:textSize="@dimen/recycleview_item_fontbig" />
+
+                    <TextView
+                        android:id="@+id/tv_completetime"
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="wrap_content"
+
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center_horizontal"
+                        android:text="下午 13:10"
+                        android:textColor="#4a4f53"
+                        android:textSize="@dimen/recycleview_item_fontbig" />
+                </RelativeLayout>
+
+                <!--分割线-->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="#e9e9e9"
+                    android:layout_height="2px" />
+
+                <!--任务地址-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="任务地址:"
+                        android:textColor="#4a4f53"
+                        android:textSize="@dimen/recycleview_item_fontbig"
+                        android:layout_centerVertical="true" />
+
+                    <TextView
+                        android:id="@+id/tv_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:text="海军工程大学"
+                        android:textColor="#4a4f53"
+                        android:textSize="@dimen/recycleview_item_fontbig" />
+
+                </RelativeLayout>
+
+                <!--        &lt;!&ndash;分割线&ndash;&gt;
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#e9e9e9"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"/>-->
+
+                <!--任务地址-->
+
+                <!--分割线-->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="#e9e9e9"
+                    android:layout_height="2px" />
+
+                <!--认领人数-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp">
+
+                    <TextView
+                        android:id="@+id/tv_getdetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:minLines="4"
+                        android:text=""
+                        android:textColor="#a2a6a7"
+                        android:textSize="13sp"
+                        android:layout_marginTop="12dp" />
+                </RelativeLayout>
+
+                <!--底部留白，方便查看底下内容-->
+                <RelativeLayout
+                    android:id="@+id/rel"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <!--底部填写价格与按钮-->
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="#f1f1f1"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:background="#ffffff"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_price"
+                android:layout_width="76dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:inputType="numberDecimal"
+                android:textCursorDrawable="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="10dp"
+                android:text="元" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_gettask"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#86c9f6">
+
+            <TextView
+                android:id="@+id/tv_gettask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="认领任务"
+                android:textColor="#ffffff"
+                android:textSize="17dp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
+
+
+

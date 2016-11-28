@@ -36,7 +36,7 @@ public class TendCommentAdapter extends RecyclerView.Adapter<TendCommentAdapter.
     @Override
     public CommentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         CommentViewHolder holder = new CommentViewHolder(LayoutInflater.from(
-                context).inflate(R.layout.recyclerview_tend_coment_item, parent, false));
+                context).inflate(R.layout.recyclerview_tend_coment_item_2, parent, false));
         return holder;
     }
 

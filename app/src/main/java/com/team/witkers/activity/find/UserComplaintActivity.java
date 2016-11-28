@@ -31,7 +31,7 @@ public class UserComplaintActivity extends BaseActivity implements View.OnClickL
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_user_complaint;
+        return R.layout.activity_user_complaint_2;
     }
 
     @Override

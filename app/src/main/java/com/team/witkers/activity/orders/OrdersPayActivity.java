@@ -49,7 +49,7 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_orders_pay;
+        return R.layout.activity_orders_pay_2;
     }
 
     @Override

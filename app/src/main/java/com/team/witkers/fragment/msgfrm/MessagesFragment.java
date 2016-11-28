@@ -93,7 +93,7 @@ public class MessagesFragment extends BaseFragment implements SwipeRefreshLayout
 
     @Override
     protected int setContentId() {
-        return R.layout.fragment_message_msg;
+        return R.layout.fragment_message_msg_2;
     }
 
     @Override

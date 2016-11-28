@@ -51,7 +51,7 @@ public class TakeOutFragment0 extends BaseFragmentForDelayLoad implements SwipeR
     private BmobGeoPoint myPoint;
     @Override
     protected int setContentId() {
-        return R.layout.fragment_index_takeout0;
+        return R.layout.fragment_index_takeout0_2;
     }
 
     @Override

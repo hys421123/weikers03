@@ -21,7 +21,7 @@ public class ChangePwdActivity extends BaseActivity {
     private EditText et_currentPwd,et_newPwd,et_verifyPwd;
     @Override
     protected int setContentId() {
-        return R.layout.activity_setting_changepwd;
+        return R.layout.activity_setting_changepwd_2;
     }
 
     @Override

@@ -70,7 +70,7 @@ public class AddTendActivity extends BaseActivity2 {
     private int ii=0;
     @Override
     protected int setContentId() {
-        return R.layout.activity_find_addtend;
+        return R.layout.activity_find_addtend_2;
     }
 
     @Override

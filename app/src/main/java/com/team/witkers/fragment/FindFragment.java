@@ -23,7 +23,7 @@ public class FindFragment extends BaseFragment implements View.OnClickListener
 
 	@Override
 	protected int setContentId() {
-		return R.layout.fragment_find;
+		return R.layout.fragment_find_2;
 	}
 
 	@Override

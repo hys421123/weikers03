@@ -9,6 +9,6 @@ import com.team.witkers.base.BaseFragment;
 public class MeFragmentLogout extends BaseFragment {
     @Override
     protected int setContentId() {
-        return R.layout.fragment_me_logout;
+        return R.layout.fragment_me_logout_2;
     }
 }

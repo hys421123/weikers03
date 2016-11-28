@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rel_item"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/ll1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_pubUser"
+            android:src="@mipmap/ic_launcher"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_width="43dp"
+            android:layout_height="43dp" />
+
+        <LinearLayout
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:id="@+id/ll2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="任务 #买牙膏#帮我买一盒云南白药的牙膏... 已有5名微客认领"
+                android:textScaleX="1.03"
+                android:lineSpacingMultiplier="1.3"
+                android:textSize="14.8sp"
+                android:layout_marginTop="2dp"
+                android:gravity="center_vertical" />
+
+            <TextView
+                android:layout_marginTop="6dp"
+                android:textColor="@color/font_gray_color"
+                android:clickable="false"
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="17小时前"
+                android:textSize="11.8sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:background="@color/division_line"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/ll1" />
+
+</RelativeLayout>

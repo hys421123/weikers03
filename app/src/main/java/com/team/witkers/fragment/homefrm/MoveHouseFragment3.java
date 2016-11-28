@@ -58,7 +58,7 @@ public class MoveHouseFragment3 extends BaseFragmentForDelayLoad implements Swip
     @Override
     protected int setContentId() {
 
-        return R.layout.fragment_index_move;
+        return R.layout.fragment_index_move_2;
     }
 
 //    @Override

@@ -27,7 +27,7 @@ public class FindMissionPageActivity extends BaseActivity {
     private String label;
     @Override
     protected int setContentId() {
-        return R.layout.activity_find_mission_page;
+        return R.layout.activity_find_mission_page_2;
     }
 
     @Override

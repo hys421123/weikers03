@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f3f3f3"
+    android:orientation="vertical"
+    >
+
+
+    <View
+        android:layout_marginTop="@dimen/me_frm__item_bigmargin"
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:background="#e2e3de"
+        />
+
+    <com.team.witkers.views.MyPubItem
+        android:clickable="true"
+        android:background="@color/selector_pub_item"
+        android:id="@+id/customView_like_tendencies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:rightIconVisibility="false"
+        app:leftIcon="@drawable/fragment_find_tend"
+        android:paddingLeft="5dp"
+        app:myPubTitle="动态"
+
+        />
+
+    <View
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:background="#e2e3de"
+        />
+
+    <View
+        android:layout_marginTop="@dimen/me_frm__item_bigmargin"
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:background="#e2e3de"
+        />
+
+    <LinearLayout
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+    <com.team.witkers.views.MyPubItem
+        android:clickable="true"
+        android:paddingLeft="5dp"
+        android:background="@color/selector_pub_item"
+        android:id="@+id/customView_like_hotLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:rightIconVisibility="false"
+        app:leftIcon="@drawable/fragment_find_lable"
+        app:myPubTitle="热门标签"
+        />
+        <View
+            android:layout_height="1px"
+            android:layout_width="match_parent"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@color/division_line"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+            <com.team.witkers.views.MyPubItem
+                android:clickable="true"
+                android:paddingLeft="5dp"
+                android:background="@color/selector_pub_item"
+                android:id="@+id/customView_like_nearWke"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:rightIconVisibility="false"
+                app:leftIcon="@drawable/fragment_find_nearby"
+                app:myPubTitle="附近微客"
+                />
+            <TextView
+                android:textColor="@color/gray_color"
+                android:layout_marginRight="13dp"
+                android:gravity="center"
+                android:textSize="13sp"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="敬请期待"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:background="#e2e3de"
+        />
+
+    <View
+        android:layout_marginTop="@dimen/me_frm__item_bigmargin"
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:background="#e2e3de"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+        <com.team.witkers.views.MyPubItem
+
+            android:paddingLeft="5dp"
+            android:clickable="true"
+            android:background="@color/selector_pub_item"
+            android:id="@+id/customView_like_events"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:rightIconVisibility="false"
+            app:leftIcon="@drawable/fragment_find_activity"
+            app:myPubTitle="活动"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:gravity="center"
+            android:textColor="@color/gray_color"
+            android:layout_marginRight="13dp"
+            android:textSize="13sp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="敬请期待"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:background="#e2e3de"
+        />
+
+    <View
+        android:layout_marginTop="@dimen/me_frm__item_bigmargin"
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:background="#e2e3de"
+        />
+
+    <com.team.witkers.views.MyPubItem
+        android:paddingLeft="5dp"
+        android:clickable="true"
+        android:background="@color/selector_pub_item"
+        android:id="@+id/customView_like_advice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:rightIconVisibility="false"
+        app:myPubTitle="意见反馈"
+        app:leftIcon="@drawable/fragment_find_opinion"
+        />
+</LinearLayout>

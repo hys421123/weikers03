@@ -57,7 +57,7 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.TakeOutV
 
     @Override
     public TakeOutViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.recyclerview_mission_item, parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.recyclerview_mission_item_2, parent,false);
         TakeOutViewHolder holder = new TakeOutViewHolder(view);
         return holder;
     }

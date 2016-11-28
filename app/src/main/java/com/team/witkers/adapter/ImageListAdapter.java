@@ -30,7 +30,7 @@ public class ImageListAdapter extends ArrayAdapter {
     private List<String> dataList;
 
     public ImageListAdapter(Context context, List<String> list) {
-        super(context, R.layout.gridview_img_item, list);
+        super(context, R.layout.gridview_img_item_2, list);
 
         this.context = context;
         this.dataList = list;
@@ -41,7 +41,7 @@ public class ImageListAdapter extends ArrayAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (null == convertView) {
-            convertView = inflater.inflate(R.layout.gridview_img_item, parent, false);
+            convertView = inflater.inflate(R.layout.gridview_img_item_2, parent, false);
         }
 //        MyLog.i("adapter_getView_list_"+dataList.get(position));
         File imageFile = new File(dataList.get(position));

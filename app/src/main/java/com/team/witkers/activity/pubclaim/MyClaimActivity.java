@@ -41,7 +41,7 @@ public class MyClaimActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_myclaim;
+        return R.layout.activity_myclaim_2;
     }
     @Override
     protected void initToolBar() {

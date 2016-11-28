@@ -43,7 +43,7 @@ public class PhotoAdapter extends BaseAdapter {
         View view = convertView;
 
         if (view == null) {
-            view = layoutInflater.inflate(R.layout.list_item_photo, parent, false);
+            view = layoutInflater.inflate(R.layout.list_item_photo_2, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.textView = (TextView) view.findViewById(R.id.text_view);
             viewHolder.imageView = (ImageView) view.findViewById(R.id.image_view);

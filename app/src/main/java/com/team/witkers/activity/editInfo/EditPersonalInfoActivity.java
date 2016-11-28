@@ -56,7 +56,7 @@ public class EditPersonalInfoActivity extends BaseActivity implements View.OnCli
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_edit_personal_info;
+        return R.layout.activity_edit_personal_info_2;
     }
 
     @Override

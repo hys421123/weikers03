@@ -54,7 +54,7 @@ public class ListViewAdapter extends BaseAdapter {
         ViewHolder2 holder = null;
         if (convertView == null) {
             holder=new ViewHolder2();
-            convertView = mInflater.inflate(R.layout.location_itemview, null);
+            convertView = mInflater.inflate(R.layout.location_itemview_2, null);
             holder.iv_location = (ImageView)convertView.findViewById(R.id.iv_location);
             holder.tv_title = (TextView)convertView.findViewById(R.id.tv_title);
             holder.tv_content = (TextView)convertView.findViewById(R.id.tv_content);

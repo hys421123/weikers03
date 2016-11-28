@@ -59,7 +59,7 @@ public class ExpressFragment1 extends BaseFragmentForDelayLoad implements SwipeR
     @Override
     protected int setContentId() {
 
-        return R.layout.fragment_index_express;
+        return R.layout.fragment_index_express_2;
     }
 
 //    @Override

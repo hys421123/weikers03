@@ -47,7 +47,7 @@ public class HotLableAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.hot_lable_itemview, null);
+            convertView = mInflater.inflate(R.layout.hot_lable_itemview_2, null);
             holder = new ViewHolder();
             holder.tv_hotLable = (TextView)convertView.findViewById(R.id.tv_hotLable);
             holder.iv_lableIcon = (ImageView) convertView.findViewById(R.id.iv_lableIcon);

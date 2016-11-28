@@ -67,7 +67,7 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
     BmobGeoPoint myPoint;
     @Override
     protected int setContentId() {
-        return R.layout.fragment_all;
+        return R.layout.fragment_all_2;
     }
 
 

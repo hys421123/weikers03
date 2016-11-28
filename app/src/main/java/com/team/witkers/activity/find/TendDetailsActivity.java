@@ -67,7 +67,7 @@ public class TendDetailsActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_find_tenddetails;
+        return R.layout.activity_find_tenddetails_2;
     }
 
     @Override
@@ -114,7 +114,7 @@ public class TendDetailsActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void setHeader(RecyclerView view) {
-        View header = LayoutInflater.from(this).inflate(R.layout.recyclerview_comment_headitems, view, false);
+        View header = LayoutInflater.from(this).inflate(R.layout.recyclerview_comment_headitems_2, view, false);
 //        mAdapter.setHeaderView(header);
     }
 
@@ -235,8 +235,8 @@ public class TendDetailsActivity extends BaseActivity implements View.OnClickLis
     private void setHeadAndFootViewWrapper() {
         mHeaderAndFooterWrapper = new HeaderAndFooterWrapperTendDetails(this, parentTend, mAdapter);
 //        MyLog.v("aaa_ ");
-        header = LayoutInflater.from(this).inflate(R.layout.recyclerview_comment_headitems, mRecyclerView, false);
-        View footer = LayoutInflater.from(this).inflate(R.layout.recyclerview_comment_footitems, mRecyclerView, false);
+        header = LayoutInflater.from(this).inflate(R.layout.recyclerview_comment_headitems_2, mRecyclerView, false);
+        View footer = LayoutInflater.from(this).inflate(R.layout.recyclerview_comment_footitems_2, mRecyclerView, false);
         mHeaderAndFooterWrapper.addFootView(footer);
         mHeaderAndFooterWrapper.addHeaderView(header);
 

@@ -21,7 +21,7 @@ public class AccountSafeActivity  extends BaseActivity implements View.OnClickLi
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_setting_acountsafe;
+        return R.layout.activity_setting_acountsafe_2;
     }
 
     @Override

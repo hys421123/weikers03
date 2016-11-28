@@ -77,7 +77,7 @@ public class MissionSearchFragment extends BaseFragment {
 
     @Override
     protected int setContentId() {
-        return R.layout.fragment_lable_search;
+        return R.layout.fragment_lable_search_2;
     }
 
     @Override

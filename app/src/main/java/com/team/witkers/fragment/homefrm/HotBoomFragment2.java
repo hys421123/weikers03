@@ -58,7 +58,7 @@ public class HotBoomFragment2 extends BaseFragmentForDelayLoad implements SwipeR
     @Override
     protected int setContentId() {
 
-        return R.layout.fragment_index_hotboom;
+        return R.layout.fragment_index_hotboom_2;
     }
 
 //    @Override

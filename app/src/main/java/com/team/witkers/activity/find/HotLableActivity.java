@@ -35,7 +35,7 @@ public class HotLableActivity extends BaseActivity implements OnClickListener{
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_hot_lable;
+        return R.layout.activity_hot_lable_2;
     }
 
     @Override

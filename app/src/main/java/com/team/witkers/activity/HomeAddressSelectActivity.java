@@ -19,7 +19,7 @@ public class HomeAddressSelectActivity extends BaseActivity implements OnAddress
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_home_address_select;
+        return R.layout.activity_home_address_select_2;
     }
 
 

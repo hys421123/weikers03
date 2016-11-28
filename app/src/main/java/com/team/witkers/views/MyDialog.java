@@ -30,7 +30,7 @@ public class MyDialog {
 
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
         final AlertDialog dialog=builder.create();
-        View dialogview=View.inflate(context, R.layout.dialog_view,null);
+        View dialogview=View.inflate(context, R.layout.dialog_view_2,null);
         Button btn_dialog_yes= (Button) dialogview.findViewById(R.id.btn_dialog_yes);
         TextView tv_dialog_title= (TextView) dialogview.findViewById(R.id.tv_dialog_title);
 

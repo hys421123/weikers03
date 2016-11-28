@@ -53,7 +53,7 @@ public class TendencyAdapter extends RecyclerView.Adapter<TendencyAdapter.Tendcy
     @Override
     public TendcyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         TendcyViewHolder holder = new TendcyViewHolder(LayoutInflater.from(
-                context).inflate(R.layout.recyclerview_tendency_item, parent,
+                context).inflate(R.layout.recyclerview_tendency_item_2, parent,
                 false));
         return holder;
 
@@ -179,7 +179,7 @@ public class TendencyAdapter extends RecyclerView.Adapter<TendencyAdapter.Tendcy
 
         public TendcyViewHolder(View v) {
             super(v);
-            iv_repost = (ImageButton) v.findViewById(R.id.ib_repost);
+//            iv_repost = (ImageButton) v.findViewById(R.id.ib_repost);
             iv_comment = (ImageView) v.findViewById(R.id.iv_comment);
             iv_like = (ImageView) v.findViewById(R.id.iv_like);
 

@@ -30,7 +30,7 @@ public class EditDetailsActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_edit_details;
+        return R.layout.activity_edit_details_2;
     }
 
     @Override

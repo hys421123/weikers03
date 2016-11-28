@@ -59,7 +59,7 @@ public class MapLocation extends AppCompatActivity implements LocationSource,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_map_location);
+        setContentView(R.layout.activity_map_location_2);
         mapView = (MapView) findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         initView();

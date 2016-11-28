@@ -12,9 +12,7 @@ import android.view.ViewGroup;
 
 import com.team.witkers.R;
 import com.team.witkers.fragment.msgfrm.MessagesFragment;
-import com.team.witkers.fragment.msgfrm.OrdersFragment;
 import com.team.witkers.fragment.msgfrm.OrdersFragment2;
-import com.team.witkers.fragment.msgfrm.TestFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +30,7 @@ public class MsgFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_msg, container, false);
+		View view = inflater.inflate(R.layout.fragment_msg_2, container, false);
 
 
 		mViewPager = (ViewPager)view.findViewById(R.id.viewPager_test);

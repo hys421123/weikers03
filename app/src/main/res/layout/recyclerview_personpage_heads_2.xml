@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/bar_layout"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/roundIv_personpage_head"
+            android:layout_width="@dimen/me_frm_head_height"
+            android:layout_height="@dimen/me_frm_head_height"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/me_frm_head_leftmargin"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="@dimen/me_frm_head_topmargin"
+            android:src="@drawable/default_head"
+            app:riv_oval="true" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/me_frm_head_height"
+            android:layout_marginTop="@dimen/me_frm_head_topmargin"
+            android:layout_toRightOf="@id/roundIv_personpage_head">
+
+            <!--三个item合成linearlayout-->
+            <LinearLayout
+
+                android:id="@+id/ll_threeItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/me_frm_three_rightmargin"
+                android:orientation="horizontal">
+
+                <!--动态-->
+                <LinearLayout
+                    android:id="@+id/ll_rv_pubMissions"
+                    android:clickable="true"
+                    android:background="@color/selector_pub_item"
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_tendencies"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="17"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#4a4f53"
+                        android:textSize="@dimen/me_frm_font_big" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="任务"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#a2a6a7"
+
+                        android:textSize="@dimen/me_frm_font_small" />
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/division_line"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginTop="6dp" />
+
+                <!--关注-->
+                <LinearLayout
+                    android:id="@+id/ll_rv_concerns"
+                    android:clickable="true"
+                    android:background="@color/selector_pub_item"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_focus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="17"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#4a4f53"
+                        android:textSize="@dimen/me_frm_font_big" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="关注"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#a2a6a7"
+                        android:textSize="@dimen/me_frm_font_small" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@color/division_line" />
+
+                <!--粉丝-->
+                <LinearLayout
+                    android:id="@+id/ll_rv_fans"
+                    android:clickable="true"
+                    android:background="@color/selector_pub_item"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_fans"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="17"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#4a4f53"
+                        android:textSize="@dimen/me_frm_font_big" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="粉丝"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#a2a6a7"
+                        android:textSize="@dimen/me_frm_font_small" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_concern"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="2dp"
+                android:background="@drawable/img_add_concern"
+                android:paddingLeft="10dp"
+                >
+
+
+                <!--           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:textAppearance="?android:attr/textAppearanceLarge"
+                               android:text="+关注"
+                               android:textColor="@color/white"
+                               android:textSize="@dimen/me_frm_font_big"
+                               android:id="@+id/textView8"
+                               android:layout_centerVertical="true"
+                               android:layout_centerHorizontal="true"
+                               />-->
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <TextView
+
+        android:id="@+id/tv_introduce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="@dimen/me_frm_head_leftmargin"
+        android:layout_marginTop="12dp"
+        android:text="我就是钢铁侠！"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="#4a4f53"
+        android:textSize="@dimen/me_frm_font_big" />
+
+    <View
+        android:layout_width="match_parent"
+        android:background="#e2e3de"
+        android:layout_height="1px" />
+
+</LinearLayout>

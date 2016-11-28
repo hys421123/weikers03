@@ -35,7 +35,7 @@ public class MyEditText extends LinearLayout {
     public MyEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        View view = View.inflate(context, R.layout.custom_myedittext, this);
+        View view = View.inflate(context, R.layout.custom_myedittext_2, this);
         iv_drawable = (ImageView) view.findViewById(R.id.iv_drawable);
         et_text = (EditText) view.findViewById(R.id.et_text);
         view_line = view.findViewById(R.id.view_line);

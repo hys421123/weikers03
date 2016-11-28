@@ -32,7 +32,7 @@ public class MissionStateAdapter extends RecyclerView.Adapter<MissionStateAdapte
 
     @Override
     public MissionStateViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.recyclerview_mission_state_item, parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.recyclerview_mission_state_item_2, parent,false);
         MissionStateAdapter.MissionStateViewHolder holder = new MissionStateAdapter.MissionStateViewHolder(view);
         return holder;
     }

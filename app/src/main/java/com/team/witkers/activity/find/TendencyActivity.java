@@ -89,7 +89,7 @@ public class TendencyActivity extends BaseActivity implements SwipeRefreshLayout
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_find_tendency;
+        return R.layout.activity_find_tendency_2;
     }
 
     @Override

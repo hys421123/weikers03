@@ -155,7 +155,7 @@ public class AllSearchFragment extends BaseFragment {
 
     @Override
     protected int setContentId() {
-        return R.layout.fragment_all_search;
+        return R.layout.fragment_all_search_2;
     }
 
     @Override

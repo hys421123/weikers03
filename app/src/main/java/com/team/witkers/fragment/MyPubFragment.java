@@ -42,7 +42,7 @@ public class MyPubFragment extends BaseFragment {
     private String lastTime = "";
     @Override
     protected int setContentId() {
-        return R.layout.fragment_mypub;
+        return R.layout.fragment_mypub_2;
     }
 
     @Override

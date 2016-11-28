@@ -31,7 +31,7 @@ public class SearchActivity extends BaseActivity {
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_hot_lable_details;
+        return R.layout.activity_hot_lable_details_2;
     }
 
     @Override

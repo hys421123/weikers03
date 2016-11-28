@@ -2,12 +2,14 @@ package com.team.witkers.activity.orders;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
@@ -55,7 +57,7 @@ public class OrdersShowActivity extends BaseActivity implements View.OnClickList
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_orders_show;
+        return R.layout.activity_orders_show_2;
 
     }
 
@@ -159,6 +161,12 @@ public class OrdersShowActivity extends BaseActivity implements View.OnClickList
                        /* intent.putExtra("fromTakeOutMissionAdapterLIN",dataList.get(position));*/
                                 Toast.makeText(OrdersShowActivity.this,"label has been clicked",Toast.LENGTH_SHORT).show();
                                 OrdersShowActivity.this.startActivity(intent);
+                            }
+
+                            @Override
+                            public void updateDrawState(TextPaint ds) {
+                                super.updateDrawState(ds);
+                                ds.setColor(Color.rgb(74,125,174));
                             }
                         }, index1, index2 + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     }

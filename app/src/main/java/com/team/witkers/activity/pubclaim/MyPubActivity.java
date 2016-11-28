@@ -43,7 +43,7 @@ public class MyPubActivity extends BaseActivity {
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_mypub;
+        return R.layout.activity_mypub_2;
     }
 
     @Override

@@ -14,7 +14,7 @@ public class AboutActivity extends BaseActivity {
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_setting_about;
+        return R.layout.activity_setting_about_2;
     }
 
 

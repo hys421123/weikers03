@@ -53,7 +53,7 @@ public class MeFragmentLogin extends BaseFragment implements View.OnClickListene
     private static final int REQUESTCODE_MELOG2 = 1;//从Mefragment中退出登录，若返回，则至主界面
     @Override
     protected int setContentId() {
-        return R.layout.fragment_me_login;
+        return R.layout.fragment_me_login_2;
     }
 
 

@@ -10,6 +10,6 @@ import com.team.witkers.base.BaseFragment;
 public class TestFragment extends BaseFragment {
     @Override
     protected int setContentId() {
-        return R.layout.fragment_message_orders2;
+        return R.layout.fragment_message_orders3;
     }
 }

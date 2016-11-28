@@ -60,7 +60,7 @@ public class ItemLongOnClickDialog extends Dialog {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             // instantiate the dialog with the custom Theme
             final ItemLongOnClickDialog dialog = new ItemLongOnClickDialog(context, R.style.dialog);
-            View layout = inflater.inflate(R.layout.dialog_long_click_item, null);
+            View layout = inflater.inflate(R.layout.dialog_long_click_item_2, null);
 
             dialog.addContentView(layout, new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));

@@ -50,7 +50,7 @@ public class OrdersShowAdapter extends RecyclerView.Adapter<OrdersShowAdapter.My
 
     @Override
     public OrdersShowAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.activity_orders_show_item, parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.activity_orders_show_item_2, parent,false);
 
         return new MyViewHolder(view);
     }

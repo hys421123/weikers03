@@ -45,7 +45,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
    private List<BmobObject> likeList;//存储所有为true的点赞条目
     @Override
     protected int setContentId() {
-        return R.layout.activity_setting;
+        return R.layout.activity_setting_2;
     }
 
     @Override

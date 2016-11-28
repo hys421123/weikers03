@@ -74,7 +74,7 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
 
     @Override
     protected int setContentId() {
-        return R.layout.activity_personal_home_page2;
+        return R.layout.activity_personal_home_page2_2;
     }
 
     @Override
@@ -255,11 +255,11 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
         //添加头部，尾部
 //        MyLog.i(pubMissionNum+"---"+concernNum+"----"+fansNum+"---"+isConcerned);
         mHeaderAndFooterWrapper = new HeaderAndFooterWrapperPersonalPage(this,otherPerson,mAdapter,pubMissionNum,concernNum,fansNum,isConcerned);
-        header = LayoutInflater.from(this).inflate(R.layout.recyclerview_personpage_heads,mRecyclerView, false);
+        header = LayoutInflater.from(this).inflate(R.layout.recyclerview_personpage_heads_2,mRecyclerView, false);
         if(isNothing)
-            footer=LayoutInflater.from(this).inflate(R.layout.recyclerview_personpage_nothing,mRecyclerView, false);
+            footer=LayoutInflater.from(this).inflate(R.layout.recyclerview_personpage_nothing_2,mRecyclerView, false);
         else
-            footer=LayoutInflater.from(this).inflate(R.layout.recyclerview_comment_footitems,mRecyclerView, false);
+            footer=LayoutInflater.from(this).inflate(R.layout.recyclerview_comment_footitems_2,mRecyclerView, false);
         mHeaderAndFooterWrapper.addFootView(footer);
         mHeaderAndFooterWrapper.addHeaderView(header);
         //设置适配器

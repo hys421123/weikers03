@@ -60,7 +60,7 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
     private int LIMIT = 6;        // 每页的数据是10条
     @Override
     protected int setContentId() {
-        return R.layout.fragment_message_orders2;
+        return R.layout.fragment_message_orders3;
     }
 
     @Override
