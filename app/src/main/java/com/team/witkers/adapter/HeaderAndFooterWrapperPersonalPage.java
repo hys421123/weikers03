@@ -1,6 +1,7 @@
 package com.team.witkers.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -406,7 +407,9 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                     break;
 
                 case R.id.ll_rv_concerns:
-                    MyLog.i("ll_rv_concerns");
+                    MyLog.i("ll_rv_other_concerns");
+
+
                     break;
 
                 case R.id.ll_rv_fans:

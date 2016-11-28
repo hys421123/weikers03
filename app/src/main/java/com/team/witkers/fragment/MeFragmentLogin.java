@@ -13,6 +13,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.team.witkers.MyApplication;
 import com.team.witkers.R;
 import com.team.witkers.activity.LoginActivity;
+import com.team.witkers.activity.concernFans.ConcernsActivity;
 import com.team.witkers.activity.editInfo.EditPersonalInfoActivity;
 import com.team.witkers.activity.pubclaim.MyClaimActivity;
 import com.team.witkers.activity.pubclaim.MyPubActivity;
@@ -140,14 +141,26 @@ public class MeFragmentLogin extends BaseFragment implements View.OnClickListene
 
             case R.id.ll_pubMissions:
                 MyLog.i("ll_pubMissions");
+
                 break;
 
+            //点击进入我的 关注
             case R.id.ll_concerns:
-                MyLog.i("ll_concerns");
+                MyLog.i("ll_Me_concerns");
+                Intent intentc=new Intent(getActivity(),ConcernsActivity.class);
+                intentc.putExtra("userName1",MyApplication.mUser.getUsername());
+                intentc.putExtra("title1","我的关注");
+                getActivity().startActivity(intentc);
                 break;
 
+            // 我的粉丝
             case R.id.ll_fans:
                 MyLog.i("ll_fans");
+                Intent intentf=new Intent(getActivity(),ConcernsActivity.class);
+                intentf.putExtra("userName1",MyApplication.mUser.getUsername());
+                intentf.putExtra("title1","我的粉丝");
+                intentf.putExtra("isFans",true);
+                getActivity().startActivity(intentf);
                 break;
         }//switch
     }//onClick

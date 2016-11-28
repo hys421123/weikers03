@@ -12,7 +12,7 @@ public class ConcernFans implements Serializable {
     private String headUrl;
     private String userName;
     private String info;
-    private Boolean isConcerned;//是否关注或成为粉丝
+    private Boolean isConcerned;//是否  互相 关注
 
 
     public ConcernFans(String headUrl, String userName, String info, Boolean isConcerned) {

@@ -166,6 +166,10 @@
         <activity android:name=".activity.pubclaim.AllOrdersActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
+        // 我的 关注、我的粉丝 相关界面
+        <activity android:name=".activity.concernFans.ConcernsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
 
     </application>
 
