@@ -27,10 +27,16 @@ public class ConcernsFansAdapter extends RecyclerView.Adapter< ConcernsFansAdapt
     private Context context;
     private List<ConcernFans> dataList;
     private List<ConcernFans> concernFansList = new ArrayList<>();
+    private List<ConcernFans> meConcernsList=null;
 
     public ConcernsFansAdapter(Context context, List<ConcernFans> dataList){
         this.context=context;
         this.dataList=dataList;
+    }
+    public ConcernsFansAdapter(Context context, List<ConcernFans> dataList,List<ConcernFans> meConcernsList){
+        this.context=context;
+        this.dataList=dataList;
+        this.meConcernsList=meConcernsList;
     }
 
     @Override
@@ -61,6 +67,11 @@ public class ConcernsFansAdapter extends RecyclerView.Adapter< ConcernsFansAdapt
         holder.tv_concerns2_info.setText(concernFans.getInfo());
 
         // TODO: 2016/11/29  设置 关注图片
+        if(meConcernsList==null||meConcernsList.size()==0){
+            Glide.with(context)
+                    .load(R.drawable.unconcerned2)
+                    .into(holder.iv_isConcerned);
+        }else{
             if(concernFans.getConcerned()){// 若处于互相 关注
                 Glide.with(context)
                         .load(R.drawable.concerned2)
@@ -70,6 +81,8 @@ public class ConcernsFansAdapter extends RecyclerView.Adapter< ConcernsFansAdapt
                         .load(R.drawable.unconcerned2)
                         .into(holder.iv_isConcerned);
             }
+        }
+
 
     }//onBindViewHolder
 

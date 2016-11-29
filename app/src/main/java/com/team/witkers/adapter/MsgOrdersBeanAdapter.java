@@ -66,121 +66,137 @@ public class MsgOrdersBeanAdapter extends RecyclerView.Adapter<MsgOrdersBeanAdap
         // 2.有确定认领人的，任务正在进行中的；
         // 3.有确定认领人的，任务已经完成的；
 
-            switch (msgOrdersBean.getClaimFlag()){
-                // 1.有认领人数的，没有确定认领人的；
-                case 1:
+        switch (msgOrdersBean.getClaimFlag()){
+            // 1.有认领人数的，没有确定认领人的；
+            case 1:
+                // 1.任务被认领，发布方收到消息;
+
 //                    MyLog.i("你的任务xx已被xx人认领");
-                    String infoStr = msgOrdersBean.getOrderContent();
-                    int takerNum = msgOrdersBean.getTakerNum();
-                    String headUrl = msgOrdersBean.getRecentTakerUrl();
-                    String time = msgOrdersBean.getRecentTakeTime();
-                    if(time!=null){
-                        pubTime = TimeUtils2.getDescriptionTimeFromTimestamp(
-                                TimeUtils2.stringToLong(time, TimeUtils2.FORMAT_DATE_TIME_SECOND));
-                    }
-                    if(infoStr.length()>10){
-                        infoStr = infoStr.substring(0,10)+"...";
-                    }
-                    spannableString = new SpannableString("你的任务 "+infoStr+" 已有 "+takerNum+" 名微客认领");
-                    spannableString.setSpan( new ForegroundColorSpan(Color.BLACK), 5, infoStr.length()+5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    if(headUrl==null||headUrl.equals("")){
-                        Glide.with(context).load(R.drawable.default_head).into(holder.ivPubUser);
-                    }else{
-                        Glide.with(context).load(headUrl).into(holder.ivPubUser);
-                    }
-                    holder.tvDetails.setText(spannableString);
-                    holder.tvTime.setText(pubTime);
-                    break;
-                // 2.有确定认领人的，任务正在进行中的；
-                case 2:
+                String infoStr = msgOrdersBean.getOrderContent();
+                int takerNum = msgOrdersBean.getTakerNum();
+                String headUrl = msgOrdersBean.getRecentTakerUrl();
+                String time = msgOrdersBean.getRecentTakeTime();
+                if(time!=null){
+                    pubTime = TimeUtils2.getDescriptionTimeFromTimestamp(
+                            TimeUtils2.stringToLong(time, TimeUtils2.FORMAT_DATE_TIME_SECOND));
+                }
+                if(infoStr.length()>11){
+                    infoStr = infoStr.substring(0,11)+"...";
+                }
+                spannableString = new SpannableString("任务 "+infoStr+" 已有 "+takerNum+" 名微客认领");
+                spannableString.setSpan( new ForegroundColorSpan(Color.rgb(85, 85, 85)), 3, infoStr.length()+3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if(headUrl==null||headUrl.equals("")){
+                    Glide.with(context).load(R.drawable.default_head).into(holder.ivPubUser);
+                }else{
+                    Glide.with(context).load(headUrl).into(holder.ivPubUser);
+                }
+                holder.tvDetails.setText(spannableString);
+                holder.tvTime.setText(pubTime);
+                break;
+
+            case 2:
+                // 2.选择微客后，发布方收到消息;
+
 //                    MyLog.i("xx选择了你，请尽快完成任务");
-                    String pubUserName = msgOrdersBean.getOrderContent();
-                    String headUrl2 = msgOrdersBean.getRecentTakerUrl();
-                    String time2 = msgOrdersBean.getRecentTakeTime();
-                    String infoStr2=msgOrdersBean.getOrderContent();
-                    if(time2!=null){
-//                        pubTime = TimeUtils2.getDescriptionTimeFromTimestamp(
-//                                TimeUtils2.stringToLong(time2, TimeUtils2.FORMAT_DATE_TIME_SECOND));
-                        pubTime=time2;
-                    }
-                    if(headUrl2==null||headUrl2.equals("")){
-                        Glide.with(context).load(R.drawable.default_head).into(holder.ivPubUser);
-                    }else{
-                        Glide.with(context).load(headUrl2).into(holder.ivPubUser);
-                    }
-                    spannableString = new SpannableString("你的任务 "+infoStr2+" 已选定 1 名微客认领，任务正在进行中。。。");
-                    spannableString.setSpan( new ForegroundColorSpan(Color.BLACK),  5, infoStr2.length()+5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    holder.tvDetails.setText(spannableString);
-                    holder.tvTime.setText(pubTime);
-                    break;
-                // 3.有确定认领人的，任务已经完成的；
-                case 3:
+
+                String infoStr2 = msgOrdersBean.getOrderContent();
+                String headUrl2 = msgOrdersBean.getRecentTakerUrl();
+                String time2 = msgOrdersBean.getRecentTakeTime();
+                if(time2!=null){
+                    pubTime = TimeUtils2.getDescriptionTimeFromTimestamp(
+                            TimeUtils2.stringToLong(time2, TimeUtils2.FORMAT_DATE_TIME_SECOND));
+                }
+                if(infoStr2.length()>11){
+                    infoStr = infoStr2.substring(0,11)+"...";
+                }
+                spannableString = new SpannableString("任务 "+infoStr2+" 正在进行中");
+                spannableString.setSpan( new ForegroundColorSpan(Color.rgb(85, 85, 85)), 3, infoStr2.length()+3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if(headUrl2==null||headUrl2.equals("")){
+                    Glide.with(context).load(R.drawable.default_head).into(holder.ivPubUser);
+                }else{
+                    Glide.with(context).load(headUrl2).into(holder.ivPubUser);
+                }
+                holder.tvDetails.setText(spannableString);
+                holder.tvTime.setText(pubTime);
+                break;
+
+
+            case 3:
+                // 3.任务完成后，发布方收到消息;
+
 //                    MyLog.i("你的任务xx正在进行中");
-                    String infoStr3 = msgOrdersBean.getOrderContent();
-                    String headUrl3 = msgOrdersBean.getRecentTakerUrl();
-                    String time3 = msgOrdersBean.getRecentTakeTime();
-                    if(time3!=null){
-                        pubTime = TimeUtils2.getDescriptionTimeFromTimestamp(
-                                TimeUtils2.stringToLong(time3, TimeUtils2.FORMAT_DATE_TIME_SECOND));
-                    }
-                    if(infoStr3.length()>10){
-                        infoStr3 = infoStr3.substring(0,10)+"...";
-                    }
-                    spannableString = new SpannableString("你的任务 "+infoStr3+" 已经完成");
-                    spannableString.setSpan( new ForegroundColorSpan(Color.BLACK), 5, infoStr3.length()+5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    if(headUrl3==null||headUrl3.equals("")){
-                        Glide.with(context).load(R.drawable.default_head).into(holder.ivPubUser);
-                    }else{
-                        Glide.with(context).load(headUrl3).into(holder.ivPubUser);
-                    }
-                    holder.tvDetails.setText(spannableString);
-                    holder.tvTime.setText(pubTime);
-                    break;
-                case 4:
-                    MyLog.i("你认领的任务xx正已完成，等待对方评价！");
-                    String infoStr4 = msgOrdersBean.getOrderContent();
-                    String headUrl4 = msgOrdersBean.getRecentTakerUrl();
-                    String time4 = msgOrdersBean.getRecentTakeTime();
-                    if(time4!=null){
-                        pubTime = TimeUtils2.getDescriptionTimeFromTimestamp(
-                                TimeUtils2.stringToLong(time4, TimeUtils2.FORMAT_DATE_TIME_SECOND));
-                    }
-                    if(infoStr4.length()>10){
-                        infoStr3 = infoStr4.substring(0,10)+"...";
-                    }
-                    spannableString = new SpannableString("你认领的任务 "+infoStr4+" 已完成，等待对方评价！");
-                    spannableString.setSpan( new ForegroundColorSpan(Color.BLACK), 7, infoStr4.length()+7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    if(headUrl4==null||headUrl4.equals("")){
-                        Glide.with(context).load(R.drawable.default_head).into(holder.ivPubUser);
-                    }else{
-                        Glide.with(context).load(headUrl4).into(holder.ivPubUser);
-                    }
-                    holder.tvDetails.setText(spannableString);
-                    holder.tvTime.setText(pubTime);
-                    break;
-                case 5:
-                    MyLog.i("你的任务xx已完成，请及时评价！");
-                    String infoStr5 = msgOrdersBean.getOrderContent();
-                    String headUrl5 = msgOrdersBean.getRecentTakerUrl();
-                    String time5 = msgOrdersBean.getRecentTakeTime();
-                    if(time5!=null){
-                        pubTime = TimeUtils2.getDescriptionTimeFromTimestamp(
-                                TimeUtils2.stringToLong(time5, TimeUtils2.FORMAT_DATE_TIME_SECOND));
-                    }
-                    if(infoStr5.length()>10){
-                        infoStr5 = infoStr5.substring(0,10)+"...";
-                    }
-                    spannableString = new SpannableString("你的任务 "+infoStr5+" 已完成，请及时评价！");
-                    spannableString.setSpan( new ForegroundColorSpan(Color.BLACK), 5, infoStr5.length()+5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    if(headUrl5==null||headUrl5.equals("")){
-                        Glide.with(context).load(R.drawable.default_head).into(holder.ivPubUser);
-                    }else{
-                        Glide.with(context).load(headUrl5).into(holder.ivPubUser);
-                    }
-                    holder.tvDetails.setText(spannableString);
-                    holder.tvTime.setText(pubTime);
-                    break;
-            }//switch
+                String infoStr3 = msgOrdersBean.getOrderContent();
+                String headUrl3 = msgOrdersBean.getRecentTakerUrl();
+                String time3 = msgOrdersBean.getRecentTakeTime();
+                if(time3!=null){
+                    pubTime = TimeUtils2.getDescriptionTimeFromTimestamp(
+                            TimeUtils2.stringToLong(time3, TimeUtils2.FORMAT_DATE_TIME_SECOND));
+                }
+                if(infoStr3.length()>11){
+                    infoStr3 = infoStr3.substring(0,11)+"...";
+                }
+                spannableString = new SpannableString("任务 "+infoStr3+" 已完成，请评价");
+                spannableString.setSpan( new ForegroundColorSpan(Color.rgb(85, 85, 85)), 3, infoStr3.length()+3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if(headUrl3==null||headUrl3.equals("")){
+                    Glide.with(context).load(R.drawable.default_head).into(holder.ivPubUser);
+                }else{
+                    Glide.with(context).load(headUrl3).into(holder.ivPubUser);
+                }
+                holder.tvDetails.setText(spannableString);
+                holder.tvTime.setText(pubTime);
+                break;
+            case 4:
+                // 4.选择微客后，认领方收到消息;
+
+                // MyLog.i("你认领的任务xx正已完成，等待对方评价！");
+                String infoStr4 = msgOrdersBean.getOrderContent();
+                String headUrl4 = msgOrdersBean.getRecentTakerUrl();
+                String time4 = msgOrdersBean.getRecentTakeTime();
+                if(time4!=null){
+                    pubTime = TimeUtils2.getDescriptionTimeFromTimestamp(
+                            TimeUtils2.stringToLong(time4, TimeUtils2.FORMAT_DATE_TIME_SECOND));
+                }
+                if(infoStr4.length()>10){
+                    infoStr3 = infoStr4.substring(0,10)+"...";
+                }
+                spannableString = new SpannableString(infoStr4+" 选择了你，请尽快完成任务");
+                // 对方用户名+" 选择了你，请尽快完成任务"
+                spannableString.setSpan( new ForegroundColorSpan(Color.BLACK), 7, infoStr4.length()+7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if(headUrl4==null||headUrl4.equals("")){
+                    Glide.with(context).load(R.drawable.default_head).into(holder.ivPubUser);
+                }else{
+                    Glide.with(context).load(headUrl4).into(holder.ivPubUser);
+                }
+                holder.tvDetails.setText(spannableString);
+                holder.tvTime.setText(pubTime);
+                break;
+            case 5:
+                // 5.发布方评价后，认领方收到消息;
+
+                // MyLog.i("你的任务xx已完成，请及时评价！");
+                String infoStr5 = msgOrdersBean.getOrderContent();
+                String headUrl5 = msgOrdersBean.getRecentTakerUrl();
+                String time5 = msgOrdersBean.getRecentTakeTime();
+                if(time5!=null){
+                    pubTime = TimeUtils2.getDescriptionTimeFromTimestamp(
+                            TimeUtils2.stringToLong(time5, TimeUtils2.FORMAT_DATE_TIME_SECOND));
+                }
+                if(infoStr5.length()>10){
+                    infoStr5 = infoStr5.substring(0,10)+"...";
+                }
+                spannableString = new SpannableString(infoStr5+" 已对你做出了评价");
+                // 对方用户名+" 已对你做出了评价"
+                spannableString.setSpan( new ForegroundColorSpan(Color.BLACK), 5, infoStr5.length()+5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if(headUrl5==null||headUrl5.equals("")){
+                    Glide.with(context).load(R.drawable.default_head).into(holder.ivPubUser);
+                }else{
+                    Glide.with(context).load(headUrl5).into(holder.ivPubUser);
+                }
+                holder.tvDetails.setText(spannableString);
+                holder.tvTime.setText(pubTime);
+                break;
+        }//switch
+
 
 
     }

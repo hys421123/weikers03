@@ -23,7 +23,7 @@ public class TimeUtils2 {
 	public final static String FORMAT_DATE_TIME = "yy-MM-dd HH:mm";
 	public final static String FORMAT_DATE1_TIME = "yyyy/MM/dd HH:mm";
 	public final static String FORMAT_DATE_TIME_SECOND = "yyyy-MM-dd HH:mm:ss";
-;
+	;
 
 	private static SimpleDateFormat sdf = new SimpleDateFormat();
 

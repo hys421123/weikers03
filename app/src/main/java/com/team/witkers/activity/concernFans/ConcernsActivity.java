@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.gc.materialdesign.widgets.ProgressDialog;
 import com.hys.mylog.MyLog;
+import com.team.witkers.MyApplication;
 import com.team.witkers.R;
 import com.team.witkers.adapter.ConcernsFansAdapter;
 import com.team.witkers.adapter.MsgOrdersBeanAdapter;
@@ -62,6 +63,8 @@ public class ConcernsActivity extends BaseActivity implements PullLoadMoreRecycl
     private boolean isFans;
     private Toolbar toolbar;
     private TextView tv_no;
+    // 我（已登录用户）自己关注 的 用户
+    private List<ConcernFans> meConcernsList;
 
     @Override
     protected int setContentId() {
@@ -107,8 +110,30 @@ public class ConcernsActivity extends BaseActivity implements PullLoadMoreRecycl
     protected void initData() {
         mDialog = new ProgressDialog(this, "正在加载");
         mDialog.show();
-        queryBmobData(0,STATE_FIRST);
+
+       queryMeData(0,STATE_FIRST);
     }
+
+    // 查询 自己的数据，自己关注的用户
+    private void queryMeData(final int page, final int state){
+        BmobQuery<ConcernBean> query0 = new BmobQuery<ConcernBean>();
+        query0.addWhereEqualTo("name", MyApplication.mUser.getUsername());
+        query0.findObjects(new FindListener<ConcernBean>() {
+            @Override
+            public void done(List<ConcernBean> list, BmobException e) {
+                if(e==null){
+                    MyLog.i("查询我的关注成功");
+                    ConcernBean concernBean0=list.get(0);
+                    meConcernsList= concernBean0.getConcernsList();
+                    queryBmobData(page,state);
+                }else{
+                    MyLog.i("查询我的关注失败");
+                }
+
+            }//done
+        });//findObjs
+
+    }//queryMeData
 
     private void queryBmobData(int page, final int actionType) {
 
@@ -181,7 +206,7 @@ public class ConcernsActivity extends BaseActivity implements PullLoadMoreRecycl
                         }else{//下拉刷新或初始化
 //                            lastTime=dataListConcernFans.get(dataListConcernFans.size()-1).
                               if(mAdapter==null){
-                                  mAdapter=new ConcernsFansAdapter(ConcernsActivity.this,dataListConcernFans);
+                                  mAdapter=new ConcernsFansAdapter(ConcernsActivity.this,dataListConcernFans,meConcernsList);
                                   mPullLoadMoreRecyclerView.setAdapter(mAdapter);
                               }else{
                                   mAdapter.notifyDataSetChanged();

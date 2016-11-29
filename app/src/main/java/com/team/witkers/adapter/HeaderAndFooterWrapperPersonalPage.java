@@ -481,6 +481,7 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
 
                 case R.id.ll_rv_concerns:
                     MyLog.i("ll_rv_other_concerns");
+
                     Intent intentc=new Intent(context,ConcernsActivity.class);
                     intentc.putExtra("userName1",person.getUsername());
                     intentc.putExtra("title1","他的关注");
