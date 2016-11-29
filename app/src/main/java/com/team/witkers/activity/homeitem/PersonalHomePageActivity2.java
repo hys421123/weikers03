@@ -131,7 +131,7 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
             @Override
             public void done(List<TendItems> list, BmobException e) {
                 if(e==null){
-                    MyLog.i("查询成功");
+//                    MyLog.i("查询成功");
 //                    MyLog.e("HomePageAct_tendHeadUrl_ "+list.get(0).getPubUser().getHeadUrl());
 
                     //mAdapter属于 下面的正文主体,即发布人的动态项
@@ -171,7 +171,7 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
             @Override
             public void done(List<Mission> list, BmobException e) {
                 if(e==null){
-                    MyLog.i("查询任务数成功");
+//                    MyLog.i("查询任务数成功");
                     pubMissionNum = list.size();
                     if(list.size()!=0){
                         isNothing=false;
@@ -218,7 +218,7 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
                         MyLog.d("isConcerned_ "+isConcerned);
 
                       String info=  fansList.get(0).getInfo();
-                        MyLog.d("info_ "+info);
+//                        MyLog.d("info_ "+info);
                     }
 
                     if(concernBean.getConcernsList()==null)
@@ -230,12 +230,7 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
 
                     //设置 顶部视图
                     setHeadAndFootViewWrapper();
-
-                    // 不能从这里直接得到粉丝 人具体信息，要单独查询这些人的
-//                BmobPointer myUser=  concernBean.getFans().getObjects().get(0);
-//                 MyLog.v("objId_ "+myUser.getObjectId());
-
-                    MyLog.v("粉丝数ff和关注数_ 自己是否已经关注"+fansNum+"/// "+concernNum+"/// "+isConcerned);
+//                    MyLog.v("粉丝数ff和关注数_ 自己是否已经关注"+fansNum+"/// "+concernNum+"/// "+isConcerned);
 
                     if(mDialog!=null)
                         mDialog.dismiss();

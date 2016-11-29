@@ -216,10 +216,10 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                     }
 
                     // 如果粉丝中 含有关注的人， 及可加互粉
-                    if(concernBean.getFansList()!=null&&concernBean.getFansList().contains(concern)){
-                        int position=concernBean.getFansList().indexOf(concern);
-                        concernBean.getFansList().get(position).setConcerned(true);
-                    }
+//                    if(concernBean.getFansList()!=null&&concernBean.getFansList().contains(concern)){
+//                        int position=concernBean.getFansList().indexOf(concern);
+////                        concernBean.getFansList().get(position).setConcerned(true);
+//                    }
 
 //                    // 修改myself 的 粉丝信息fansList， 主要是对 isConcerned(是否互相关注) 属性进行修改
 //                    // 新建一个交集
@@ -272,18 +272,18 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
 
                     if(fansBean.getFansList()==null){
                         fansList=new ArrayList<ConcernFans>();
-                        if(fansBean.getConcernsList()!=null&&fansBean.getConcernsList().contains(fans)){
-                            MyLog.v("person set_concern_true_0");
-                            fans.setConcerned(true);
-                        }
+//                        if(fansBean.getConcernsList()!=null&&fansBean.getConcernsList().contains(fans)){
+//                            MyLog.v("person set_concern_true_0");
+////                            fans.setConcerned(true);
+//                        }
                         fansList.add(fans);
                         fansBean.setFansList(fansList);
                     }else {
-                        if(fansBean.getConcernsList()!=null&&fansBean.getConcernsList().contains(fans)){
-//                            int position=fansBean.getConcernsList().indexOf(fans);
-                            MyLog.v("person set_concern_true_1");
-                            fans.setConcerned(true);
-                        }
+//                        if(fansBean.getConcernsList()!=null&&fansBean.getConcernsList().contains(fans)){
+////                            int position=fansBean.getConcernsList().indexOf(fans);
+//                            MyLog.v("person set_concern_true_1");
+////                            fans.setConcerned(true);
+//                        }
                         fansBean.getFansList().add(fans);
                     }
 
@@ -354,10 +354,10 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                     }
 
                     //若 含有关注的人被 取消，则去掉互粉
-                    if(concernBean.getFansList()!=null&&concernBean.getFansList().contains(concern)){
-                         int position=   concernBean.getFansList().indexOf(concern);
-                        concernBean.getFansList().get(position).setConcerned(false);
-                    }
+//                    if(concernBean.getFansList()!=null&&concernBean.getFansList().contains(concern)){
+//                         int position=   concernBean.getFansList().indexOf(concern);
+////                        concernBean.getFansList().get(position).setConcerned(false);
+//                    }
 
                     concernBean.update(new UpdateListener() {
                         @Override
@@ -414,39 +414,6 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
 
     }//unConcernPerson3
 
-    private void unConcernPerson(MyUser person, MyUser myself) {
-        BmobRelation relation = new BmobRelation();
-        BmobRelation relation2 = new BmobRelation();
-        relation.remove(person);
-        relation2.remove(myself);
-//        myself.setObjectId(myself.getObjectId());
-//        person.setObjectId(person.getObjectId());
-        myself.setConcernPerson(relation);//我取消关注别人
-        person.setFansPerson(relation2);//别人减少我这个fans
-
-        myself.update(myself.getObjectId(),new UpdateListener() {
-            @Override
-            public void done(BmobException e) {
-                if(e==null){
-                    MyLog.i("用户取消关注成功");
-                }else{
-                    MyLog.i("用户取消关注失败："+e.getMessage());
-                }
-            }
-        });
-
-        person.update(person.getObjectId(),new UpdateListener() {
-            @Override
-            public void done(BmobException e) {
-                if(e==null){
-                    MyLog.i("用户减少fans成功");
-                }else{
-                    MyLog.i("用户减少fans失败："+e.getMessage());
-                }
-            }
-        });
-    }
-
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         RoundedImageView roundIv_personpage_head;
         TextView tv_tendencies,tv_focus,tv_fans,tv_introduce;
@@ -480,11 +447,13 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                     break;
 
                 case R.id.ll_rv_concerns:
-                    MyLog.i("ll_rv_other_concerns");
+//                    MyLog.i("ll_rv_other_concerns");
 
                     Intent intentc=new Intent(context,ConcernsActivity.class);
                     intentc.putExtra("userName1",person.getUsername());
                     intentc.putExtra("title1","他的关注");
+                    // 处理别人的关注
+                    intentc.putExtra("isOthers",true);
                     context.startActivity(intentc);
 
                     break;
@@ -495,6 +464,8 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                     intentf.putExtra("userName1",person.getUsername());
                     intentf.putExtra("title1","他的粉丝");
                     intentf.putExtra("isFans",true);
+                    // 处理别人的粉丝
+                    intentf.putExtra("isOthers",true);
                     context.startActivity(intentf);
                     break;
             }//switch

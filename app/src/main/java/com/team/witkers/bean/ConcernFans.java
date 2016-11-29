@@ -1,5 +1,7 @@
 package com.team.witkers.bean;
 
+import com.hys.mylog.MyLog;
+
 import java.io.Serializable;
 
 /**
@@ -12,14 +14,14 @@ public class ConcernFans implements Serializable {
     private String headUrl;
     private String userName;
     private String info;
-    private Boolean isConcerned=false;//是否  互相 关注, 默认 不是 互关
+//    private Boolean isConcerned=false;//是否  互相 关注, 默认 不是 互关
 
 
     public ConcernFans(String headUrl, String userName, String info) {
         this.headUrl = headUrl;
         this.userName = userName;
         this.info = info;
-        this.isConcerned = isConcerned;
+//        this.isConcerned = isConcerned;
     }
 
     public String getHeadUrl() {
@@ -46,13 +48,13 @@ public class ConcernFans implements Serializable {
         this.info = info;
     }
 
-    public Boolean getConcerned() {
-        return isConcerned;
-    }
-
-    public void setConcerned(Boolean concerned) {
-        isConcerned = concerned;
-    }
+//    public Boolean getConcerned() {
+//        return isConcerned;
+//    }
+//
+//    public void setConcerned(Boolean concerned) {
+//        isConcerned = concerned;
+//    }
 
 
     // 重写equals 方法，保证能检查到相同属性的对象
@@ -61,10 +63,14 @@ public class ConcernFans implements Serializable {
         if (obj instanceof ConcernFans) {
             ConcernFans fans = (ConcernFans) obj;
             if(fans.getHeadUrl().equals(getHeadUrl())&&fans.getUserName().equals(getUserName())
-                    &&fans.getInfo().equals(getInfo())){
+                   ){
                 return true;
-            }else//内if
-            return false;
+            }else {//内if
+//             MyLog.d(fans.getInfo().equals(getInfo())+"");
+//                MyLog.e("false");
+                return false;
+            }
+
 
         }
         return super.equals(obj);

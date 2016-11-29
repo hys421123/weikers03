@@ -61,6 +61,7 @@ public class ConcernsActivity extends BaseActivity implements PullLoadMoreRecycl
 
     private  String userName,title;
     private boolean isFans;
+    private boolean isOthers;//是否 建立的是别人的关注、粉丝
     private Toolbar toolbar;
     private TextView tv_no;
     // 我（已登录用户）自己关注 的 用户
@@ -77,10 +78,7 @@ public class ConcernsActivity extends BaseActivity implements PullLoadMoreRecycl
         title=getIntent().getStringExtra("title1");
         String str=title.substring(0,1);
 //        MyLog.v(str);
-        // 若为 设置别人的粉丝、关注时， 令 meConcernsList not null
-
-        if(str.equals("他"))
-            meConcernsList=new ArrayList<>();
+        isOthers=getIntent().getBooleanExtra("isOthers",false);
         isFans=getIntent().getBooleanExtra("isFans",false);
     }
 
@@ -117,12 +115,12 @@ public class ConcernsActivity extends BaseActivity implements PullLoadMoreRecycl
         mDialog = new ProgressDialog(this, "正在加载");
         mDialog.show();
 
-        if(meConcernsList!=null){
-//            MyLog.v("meConcernsList not null 处理别人的粉丝 关注");
+        if(isOthers){
+            MyLog.v("处理别人的粉丝 关注");
             queryMeData(0,STATE_FIRST);//有关注别人
         }
         else{
-//            MyLog.v("meConcernsList null 处理自己的粉丝 关注");
+            MyLog.v("处理自己的粉丝 关注");
             queryBmobData(0,STATE_FIRST);
         }
 
@@ -211,6 +209,8 @@ public class ConcernsActivity extends BaseActivity implements PullLoadMoreRecycl
                             }
                             return;
                         }else{//getFansList.size() !=0
+                            if(!isOthers)// 处理自己的粉丝时，才要获取两次getConcernList()
+                                meConcernsList=concernBean.getConcernsList();
                             dataListConcernFans=concernBean.getConcernsList();
                         }
                     }// 选择 关注者

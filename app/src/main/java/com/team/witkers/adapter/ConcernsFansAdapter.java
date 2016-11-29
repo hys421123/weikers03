@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.hys.mylog.MyLog;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.team.witkers.MyApplication;
 import com.team.witkers.R;
 import com.team.witkers.bean.ConcernFans;
 import com.team.witkers.bean.Mission;
@@ -29,6 +30,8 @@ public class ConcernsFansAdapter extends RecyclerView.Adapter< ConcernsFansAdapt
     private List<ConcernFans> dataList;
     private List<ConcernFans> concernFansList = new ArrayList<>();
     private List<ConcernFans> meConcernsList=null;
+    private  boolean isConcerned3;//判断是否 被 本用户关注的 状态
+
 
     public ConcernsFansAdapter(Context context, List<ConcernFans> dataList){
         this.context=context;
@@ -48,7 +51,7 @@ public class ConcernsFansAdapter extends RecyclerView.Adapter< ConcernsFansAdapt
     }
 
     @Override
-    public void onBindViewHolder(ConcernsFansViewHolder holder, int position) {
+    public void onBindViewHolder(final ConcernsFansViewHolder holder, int position) {
         ConcernFans concernFans=dataList.get(position);
 
         //TODO 设置头像
@@ -68,38 +71,73 @@ public class ConcernsFansAdapter extends RecyclerView.Adapter< ConcernsFansAdapt
         holder.tv_concerns2_info.setText(concernFans.getInfo());
 
         // TODO: 2016/11/29  设置 关注图片
-        //   只是 显示自己的粉丝时， 这个list没有设置， 为 null
-        if(meConcernsList==null){
-            MyLog.v("meConcernsList null");
+        //若关注或粉丝是自己的话，则不出现
+         if( concernFans.getUserName().equals(MyApplication.mUser.getUsername()) ){
+            holder.iv_isConcerned.setVisibility(View.INVISIBLE);
+             return;
+        }
 
-            if(concernFans.getConcerned()){// 若处于互相 关注
-                Glide.with(context)
-                        .load(R.drawable.concerned2)
-                        .into(holder.iv_isConcerned);
-            }else{//不是互相关注
-                Glide.with(context)
-                        .load(R.drawable.unconcerned2)
-                        .into(holder.iv_isConcerned);
-            }
 
-        }else{ // meConcernsList not null 显示别人的粉丝、关注的时候
+//        //   只是 显示自己的粉丝时， 这个list没有设置， 为 null
+//        if(meConcernsList==null){
+//            MyLog.v("meConcernsList null");
+//
+//            if(concernFans.getConcerned()){// 若处于互相 关注
+//                Glide.with(context)
+//                        .load(R.drawable.concerned2)
+//                        .into(holder.iv_isConcerned);
+//                isConcerned3=true;
+//            }else{//不是互相关注
+//                Glide.with(context)
+//                        .load(R.drawable.unconcerned2)
+//                        .into(holder.iv_isConcerned);
+//                isConcerned3=false;
+//            }
+//
+//        }else
+        if(meConcernsList!=null&&meConcernsList.size()!=0)
+        { // meConcernsList not null 显示别人的粉丝、关注的时候
             // 如果 我的关注者 中 含有 他人的粉丝或 关注时，表明 与我互粉的 关联
-            MyLog.v("meConcernsList not null");
+//            MyLog.v("meConcernsList not null");
             for(int i=0;i<meConcernsList.size();i++){
               MyLog.v("meConcernsList_userName_ "+ meConcernsList.get(i).getUserName());
             }
             MyLog.d("concernFans_userName_"+ concernFans.getUserName() );
+            MyLog.e(meConcernsList.contains(concernFans)+"");
+
             if(meConcernsList.contains(concernFans)){
                 Glide.with(context)
                         .load(R.drawable.concerned2)
                         .into(holder.iv_isConcerned);
+                isConcerned3=true;
             }else{
                 Glide.with(context)
-                        .load(R.drawable.concerned2)
+                        .load(R.drawable.unconcerned2)
                         .into(holder.iv_isConcerned);
+                isConcerned3=false;
             }
+        }// meConcernsList not null 显示别人的粉丝、关注的时候
 
-        }
+        // TODO: 2016/11/30  添加 关注的 点击事件
+
+        holder.iv_isConcerned.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyLog.d("click concerned");
+                if(isConcerned3){//若已经互相关注了，  则取消关注
+                    Glide.with(context)
+                            .load(R.drawable.unconcerned2)
+                            .into(holder.iv_isConcerned);
+                    isConcerned3=false;
+                }else{
+                    Glide.with(context)
+                            .load(R.drawable.concerned2)
+                            .into(holder.iv_isConcerned);
+                    isConcerned3=true;
+                }//else
+
+            }//onClick
+        });
 
 
     }//onBindViewHolder
@@ -109,7 +147,7 @@ public class ConcernsFansAdapter extends RecyclerView.Adapter< ConcernsFansAdapt
         return dataList.size();
     }
 
-    class ConcernsFansViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class ConcernsFansViewHolder extends RecyclerView.ViewHolder {
 
         private RoundedImageView concerns2_head;
         private TextView tv_concerns2_name,   tv_concerns2_info;
@@ -122,11 +160,10 @@ public class ConcernsFansAdapter extends RecyclerView.Adapter< ConcernsFansAdapt
             tv_concerns2_name= (TextView) itemView.findViewById(R.id.tv_concerns2_name);
             tv_concerns2_info= (TextView) itemView.findViewById(R.id.tv_concerns2_info);
             iv_isConcerned= (ImageView) itemView.findViewById(R.id.iv_isConcerned);
-        }
 
-        @Override
-        public void onClick(View view) {
 
         }
+
+
     }//ViewHolder
 }//ConcernsFansAdapter_cls
