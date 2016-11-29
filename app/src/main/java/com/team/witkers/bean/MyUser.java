@@ -11,16 +11,16 @@ import cn.bmob.v3.datatype.BmobRelation;
 public class MyUser extends BmobUser implements Serializable{
     //其他属性BmobUser都已经具有不用填写
     // 包括username、password、mobilePhoneNumber、mobilePhoneNumberVerified、
-    private String headUrl;//头像地址
+    private String headUrl="";//头像地址
 //    private BmobRelation likeTendItems; //所点赞的动态，希望由user得到相应点赞过的动态项
     private BmobRelation takeMissions;//认领的所有任务
     private BmobRelation concernPerson;//关注的人
     private BmobRelation fansPerson;//他的粉丝们
-    private String nickName;
-    private String relName;
-    private String sex;
-    private String location;
-    private String Introduce;
+    private String nickName="";
+    private String relName="";
+    private String sex="";
+    private String location="";
+    private String Introduce="";
 
     public BmobRelation getFansPerson() {
         return fansPerson;

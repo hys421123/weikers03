@@ -120,7 +120,7 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
         query.order("-createdAt");
 
         boolean isCache = query.hasCachedResult(TendItems.class);
-        MyLog.i("isCachePersonPage "+isCache);
+//        MyLog.i("isCachePersonPage "+isCache);
         if(NetworkUtils.isNetWorkConnet(this))
             query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ONLY);
         else
@@ -201,10 +201,7 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
             public void done(List<ConcernBean> list, BmobException e) {
                 if(e==null){
                     MyLog.v("查询关注成功");
-
-
                     ConcernBean concernBean=list.get(0);
-
 
                     if(concernBean.getFansList()==null||concernBean.getFansList().size()==0)
                         fansNum=0;
@@ -213,6 +210,9 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
                         fansNum = fansList.size();
                         // 我自己
                         MyUser mUser2=MyApplication.mUser;
+//                        MyLog.v("Me_introduce_"+mUser2.getIntroduce());
+                        if(mUser2.getIntroduce()==null)
+                            mUser2.setIntroduce("");
                         // 判断我自己是否在 粉丝之中
                        isConcerned= fansList.contains(new ConcernFans(mUser2.getHeadUrl(),mUser2.getUsername(),mUser2.getIntroduce()));
                         MyLog.d("isConcerned_ "+isConcerned);
@@ -221,13 +221,10 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
                         MyLog.d("info_ "+info);
                     }
 
-
                     if(concernBean.getConcernsList()==null)
                         concernNum=0;
                     else
                         concernNum=concernBean.getConcernsList().size();
-
-
 
                     MyLog.v("粉丝数ff和关注数_ 自己是否已经关注"+fansNum+"/// "+concernNum+"/// "+isConcerned);
 
@@ -238,14 +235,13 @@ public class PersonalHomePageActivity2 extends BaseActivity implements
 //                BmobPointer myUser=  concernBean.getFans().getObjects().get(0);
 //                 MyLog.v("objId_ "+myUser.getObjectId());
 
-//                    MyLog.v("粉丝数ff和关注数_ 自己是否已经关注"+fansNum+"/// "+concernNum+"/// "+isConcerned);
+                    MyLog.v("粉丝数ff和关注数_ 自己是否已经关注"+fansNum+"/// "+concernNum+"/// "+isConcerned);
 
-//                    */
                     if(mDialog!=null)
                         mDialog.dismiss();
 
                 }else{
-                    MyLog.e("查询关注失败"+e.getMessage());
+                    MyLog.e("查询关注失败11 "+e.getMessage());
                     if(mDialog!=null)
                         mDialog.dismiss();
                 }

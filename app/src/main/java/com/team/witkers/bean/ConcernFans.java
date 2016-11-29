@@ -63,7 +63,8 @@ public class ConcernFans implements Serializable {
             if(fans.getHeadUrl().equals(getHeadUrl())&&fans.getUserName().equals(getUserName())
                     &&fans.getInfo().equals(getInfo())){
                 return true;
-            }//内if
+            }else//内if
+            return false;
 
         }
         return super.equals(obj);

@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.hys.mylog.MyLog;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.team.witkers.R;
 import com.team.witkers.bean.ConcernFans;
@@ -67,11 +68,10 @@ public class ConcernsFansAdapter extends RecyclerView.Adapter< ConcernsFansAdapt
         holder.tv_concerns2_info.setText(concernFans.getInfo());
 
         // TODO: 2016/11/29  设置 关注图片
-        if(meConcernsList==null||meConcernsList.size()==0){
-            Glide.with(context)
-                    .load(R.drawable.unconcerned2)
-                    .into(holder.iv_isConcerned);
-        }else{
+        //   只是 显示自己的粉丝时， 这个list没有设置， 为 null
+        if(meConcernsList==null){
+            MyLog.v("meConcernsList null");
+
             if(concernFans.getConcerned()){// 若处于互相 关注
                 Glide.with(context)
                         .load(R.drawable.concerned2)
@@ -81,6 +81,24 @@ public class ConcernsFansAdapter extends RecyclerView.Adapter< ConcernsFansAdapt
                         .load(R.drawable.unconcerned2)
                         .into(holder.iv_isConcerned);
             }
+
+        }else{ // meConcernsList not null 显示别人的粉丝、关注的时候
+            // 如果 我的关注者 中 含有 他人的粉丝或 关注时，表明 与我互粉的 关联
+            MyLog.v("meConcernsList not null");
+            for(int i=0;i<meConcernsList.size();i++){
+              MyLog.v("meConcernsList_userName_ "+ meConcernsList.get(i).getUserName());
+            }
+            MyLog.d("concernFans_userName_"+ concernFans.getUserName() );
+            if(meConcernsList.contains(concernFans)){
+                Glide.with(context)
+                        .load(R.drawable.concerned2)
+                        .into(holder.iv_isConcerned);
+            }else{
+                Glide.with(context)
+                        .load(R.drawable.concerned2)
+                        .into(holder.iv_isConcerned);
+            }
+
         }
 
 
