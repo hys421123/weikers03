@@ -198,7 +198,7 @@ public class MeFragmentLogin extends BaseFragment implements View.OnClickListene
                 if(e!=null){
                     MyToast.showToast(getActivity(),"查询失败"+e);
                 }else {
-                    MyLog.i("查询任务数成功" + list.size());
+//                    MyLog.i("查询任务数成功" + list.size());
                     pubMissionNum = list.size();
                     getConcernNumAndFansNum();
                 }

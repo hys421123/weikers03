@@ -215,32 +215,6 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                          concernBean.getConcernsList().add(concern);
                     }
 
-                    // 如果粉丝中 含有关注的人， 及可加互粉
-//                    if(concernBean.getFansList()!=null&&concernBean.getFansList().contains(concern)){
-//                        int position=concernBean.getFansList().indexOf(concern);
-////                        concernBean.getFansList().get(position).setConcerned(true);
-//                    }
-
-//                    // 修改myself 的 粉丝信息fansList， 主要是对 isConcerned(是否互相关注) 属性进行修改
-//                    // 新建一个交集
-//                    List<ConcernFans> intersectionFansList1=new ArrayList<ConcernFans>();
-//                    intersectionFansList1.addAll(concernBean.getFansList()) ;
-//                    if(intersectionFansList1!=null) {
-////                        取交集
-//                        intersectionFansList1.retainAll(concernBean.getConcernsList());
-//                        if (intersectionFansList1.size() != 0) {// 粉丝、关注 两者有交集
-//                            concernBean.getFansList().removeAll(intersectionFansList1);//取 差集
-//                            // 修改 交集的 isConcerned 属性
-//                            for (ConcernFans fans : intersectionFansList1) {
-//                                fans.setConcerned(true);
-//                            }
-//                            //修改属性后，  并集  ,此时 完成 对getConcernsList的修改
-//                            concernBean.getFansList().addAll(intersectionFansList1);
-//                        }//有交集
-//                    }//fansList2 not null
-
-
-
 
                     concernBean.update(new UpdateListener() {
                         @Override
