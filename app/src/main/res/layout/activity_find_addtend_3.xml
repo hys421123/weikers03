@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <EditText
+        android:padding="8dp"
+        android:id="@+id/et_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:background="@color/white"
+        android:inputType="textMultiLine"
+        android:textSize="16sp"
+        android:maxLength="200"
+        android:minLines="6"
+        android:hint="说点什么吧"
+        android:gravity="left|top"
+        />
+
+    <cn.bingoogolapple.photopicker.widget.BGASortableNinePhotoLayout
+        android:layout_below="@id/et_input"
+        android:id="@+id/mNinePhotosLayout"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_margin="10dp"/>
+
+    <!--下方点击控件-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorBlack"/>
+        <LinearLayout
+            android:background="@color/white"
+            android:fillViewport="true"
+            android:id="@+id/operation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/addtend_padding"
+            android:paddingRight="@dimen/addtend_padding"
+            android:layout_below="@+id/input_eare"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/ib_photo"
+                android:src="@drawable/selector_addtend_pic"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="@dimen/addtend_padding"
+                android:background="#00000000"/>
+            <ImageButton
+                android:id="@+id/ib_emoj"
+                android:src="@drawable/selector_addtend_emoj"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="@dimen/addtend_padding"
+                android:background="#00000000"/>
+            <TextView
+                android:id="@+id/tv_input_length"
+                android:text="200"
+                android:textColor="#888888"
+                android:textSize="14sp"
+                android:layout_gravity="center_vertical"
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorBlack"/>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager_emo"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="120dp" />
+    </LinearLayout>
+
+
+</RelativeLayout>
