@@ -308,31 +308,8 @@ public class AddTendActivity extends BaseActivity2 {
         tend.setFriendHeadUrl(headUrl);
 
         tend.setContent(et_input.getText().toString());
-//        tend.setPicUrl("http://oac7bvp34.bkt.clouddn.com/photo.png");
-
-//        List<TendComments> list=new ArrayList<>();
-//        TendComments comment=new TendComments();
-//        comment.setCommentContent("我那个去");
-//        comment.setCommentUserName("hhhh");
-//        comment.save(new SaveListener<String>() {
-//            @Override
-//            public void done(String s, BmobException e) {
-//                if(e==null){
-////                    BmobToast.successShow(AddTendActivity.this,"评论上传成功");
-//                    MyLog.i("评论上传成功");
-//                }else{
-////                    BmobToast.failureShow(AddTendActivity.this,"评论上传失败",e.getMessage());
-//                    MyLog.e("评论上传失败_ "+e.getMessage());
-//                }//else
-//            }//done
-//        });
-
-//        list.add(comment);
-//        tend.setCommentsList(list);
-
         tend.setCommentNum(0);
 
-//        tend.setCreateTime("");
 
         if(imgList.size()==0){
             //没图片, 就赋值 空字符串

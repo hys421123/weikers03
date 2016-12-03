@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.team.witkers">
 
     <uses-permission android:name="android.permission.CALL_PHONE"/>
@@ -34,6 +35,7 @@
     <!-- 用于读取手机当前的状态 -->
     <!-- 写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据 -->
     <application
+
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/appicon"
@@ -78,12 +80,17 @@
         <activity
             android:name=".activity.setting.ChangePwdActivity"
             android:theme="@style/ThemeChnagePwd" />
+
+        <!--动态有关-->
         <activity
             android:name=".activity.find.TendencyActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.find.AddTendActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.find.AddTendActivity2"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <!-- 九宫格 添加多张图片，以九宫格显示，在AddTendActivity中调用 -->
         <activity
             android:name="com.zfdang.multiple_images_selector.ImagesSelectorActivity"
@@ -95,10 +102,10 @@
             android:name=".activity.address.AddressSelectActivity"
             android:label="@string/title_activity_address_select"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.homeitem.TaskDetailsActivity"
-            android:label="@string/title_activity_address_select"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <!--<activity-->
+            <!--android:name=".activity.homeitem.TaskDetailsActivity"-->
+            <!--android:label="@string/title_activity_address_select"-->
+            <!--android:theme="@style/AppTheme.NoActionBar" />-->
         <activity
             android:name=".activity.homeitem.PersonalHomePageActivity2"
             android:label="@string/title_activity_personal_home_page"
@@ -158,6 +165,7 @@
         <activity android:name=".activity.HomeAddressSelectActivity"></activity>
         <activity android:name=".activity.FindMissionPageActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+
         <!--我的发布与认领-->
         <activity android:name=".activity.pubclaim.MyClaimActivity"
             android:theme="@style/AppTheme.NoActionBar"/>

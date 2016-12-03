@@ -7,8 +7,9 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/toolbar_color</item>
-
     </style>
+
+
     <!--<item name="android:statusBarColor">@color/toolbar_color</item>-->
 
 </resources>

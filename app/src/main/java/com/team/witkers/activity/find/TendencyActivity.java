@@ -293,7 +293,7 @@ public class TendencyActivity extends BaseActivity implements SwipeRefreshLayout
         }
         if (item.getItemId() == R.id.menu_add_tend) {
             MyLog.v("add tend");
-            Intent intent2 = new Intent(this, AddTendActivity.class);
+            Intent intent2 = new Intent(this, AddTendActivity2.class);
             startActivity(intent2);
         }
         return super.onOptionsItemSelected(item);

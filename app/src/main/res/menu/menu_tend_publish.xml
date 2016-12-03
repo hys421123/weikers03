@@ -5,7 +5,6 @@
         android:id="@+id/menu_tend_publish"
         android:orderInCategory="100"
         android:title="发表"
-
         app:showAsAction="always"
         />
 </menu>

@@ -1,0 +1,5 @@
+int id dataBinding 0x7f030000
+int id onAttachStateChangeListener 0x7f030001
+int id onDateChanged 0x7f030002
+int id textWatcher 0x7f030003
+int layout item_databinding_dummy 0x7f020000

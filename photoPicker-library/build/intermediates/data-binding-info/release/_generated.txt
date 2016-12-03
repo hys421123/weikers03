@@ -1,0 +1,2 @@
+cn.bingoogolapple.androidcommon.adapter.databinding.ItemDatabindingDummyBinding
+android.databinding.DataBindingComponent
