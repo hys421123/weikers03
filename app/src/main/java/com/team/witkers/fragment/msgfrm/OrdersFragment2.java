@@ -195,12 +195,27 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
     private List<MsgOrdersBean>  getBeanList(List<Mission> list){
         MyLog.i("getBeanList里面");
         List<MsgOrdersBean> beanList = new ArrayList<MsgOrdersBean>();
+
+//         把微客消息处理 装进去
+        String content0="微客消息通知";
+
+        int takerNum0=0;
+        String headUrl0="";
+        String time0="";
+
+        MsgOrdersBean msgOrdersBean0 = new MsgOrdersBean(content0,takerNum0,headUrl0,time0,null,null,0);
+        beanList.add(msgOrdersBean0);
+
         for(Mission mission:list){
             //一个mission 发布任务需要分为有三种分类，
             // 0.没人认领的，跳过封装；  mission.getClaimItemList()==null
             // 1.有认领人数的，没有确定认领人的；  mission.getChooseClaimant()==null(大多数) ,msgOrdersBean.getClaimFlag=1
             // 2.有确定认领人的，任务正在进行中的； mission.isFinished==false ,msgOrdersBean.getClaimFlag=2
             // 3.有确定认领人的，任务已经完成的；   mission.isFinished==true ,msgOrdersBean.getClaimFlag=3
+
+//            4. 有人选择了你， 接单任务
+//            5.你完成了别人 指定的任务/
+
 
             //第0种
             if(mission.getClaimItemList()==null){//若没有认领人，则跳过封装

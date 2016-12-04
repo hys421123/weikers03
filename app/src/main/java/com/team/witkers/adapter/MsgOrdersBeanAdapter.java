@@ -26,6 +26,7 @@ import com.team.witkers.R;
 import com.team.witkers.activity.orders.OrdersDoingShowActivity;
 import com.team.witkers.activity.orders.OrdersEvaluateShowActivity;
 import com.team.witkers.activity.orders.OrdersShowActivity;
+import com.team.witkers.activity.orders.WeikersMsgActivity;
 import com.team.witkers.bean.ClaimItems;
 import com.team.witkers.bean.MsgOrdersBean;
 import com.team.witkers.utils.TimeUtils2;
@@ -58,15 +59,27 @@ public class MsgOrdersBeanAdapter extends RecyclerView.Adapter<MsgOrdersBeanAdap
     public void onBindViewHolder(final MsgOrdersBeanAdapter.MyViewHolder holder, final int position) {
 
 
+
         msgOrdersBean = dataListMsgOrdersBean.get(position);
         claimItemsList = msgOrdersBean.getClaimItemsList();
 
 //        private int claimFlag;//认领标志位
+//        0. 微客消息通知， 即你被 别人确认 选中接单
+
         // 1.有认领人数的，没有确定认领人的；
         // 2.有确定认领人的，任务正在进行中的；
         // 3.有确定认领人的，任务已经完成的；
 
         switch (msgOrdersBean.getClaimFlag()){
+//            0. 微客消息通知， 即你被 别人确认 选中接单
+            case 0:
+                // 设置 微客消息通知
+                Glide.with(context).load(R.drawable.notice).into(holder.ivPubUser);
+                holder.tvDetails.setText("微客消息通知");
+                holder.tvTime.setText(pubTime);
+                break;
+
+
             // 1.有认领人数的，没有确定认领人的；
             case 1:
                 // 1.任务被认领，发布方收到消息;
@@ -240,6 +253,12 @@ public class MsgOrdersBeanAdapter extends RecyclerView.Adapter<MsgOrdersBeanAdap
                     MsgOrdersBean msgOrdersBean = dataListMsgOrdersBean.get(getLayoutPosition());
                     MyLog.i("msgOrdersBean.getTextFlag()"+msgOrdersBean.getClaimFlag());
                     switch (msgOrdersBean.getClaimFlag()){
+                        case 0:
+                            Intent intent0 = new Intent(context, WeikersMsgActivity.class);
+//                            intent0.putExtra("fromMsgOrdersBeanAdapter", msgOrdersBean);
+                            context.startActivity(intent0);
+
+                            break;
                         case 1:
                             MyLog.v("111111");
                             Intent intent = new Intent(context, OrdersShowActivity.class);

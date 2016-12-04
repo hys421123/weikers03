@@ -129,6 +129,7 @@
         <!--4b68b26b09c4cde8a613354c5a3ff0d1   dell的key-->
         <!--89754d2e985829107b11bffc08dab2b7  labtory's key-->
 
+        <!--订单fragment相关-->
         <activity
             android:name=".activity.orders.OrdersShowActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -147,6 +148,10 @@
         <activity
             android:name=".activity.orders.OrdersPayActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.orders.WeikersMsgActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--以上是 订单fragment相关-->
+
         <activity
             android:name=".activity.find.UserComplaintActivity"
             android:theme="@style/AppTheme.NoActionBar" />
