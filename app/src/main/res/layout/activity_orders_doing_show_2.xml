@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rel_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+
     android:background="@color/all_background_color">
 
     <!--<include layout="@layout/topbar" />-->
@@ -37,7 +37,7 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/bar_layout">
 
         <LinearLayout
@@ -358,20 +358,52 @@
     </ScrollView>
 
 
-    <Button
-        android:id="@+id/btn_confirm"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/gray_trans"
-        android:text="任务正在进行中..."
-        android:textColor="@color/black_light"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <!--<Button-->
+        <!--android:id="@+id/btn_confirm"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:background="@color/gray_trans"-->
+        <!--android:text="任务正在进行中..."-->
+        <!--android:textColor="@color/black_light"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true" />-->
+
+    <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_marginLeft="10dp"
+          android:layout_marginRight="10dp"
+          android:layout_marginBottom="8dp"
+          android:layout_alignParentBottom="true"
+          android:layout_centerHorizontal="true">
+          <ImageButton
+              android:id="@+id/ib_call"
+              android:src="@drawable/ic_phone_blue"
+              android:layout_width="0dp"
+              android:layout_weight="1"
+              android:layout_height="45dp"
+
+              android:background="@color/white"
+              />
+
+          <Button
+              android:textColor="@color/white"
+              android:id="@+id/btn_confirm"
+              android:layout_width="0dp"
+              android:layout_weight="2"
+              android:layout_marginLeft="8dp"
+              android:layout_height="45dp"
+              android:background="#b4a6cded"
+              android:text="任务进行中" />`
+
+
+      </LinearLayout>
     `
 
 
-</LinearLayout>
+</RelativeLayout>
 
 
 
