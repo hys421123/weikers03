@@ -174,6 +174,7 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
                 chooseClaimant.setClaimStatus(false);
                 chooseClaimant.setClaimHeadUrl(claimItem.getClaimHeadUrl());
                 mission.setChooseClaimant(chooseClaimant);
+                mission.setClaimName(claimItem.getClaimName());
                 mission.update(new UpdateListener() {
                     @Override
                     public void done(BmobException e) {

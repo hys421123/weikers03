@@ -17,6 +17,18 @@ public class ChooseClaimant implements Serializable {
     //认领人头像
     private String claimHeadUrl;
 
+
+
+    public ChooseClaimant() {
+    }
+
+    public ChooseClaimant(String claimName, float claimMoney, boolean claimStatus, String claimHeadUrl) {
+        this.claimName = claimName;
+        this.claimMoney = claimMoney;
+        this.claimStatus = claimStatus;
+        this.claimHeadUrl = claimHeadUrl;
+    }
+
     public void setClaimHeadUrl(String claimHeadUrl) {
         this.claimHeadUrl = claimHeadUrl;
     }
@@ -49,6 +61,19 @@ public class ChooseClaimant implements Serializable {
         this.claimStatus = claimStatus;
     }
 
-
-
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof ChooseClaimant) {
+            ChooseClaimant claimant = (ChooseClaimant) obj;
+            if(claimant.getClaimName().equals(getClaimName())
+                    ){
+                return true;
+            }else {//内if
+//             MyLog.d(fans.getInfo().equals(getInfo())+"");
+//                MyLog.e("false");
+                return false;
+            }
+        }
+        return super.equals(obj);
+    }//equals
 }

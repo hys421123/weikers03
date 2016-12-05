@@ -19,6 +19,7 @@ public class Mission extends BmobObject implements Serializable {
 //    private List<String> claimName;//认领人用户名，不能重复的,跟前面的项保持一致
     private List<ClaimItems> claimItemList;//认领项，包括认领人用户名和认领金额，不能重复
     private ChooseClaimant chooseClaimant;//选定认领人
+    private String claimName=""; //选定的认领人用户名  默认空字符串
     private boolean isFinished=false;//任务完成状态,默认是未完成
 
     private String finishTime="0";//任务完成时间
@@ -26,7 +27,7 @@ public class Mission extends BmobObject implements Serializable {
     private String pubUserName;
     private String pubUserHeadUrl;
 
-    private String name;//姓名 真实姓名？
+    private String name;//
     private String phone;//电话
     private String address;//地址
 
@@ -41,6 +42,22 @@ public class Mission extends BmobObject implements Serializable {
     private double longitude;
 
     private BmobGeoPoint missionLocation;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setClaimName(String claimName) {
+        this.claimName = claimName;
+    }
+
+    public String getClaimName() {
+        return claimName;
+    }
 
     public List<ClaimItems> getClaimItemList() {
         return claimItemList;
@@ -151,14 +168,7 @@ public class Mission extends BmobObject implements Serializable {
         return address;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public String getName() {
-
-        return name;
-    }
 
     public void setPhone(String phone) {
         this.phone = phone;

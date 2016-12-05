@@ -208,6 +208,51 @@ public class MsgOrdersBeanAdapter extends RecyclerView.Adapter<MsgOrdersBeanAdap
                 holder.tvDetails.setText(spannableString);
                 holder.tvTime.setText(pubTime);
                 break;
+//            6. 有人选择了你， 接单任务
+            case 6:
+                String pubUserName6 = msgOrdersBean.getOrderContent();
+                String headUrl6 = msgOrdersBean.getRecentTakerUrl();
+                String time6 = msgOrdersBean.getRecentTakeTime();
+                if(time6!=null){
+                    pubTime = TimeUtils2.getDescriptionTimeFromTimestamp(
+                            TimeUtils2.stringToLong(time6, TimeUtils2.FORMAT_DATE_TIME_SECOND));
+                }
+
+
+                spannableString = new SpannableString(pubUserName6+"选择了你，请尽快完成任务");
+                // 对方用户名+" 已对你做出了评价"
+                spannableString.setSpan( new ForegroundColorSpan(Color.BLUE), 0, pubUserName6.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+                if(headUrl6==null||headUrl6.equals("")){
+                    Glide.with(context).load(R.drawable.default_head).into(holder.ivPubUser);
+                }else{
+                    Glide.with(context).load(headUrl6).into(holder.ivPubUser);
+                }
+                holder.tvTime.setText(time6);
+                holder.tvDetails.setText(spannableString);
+                break;
+
+//            7.你完成了别人 指定的任务/
+            case 7:
+                String infoStr7 = msgOrdersBean.getOrderContent();
+                String headUrl7 = msgOrdersBean.getRecentTakerUrl();
+                String time7 = msgOrdersBean.getRecentTakeTime();
+                if(time7!=null){
+                    pubTime = TimeUtils2.getDescriptionTimeFromTimestamp(
+                            TimeUtils2.stringToLong(time7, TimeUtils2.FORMAT_DATE_TIME_SECOND));
+                }
+                String details7="任务"+infoStr7+"收到评价";
+
+
+                if(headUrl7==null||headUrl7.equals("")){
+                    Glide.with(context).load(R.drawable.default_head).into(holder.ivPubUser);
+                }else{
+                    Glide.with(context).load(headUrl7).into(holder.ivPubUser);
+                }
+                holder.tvTime.setText(pubTime);
+                holder.tvDetails.setText(details7);
+                break;
         }//switch
 
 

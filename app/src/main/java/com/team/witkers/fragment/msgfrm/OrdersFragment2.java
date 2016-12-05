@@ -12,6 +12,7 @@ import com.team.witkers.R;
 import com.team.witkers.adapter.MsgOrdersBeanAdapter;
 import com.team.witkers.adapter.MsgTendAdapter;
 import com.team.witkers.base.BaseFragment;
+import com.team.witkers.bean.ChooseClaimant;
 import com.team.witkers.bean.ClaimItems;
 import com.team.witkers.bean.Mission;
 import com.team.witkers.bean.MsgOrdersBean;
@@ -197,8 +198,7 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
         List<MsgOrdersBean> beanList = new ArrayList<MsgOrdersBean>();
 
 //         把微客消息处理 装进去
-        String content0="微客消息通知";
-
+        String content0="";
         int takerNum0=0;
         String headUrl0="";
         String time0="";
@@ -216,6 +216,8 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
 //            4. 有人选择了你， 接单任务
 //            5.你完成了别人 指定的任务/
 
+//            6. 有人选择了你， 接单任务
+//            7.你完成了别人 指定的任务/
 
             //第0种
             if(mission.getClaimItemList()==null){//若没有认领人，则跳过封装
@@ -263,97 +265,6 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
             }
 
 
-//            else{
-//                //若任务有人认领
-//                List<ClaimItems> claimItemsList =mission.getClaimItemList();
-//                /////////////////////////////////////
-////                Boolean selectFlag = isSelected(claimItemsList);
-//                if(!selectFlag){//没有确定认领微客
-//                    MyLog.i("没有确定认领微客");
-//
-//                    if(claimItemsList.get(claimPosition).getClaimName().equals(myUser.getUsername())){
-//                        MyLog.i("我是认领者");
-//                    }else if(mission.getPubUserName().equals(myUser.getUsername())){
-//                        MyLog.i("我是发布者");
-//                        String missionId = mission.getObjectId();
-//                        int  takerNum = mission.getClaimItemList().size();
-//                        String content=mission.getInfo();
-//                        String time =mission.getClaimItemList().get(takerNum-1).getClaimTime();
-//                        MyLog.i("takerNum--->"+takerNum+"time--->"+mission.getClaimItemList().get(takerNum-1).getClaimTime());
-//                        String headUrl = mission.getClaimItemList().get(0).getClaimHeadUrl();
-//                        MyLog.i("headUrl--->"+headUrl+"time---->"+mission.getClaimItemList().get(0).getClaimTime());
-//                        MsgOrdersBean msgOrdersBean = new MsgOrdersBean(
-//                                content,takerNum,headUrl,time,claimItemsList,missionId,"kind1");
-//                        beanList.add(msgOrdersBean);
-//                    }else{
-//                        MyLog.i("我是无关人员");
-//                    }
-//                }else {
-//                    switch (claimItemsList.get(claimPosition).getClaimFlag()){
-//                        case "Doing":
-//                            MyLog.i("Doing");
-//                            MyLog.i("takerName-->"+claimItemsList.get(claimPosition).getClaimName()+
-//                                    "--claimMoney-->"+claimItemsList.get(claimPosition).getClaimMoney()+
-//                                    "--missionInfo-->"+mission.getInfo());
-//
-//                            if(claimItemsList.get(claimPosition).getClaimName().equals(myUser.getUsername())){
-//                                MyLog.i("我是认领者---xxx选择了你");
-//                                String missionId = mission.getObjectId();
-//                                String content=mission.getPubUserName();
-//                                String headUrl = mission.getPubUserHeadUrl();
-//                                MyLog.i("time qian"+mission.getDealTime());
-//                                SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss ");
-//                                String time = formatter.format(mission.getDealTime());
-//                                MyLog.i("time hou");
-//                                MsgOrdersBean msgOrdersBean = new MsgOrdersBean(
-//                                        content,0,headUrl,time,claimItemsList,missionId,"kind2");
-//                                beanList.add(msgOrdersBean);
-//                            }else if(mission.getPubUserName().equals(myUser.getUsername())){
-//                                MyLog.i("我是发布者---任务正在进行中");
-//                                String headUrl = mission.getClaimItemList().get(claimPosition).getClaimHeadUrl();
-//                                MyLog.i("headUrl-->"+headUrl
-//                                        +",claimPosition-->"+claimPosition
-//                                        +",claimList-->"+mission.getClaimItemList().get(claimPosition).getClaimName());
-//                                String content = mission.getInfo();
-//                                SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss ");
-//                                String time = formatter.format(mission.getDealTime());
-//                                String missionId = mission.getObjectId();
-//                                MsgOrdersBean msgOrdersBean = new MsgOrdersBean(
-//                                        content,0,headUrl,time,claimItemsList,missionId,"kind3");
-//                                beanList.add(msgOrdersBean);
-//                            }else{
-//                                MyLog.i("我是无关人员");
-//                            }
-//                            break;
-//                        case "After":
-//                            MyLog.i("After");
-//                            if(claimItemsList.get(claimPosition).getClaimName().equals(myUser.getUsername())){
-//                                MyLog.i("我是认领者---等待对方评价");
-//                                String missionId = mission.getObjectId();
-//                                String content=mission.getInfo();
-//                                String headUrl = mission.getPubUserHeadUrl();
-//                                SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss ");
-//                                String time = formatter.format(mission.getDealTime());
-//                                MsgOrdersBean msgOrdersBean = new MsgOrdersBean(
-//                                        content,0,headUrl,time,claimItemsList,missionId,"kind4");
-//                                beanList.add(msgOrdersBean);
-//                            }else if(mission.getPubUserName().equals(myUser.getUsername())){
-//                                MyLog.i("我是发布者---已完成，请评价");
-//                                String headUrl = mission.getClaimItemList().get(claimPosition).getClaimHeadUrl();
-//                                String content = mission.getInfo();
-//                                SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss ");
-//                                String time = formatter.format(mission.getDealTime());
-//                                String missionId = mission.getObjectId();
-//                                MsgOrdersBean msgOrdersBean = new MsgOrdersBean(
-//                                        content,0,headUrl,time,claimItemsList,missionId,"kind5");
-//                                beanList.add(msgOrdersBean);
-//                            }else{
-//                                MyLog.i("我是无关人员");
-//                            }
-//                            break;
-//                    }
-//                }
-//            }
         }//for
         return beanList;
     }
