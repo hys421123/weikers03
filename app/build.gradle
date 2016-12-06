@@ -1,8 +1,13 @@
 apply plugin: 'com.android.application'
+//apply plugin: 'com.antfortune.freeline'
 
 android {
     compileSdkVersion 23
     buildToolsVersion '23.0.2'
+
+//    freeline{
+//        hack true
+//    }
 
     defaultConfig {
         applicationId "com.team.witkers"
@@ -67,4 +72,6 @@ dependencies {
     compile 'cn.bingoogolapple:bga-adapter:1.1.5@aar'
     compile 'pub.devrel:easypermissions:0.2.1'
     compile project(':photopicker-library')
+
+//    complie  'com.antfortune.freeline:runtime:0.8.3'
 }

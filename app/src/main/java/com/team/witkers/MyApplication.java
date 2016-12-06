@@ -21,6 +21,7 @@ import android.content.Context;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 
+
 import com.bilibili.magicasakura.utils.ThemeUtils;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.team.witkers.bean.MyUser;
@@ -47,6 +48,8 @@ public class MyApplication extends Application implements ThemeUtils.switchColor
         Bmob.initialize(this, BmobID);
         ThemeUtils.setSwitchColor(this);
         Fresco.initialize(getApplicationContext());
+
+//        FreelineCore.init(this);
     }
 
     @Override

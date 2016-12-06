@@ -28,7 +28,7 @@ import cn.bmob.v3.listener.FindListener;
  * Created by lenovo on 2016/12/5.
  */
 
-public class WeikersMsgActivity extends BGAPPToolbarActivity {
+public class WeikersMsgActivity extends BGAPPToolbarActivity implements PullLoadMoreRecyclerView.PullLoadMoreListener{
 
     private ProgressDialog mDialog;
     private static final int STATE_FIRST = 0;// 第一次载入
@@ -52,10 +52,14 @@ public class WeikersMsgActivity extends BGAPPToolbarActivity {
     @Override
     protected void setListener() {
         setTitle("微客消息");
+        mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
     }
 
     @Override
     protected void processLogic(Bundle savedInstanceState) {
+        mDialog = new ProgressDialog(this, "正在加载");
+        mDialog.show();
+
         queryChooseClaimant(0, STATE_FIRST);
     }
 
@@ -92,7 +96,7 @@ public class WeikersMsgActivity extends BGAPPToolbarActivity {
                         }// 刷新或初始化
 
 
-                        MyLog.i("去掉对话框，去掉刷新");
+                        MyLog.i("去掉对话框，去掉刷新333");
                         if (mDialog != null) {
                             mDialog.dismiss();
                         }
@@ -101,8 +105,16 @@ public class WeikersMsgActivity extends BGAPPToolbarActivity {
 
                     } else
                         MyLog.d("list_size_ 0");
+                    if (mDialog != null) {
+                        mDialog.dismiss();
+                    }
+                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
                 } else {
+                    if (mDialog != null) {
+                        mDialog.dismiss();
+                    }
+                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                     MyLog.i("查询选定接单人失败_ " + e.getMessage());
                 }
             }//done
@@ -130,11 +142,13 @@ public class WeikersMsgActivity extends BGAPPToolbarActivity {
             if(!mission.getFinished()){
 
                 String pubUserName=mission.getPubUserName();
+                String orderContent=mission.getInfo();
                 String time =mission.getFinishTime();
 //                MyLog.i("takerNum--->"+takerNum+"time--->"+mission.getClaimItemList().get(takerNum-1).getClaimTime());
                 String headUrl = mission.getClaimItemList().get(0).getClaimHeadUrl();
+                String missionId=mission.getObjectId();
 
-                MsgOrdersBean msgOrdersBean = new MsgOrdersBean(pubUserName,1,headUrl,time,null,"",6);
+                MsgOrdersBean msgOrdersBean = new MsgOrdersBean(pubUserName,orderContent,1,headUrl,time,null,missionId,6);
                 beanList.add(msgOrdersBean);
             }else{
 //            7.你完成了别人 指定的任务/
@@ -154,4 +168,14 @@ public class WeikersMsgActivity extends BGAPPToolbarActivity {
         return beanList;
     }//getBeanList
 
+    @Override
+    public void onRefresh() {
+        MyLog.v("onRefresh");
+        queryChooseClaimant(0, STATE_REFRESH);
+    }
+
+    @Override
+    public void onLoadMore() {
+
+    }
 }//WeikersMsgAct_cls

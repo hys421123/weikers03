@@ -210,7 +210,7 @@ public class MsgOrdersBeanAdapter extends RecyclerView.Adapter<MsgOrdersBeanAdap
                 break;
 //            6. 有人选择了你， 接单任务
             case 6:
-                String pubUserName6 = msgOrdersBean.getOrderContent();
+                String pubUserName6 = msgOrdersBean.getPubUserName();
                 String headUrl6 = msgOrdersBean.getRecentTakerUrl();
                 String time6 = msgOrdersBean.getRecentTakeTime();
                 if(time6!=null){
@@ -221,7 +221,7 @@ public class MsgOrdersBeanAdapter extends RecyclerView.Adapter<MsgOrdersBeanAdap
 
                 spannableString = new SpannableString(pubUserName6+"选择了你，请尽快完成任务");
                 // 对方用户名+" 已对你做出了评价"
-                spannableString.setSpan( new ForegroundColorSpan(Color.BLUE), 0, pubUserName6.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableString.setSpan( new ForegroundColorSpan(Color.rgb(74,125,174)), 0, pubUserName6.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
                 if(headUrl6==null||headUrl6.equals("")){
@@ -334,9 +334,18 @@ public class MsgOrdersBeanAdapter extends RecyclerView.Adapter<MsgOrdersBeanAdap
 //                            intent5.putExtra("stateInfo",false);
                             context.startActivity(intent5);
                             break;
+//            6. 有人选择了你， 接单任务
+                        case 6:
+                            Intent intent6 = new Intent(context, OrdersDoingShowActivity.class);
+                            intent6.putExtra("fromMsgOrdersBeanAdapter", msgOrdersBean);
+                            intent6.putExtra("stateInfo","任务正在进行中");
+                            context.startActivity(intent6);
+                            break;
+//            7.你完成了别人 指定的任务/
+                        case 7:
 
-
-                    }
+                            break;
+                    }//switch getClaimFlag
 
                     break;
             }

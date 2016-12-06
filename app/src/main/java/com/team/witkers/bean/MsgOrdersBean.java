@@ -8,6 +8,18 @@ import java.util.List;
  */
 //订单消息Bean,从mission中获取出来，不需要上传
 public class MsgOrdersBean implements Serializable {
+// 针对 接单人的 微客消息通知
+    private String pubUserName;
+    public void setPubUserName(String pubUserName) {
+        this.pubUserName = pubUserName;
+    }
+    public String getPubUserName() {
+        return pubUserName;
+    }
+
+
+
+    //任务内容
     private String orderContent;
 
     private int takerNum=0;//认领人数
@@ -22,6 +34,18 @@ public class MsgOrdersBean implements Serializable {
 
     public MsgOrdersBean(String orderContent, int takerNum, String recentTakerUrl, String recentTakeTime,
                          List<ClaimItems> claimItemsList,String missionId,int textFlag){
+        this.orderContent=orderContent;
+        this.takerNum=takerNum;
+        this.recentTakerUrl=recentTakerUrl;
+        this.recentTakeTime=recentTakeTime;
+        this.claimItemsList = claimItemsList;
+        this.missionId = missionId;
+        this.claimFlag = textFlag;
+    }
+
+    public MsgOrdersBean(String pubUserName,String orderContent, int takerNum, String recentTakerUrl, String recentTakeTime,
+                         List<ClaimItems> claimItemsList,String missionId,int textFlag){
+        this.pubUserName=pubUserName;
         this.orderContent=orderContent;
         this.takerNum=takerNum;
         this.recentTakerUrl=recentTakerUrl;
