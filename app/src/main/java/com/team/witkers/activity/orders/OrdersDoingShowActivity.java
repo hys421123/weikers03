@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.text.SpannableString;
@@ -191,7 +192,7 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
                             @Override
                             public void updateDrawState(TextPaint ds) {
                                 super.updateDrawState(ds);
-                                ds.setColor(Color.rgb(74,125,174));
+                                ds.setColor(Color.rgb(74, 125, 174));
                             }
                         }, index1, index2 + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     }
@@ -247,15 +248,21 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
                 MyLog.i("ib_call");
                 if (phoneNum != null) {
                     MyLog.i(phoneNum);
-                    Intent intent3 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+phoneNum));
+                    Intent intent3 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNum));
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         // TODO: Consider calling
+                        MyLog.e("check error");
                         //    ActivityCompat#requestPermissions
                         // here to request the missing permissions, and then overriding
                         //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
                         //                                          int[] grantResults)
                         // to handle the case where the user grants the permission. See the documentation
                         // for ActivityCompat#requestPermissions for more details.
+                        //android 6.0
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            requestPermissions(new String[]{"android.permission.CALL_PHONE"}, 111);
+                        }
+
                         return;
                     }
                     startActivity(intent3);
