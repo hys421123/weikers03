@@ -4,15 +4,18 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.gc.materialdesign.widgets.ProgressDialog;
+import com.hys.emition_library.fragment.EmotionMainFragment;
 import com.hys.mylog.MyLog;
 import com.team.witkers.R;
 import com.team.witkers.bean.MyUser;
@@ -69,14 +72,24 @@ public class AddTendActivity2 extends BGAPPToolbarActivity implements BGASortabl
 
     private static final String EXTRA_MOMENT = "EXTRA_MOMENT";
 
+    private EmotionMainFragment emotionMainFragment;
 
+    private boolean isVisibleInput = true;
     @Override
     protected void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_find_addtend_3);
 
         mNinePhotosLayout = getViewById(R.id.mNinePhotosLayout);
-        ib_photo=getViewById(R.id.ib_photo);
         et_input=getViewById(R.id.et_input);
+//        ib_photo=getViewById(R.id.ib_photo);
+
+//        ib_emoj=getViewById(R.id.ib_emoj);
+
+        et_input.setFocusable(true);
+        et_input.setFocusableInTouchMode(true);
+        et_input.requestFocus();
+        InputMethodManager im = ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE));
+        im.showSoftInput(et_input, 0);
     }
 
     @Override
@@ -88,14 +101,66 @@ public class AddTendActivity2 extends BGAPPToolbarActivity implements BGASortabl
         // 设置拖拽排序控件的代理
         mNinePhotosLayout.setDelegate(AddTendActivity2.this);
 
-        ib_photo.setOnClickListener(this);
+        et_input.setOnClickListener(this);
+
+
+
+
+
+//        ib_photo.setOnClickListener(this);
+//        ib_emoj.setOnClickListener(this);
     }
 
     @Override
     protected void processLogic(Bundle savedInstanceState) {
         setTitle("编辑");
+
+
+//        et_input.setFocusable(true);
+//        et_input.setFocusableInTouchMode(true);
+//        et_input.requestFocus();
+//        InputMethodManager im = ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE));
+//        im.showSoftInput(et_input, 0);
+
+
         mNinePhotosLayout.init(this);
+        initEmotionMainFragment();
     }
+
+    /**
+     * 初始化表情面板
+     */
+    public void initEmotionMainFragment(){
+        //构建传递参数
+        Bundle bundle = new Bundle();
+        //绑定主内容编辑框  fragment与editText 相互绑定
+        bundle.putBoolean(EmotionMainFragment.BIND_TO_EDITTEXT,false);
+        //隐藏控件
+        bundle.putBoolean(EmotionMainFragment.HIDE_BAR_EDITTEXT_AND_BTN,true);
+        //替换fragment
+        //创建修改实例
+        emotionMainFragment =EmotionMainFragment.newInstance(EmotionMainFragment.class,bundle);
+        emotionMainFragment.bindToContentView(et_input);
+        FragmentTransaction transaction =getSupportFragmentManager().beginTransaction();
+        // Replace whatever is in thefragment_container view with this fragment,
+        // and add the transaction to the backstack
+        transaction.replace(R.id.fl_emotionview_main,emotionMainFragment);
+        transaction.addToBackStack(null);
+        //提交修改
+        transaction.commit();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        /**
+         * 判断是否拦截返回键操作
+         */
+        if (!emotionMainFragment.isInterceptBackPress()) {
+            super.onBackPressed();
+        }
+    }//onBackPressed
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -163,6 +228,11 @@ public class AddTendActivity2 extends BGAPPToolbarActivity implements BGASortabl
         switch (view.getId()) {
             case R.id.et_input:
 
+                MyLog.v("et input");
+                if (isVisibleInput) {
+                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+                    isVisibleInput = false;
+                }
                 break;
 
             case R.id.ib_photo:
@@ -170,7 +240,7 @@ public class AddTendActivity2 extends BGAPPToolbarActivity implements BGASortabl
 
                 break;
             case R.id.ib_emoj:
-
+                MyLog.v("emoj");
                 break;
         }//switch
     }//click
