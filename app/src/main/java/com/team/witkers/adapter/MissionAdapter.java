@@ -133,24 +133,37 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.TakeOutV
         final int index1 = infoTemp.indexOf("#");
         //如果没有这个字符就返回-1
         if (index1!=-1) {
-            final int index2 = infoTemp.indexOf("#", index1 + 1);
+            int index2 = infoTemp.indexOf("#", index1 + 1);
+//            MyLog.v("new String_ "+builder.toString());
             SpannableString spannableString = null;
             if (index2 != -1) {
-                spannableString = new SpannableString(infoTemp);
 
+                final StringBuilder builder=new StringBuilder(infoTemp);
+                if(index1!=0){
+                    builder.insert(index1," ");
+                    index2=index2+1;
+                }else{
+                    builder.insert(index2+1," ");
+                }
+                spannableString = new SpannableString(builder);
 
                 //NoUnderlineClickableSpan 设置为不要下划线的类
+                final int finalIndex = index2;
                 spannableString.setSpan(new NoUnderlineClickableSpan() {
                     @Override
                     public void onClick(View widget) {
 //                        MyToast.showToast(context,"onclick lable");
                         //TODO 这里修改跳转的目标activity
 
-                        final Intent intent2 = new Intent(context, FindMissionPageActivity.class);
-                        final String labelStr = infoTemp.substring(index1+1, index2);
+
+                        String labelStr = infoTemp.substring(index1+1, finalIndex);
+//                        StringBuilder builder2=new StringBuilder(labelStr);
+                       labelStr= labelStr.replace("#","");
+                        MyLog.i("labelStr_"+labelStr);
 
                         // 查找相关标签
                         BmobQuery<Mission> query = new BmobQuery<Mission>();
+                        query.include("pubUser");
                         query.addWhereEqualTo("category",labelStr);
 //                        MyLog.v("labelStr_ "+labelStr);
                         query.findObjects(new FindListener<Mission>() {
@@ -162,6 +175,7 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.TakeOutV
                                         MyLog.i("ii没有查找到相关任务");
                                     }
                                     missonList = list;
+                                    Intent intent2 = new Intent(context, FindMissionPageActivity.class);
                                     intent2.putExtra("fromTakeOutMissionAdapterTV",(Serializable)missonList);
                                     intent2.putExtra("fromFindMissoionLabel",missonList.get(0).getCategory());
                                     context.startActivity(intent2);
@@ -173,14 +187,15 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.TakeOutV
                             }
                         });
 
-
 //                        context.startActivity(intent);
 
 //                        Intent intent = new Intent(context, SearchActivity.class);
 //                        String lableStr = infoTemp.substring(index1+1, index2);
 //                        intent.putExtra("ToHotLableDetails",lableStr);
 //                        context.startActivity(intent);
-                    }
+                    }//onCLick
+
+
 
                     @Override
                     public void updateDrawState(TextPaint ds) {

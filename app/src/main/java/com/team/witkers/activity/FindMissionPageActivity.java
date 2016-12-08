@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.hys.mylog.MyLog;
 import com.team.witkers.R;
 import com.team.witkers.adapter.MissionAdapter;
 import com.team.witkers.base.BaseActivity;
@@ -58,6 +59,9 @@ public class FindMissionPageActivity extends BaseActivity {
 
         label=getIntent().getStringExtra("fromFindMissoionLabel");
         missoinList=(ArrayList<Mission>) getIntent().getSerializableExtra("fromTakeOutMissionAdapterTV");
+
+//        missoinList.get(0).getPubUserHeadUrl();
+//        MyLog.d("find headUrl_ "+missoinList.get(0).getPubUserHeadUrl());
 //        MyLog.i("getIntent  missionSize---->"+missoinList.size());
 //        MyLog.d("missionDetails--> "+missoinList.get(2).getInfo());
     }
