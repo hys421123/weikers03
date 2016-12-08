@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.hys.emition_library.utils.SpanStringUtils;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.stfalcon.frescoimageviewer.ImageViewer;
 import com.team.witkers.MyApplication;
@@ -122,7 +123,12 @@ public class HeaderAndFooterWrapperTendDetails<T> extends RecyclerView.Adapter<R
         if (isHeaderViewPos(position))
         {
             ((MyViewHolder)holder).tvName.setText(data.getFriendName());
-            ((MyViewHolder)holder).tvContent.setText(data.getContent());
+//            ((MyViewHolder)holder).tvContent.setText(data.getContent());
+
+            //        emotion_map_type 1 表示采用的是第一种类型 的表情
+            // 特殊文字处理,将表情等转换一下
+            ((MyViewHolder)holder).tvContent.setText(  SpanStringUtils.getEmotionContent
+                    (1, context,((MyViewHolder)holder).tvContent, data.getContent())  );
 
             String timeStr="";
 //            if(data.getCreatedAt()==null)

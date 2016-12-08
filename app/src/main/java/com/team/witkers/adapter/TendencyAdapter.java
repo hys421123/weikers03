@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.hys.emition_library.utils.SpanStringUtils;
 import com.hys.mylog.MyLog;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.stfalcon.frescoimageviewer.ImageViewer;
@@ -72,7 +73,13 @@ public class TendencyAdapter extends RecyclerView.Adapter<TendencyAdapter.Tendcy
             holder.tv_tendPubtime.setText(pubTime);
         }
         holder.tv_tendName.setText(tend.getFriendName());
-        holder.tv_tendPubcontent.setText(tend.getContent());
+
+//        emotion_map_type 1 表示采用的是第一种类型 的表情
+        // 特殊文字处理,将表情等转换一下
+        holder.tv_tendPubcontent.setText(  SpanStringUtils.getEmotionContent
+                (1, context, holder.tv_tendPubcontent, tend.getContent())  );
+
+//        holder.tv_tendPubcontent.setText(tend.getContent());
         holder.tv_commentNum.setText("" + tend.getCommentNum());
 //        holder.tv_likeNum.setText("" + tend.getLikeNum());
 //        isLike=tend.isLike();
