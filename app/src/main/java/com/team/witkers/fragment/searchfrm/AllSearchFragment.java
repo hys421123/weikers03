@@ -227,6 +227,7 @@ public class AllSearchFragment extends BaseFragment {
     }
     protected void searchMission(String searchTemp){
         BmobQuery<Mission> query = new BmobQuery<Mission>();
+        query.include("pubUser");
         query.addWhereEqualTo("category",searchTemp);
         query.findObjects(new FindListener<Mission>() {
 
