@@ -78,13 +78,13 @@
         <!--android:button="@null"-->
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:background="#e9e9e9"
-        android:layout_height="2px"
-        android:layout_below="@+id/rl1"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="38dp" />
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="#e9e9e9"-->
+        <!--android:layout_height="2px"-->
+        <!--android:layout_below="@+id/rl1"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:layout_marginRight="38dp" />-->
 
 
 </RelativeLayout>

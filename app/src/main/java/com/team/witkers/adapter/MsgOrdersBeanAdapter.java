@@ -25,7 +25,7 @@ import com.hys.mylog.MyLog;
 import com.team.witkers.R;
 import com.team.witkers.activity.orders.OrdersDoingShowActivity;
 import com.team.witkers.activity.orders.OrdersEvaluateShowActivity;
-import com.team.witkers.activity.orders.OrdersShowActivity;
+import com.team.witkers.activity.orders.OrdersSelectActivity;
 import com.team.witkers.activity.orders.WeikersMsgActivity;
 import com.team.witkers.bean.ClaimItems;
 import com.team.witkers.bean.MsgOrdersBean;
@@ -306,7 +306,7 @@ public class MsgOrdersBeanAdapter extends RecyclerView.Adapter<MsgOrdersBeanAdap
                             break;
                         case 1:
                             MyLog.v("111111");
-                            Intent intent = new Intent(context, OrdersShowActivity.class);
+                            Intent intent = new Intent(context, OrdersSelectActivity.class);
                             intent.putExtra("fromMsgOrdersBeanAdapter", msgOrdersBean);
                             context.startActivity(intent);
                             break;

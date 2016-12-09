@@ -130,7 +130,7 @@
 
         <!--订单fragment相关-->
         <activity
-            android:name=".activity.orders.OrdersShowActivity"
+            android:name=".activity.orders.OrdersSelectActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.editInfo.EditPersonalInfoActivity"

@@ -39,7 +39,7 @@ import cn.bmob.v3.listener.QueryListener;
 
 
 
-public class OrdersShowActivity extends BaseActivity implements View.OnClickListener{
+public class OrdersSelectActivity extends BaseActivity implements View.OnClickListener{
 //  消息frm到任务详情，选择某微客支付的 activity
     private MsgOrdersBean msgOrdersBean;
     private ImageView ivHead,iv_topBack;
@@ -64,7 +64,7 @@ public class OrdersShowActivity extends BaseActivity implements View.OnClickList
     @Override
     protected void getIntentData(){
 
-        MyLog.v("OrdersShowActivity getIntent");
+        MyLog.v("OrdersSelectActivity getIntent");
 
         msgOrdersBean = (MsgOrdersBean) getIntent().getSerializableExtra("fromMsgOrdersBeanAdapter");
         MyLog.i("content-->"+msgOrdersBean.getOrderContent());
@@ -110,9 +110,9 @@ public class OrdersShowActivity extends BaseActivity implements View.OnClickList
         ordersShowAdapter.setOnItemClickListener(new OrdersShowAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, String data, int position) {
-                MyToast.showToast(OrdersShowActivity.this,"data--->"+data+"----position--->"+position);
+                MyToast.showToast(OrdersSelectActivity.this,"data--->"+data+"----position--->"+position);
                 takerName = data;
-                OrdersShowActivity.this.position = position;
+                OrdersSelectActivity.this.position = position;
             }
         });
     }
@@ -123,15 +123,15 @@ public class OrdersShowActivity extends BaseActivity implements View.OnClickList
             @Override
             public void done(final Mission mission, BmobException e) {
                 MyLog.i("mission 查询成功");
-                OrdersShowActivity.this.mission = mission;
+                OrdersSelectActivity.this.mission = mission;
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         String headUrl = mission.getPubUserHeadUrl();
                         if(headUrl==null||headUrl.equals("")){
-                            Glide.with(OrdersShowActivity.this).load(R.drawable.default_head).into(ivHead);
+                            Glide.with(OrdersSelectActivity.this).load(R.drawable.default_head).into(ivHead);
                         }else{
-                            Glide.with(OrdersShowActivity.this).load(headUrl).into(ivHead);
+                            Glide.with(OrdersSelectActivity.this).load(headUrl).into(ivHead);
                         }
                         tvName.setText(mission.getPubUserName());
                         tvDistance.setText("---");
@@ -157,10 +157,10 @@ public class OrdersShowActivity extends BaseActivity implements View.OnClickList
                             @Override
                             public void onClick(View widget){
                                 //TODO 这里修改跳转的目标activity
-                                Intent intent = new Intent(OrdersShowActivity.this,ClaimTaskActivity2.class);
+                                Intent intent = new Intent(OrdersSelectActivity.this,ClaimTaskActivity2.class);
                        /* intent.putExtra("fromTakeOutMissionAdapterLIN",dataList.get(position));*/
-                                Toast.makeText(OrdersShowActivity.this,"label has been clicked",Toast.LENGTH_SHORT).show();
-                                OrdersShowActivity.this.startActivity(intent);
+                                Toast.makeText(OrdersSelectActivity.this,"label has been clicked",Toast.LENGTH_SHORT).show();
+                                OrdersSelectActivity.this.startActivity(intent);
                             }
 
                             @Override
@@ -189,21 +189,21 @@ public class OrdersShowActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.btn_select:
                 if(takerName==null){
-                    MyToast.showToast(OrdersShowActivity.this,"你还没有选择微客哦！");
+                    MyToast.showToast(OrdersSelectActivity.this,"你还没有选择微客哦！");
                     return;
                 }
-                new AlertDialog.Builder(OrdersShowActivity.this).setTitle("确定选择该微客？")
+                new AlertDialog.Builder(OrdersSelectActivity.this).setTitle("确定选择该微客？")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                MyToast.showToast(OrdersShowActivity.this,"应该跳转了");
-                                Intent intent = new Intent(OrdersShowActivity.this,OrdersPayActivity.class);
+                                MyToast.showToast(OrdersSelectActivity.this,"应该跳转了");
+                                Intent intent = new Intent(OrdersSelectActivity.this,OrdersPayActivity.class);
                                 intent.putExtra("fromOrdersShow",mission);
                                 intent.putExtra("position",position);
                                 startActivityForResult(intent,PAY_FLAG);
                                 
-/*                                MyToast.showToast(OrdersShowActivity.this,"选择"+takerName+"完成你的任务");
+/*                                MyToast.showToast(OrdersSelectActivity.this,"选择"+takerName+"完成你的任务");
                                 //传递takerName和mission对象
                                 mission.getClaimItemList().get(position).setClaimFlag("Doing");
                                 SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss ");
@@ -213,7 +213,7 @@ public class OrdersShowActivity extends BaseActivity implements View.OnClickList
                                     public void done(BmobException e) {
                                         if(e==null){
                                             MyLog.i("更新成功");
-                                            Intent intent = new Intent(OrdersShowActivity.this,OrdersPayActivity.class);
+                                            Intent intent = new Intent(OrdersSelectActivity.this,OrdersPayActivity.class);
                                             intent.putExtra("fromOrdersShow",mission);
                                             startActivity(intent);
                                         }else{

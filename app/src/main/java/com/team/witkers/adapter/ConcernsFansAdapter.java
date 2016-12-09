@@ -40,11 +40,12 @@ public class ConcernsFansAdapter extends RecyclerView.Adapter< ConcernsFansAdapt
 //    private  boolean isConcerned3;//判断是否 被 本用户关注的 状态
 
 
-    public ConcernsFansAdapter(Context context, List<ConcernFans> dataList){
-        this.context=context;
-        this.dataList=dataList;
-    }
+//    public ConcernsFansAdapter(Context context, List<ConcernFans> dataList){
+//        this.context=context;
+//        this.dataList=dataList;
+//    }
     public ConcernsFansAdapter(Context context, List<ConcernFans> dataList,List<ConcernFans> meConcernsList){
+        MyLog.i("ConcernsFansAdapter 构造函数");
         this.context=context;
         this.dataList=dataList;
         this.meConcernsList=meConcernsList;
@@ -59,9 +60,26 @@ public class ConcernsFansAdapter extends RecyclerView.Adapter< ConcernsFansAdapt
 
     @Override
     public void onBindViewHolder(final ConcernsFansViewHolder holder, final int position) {
-        final ConcernFans concernFans=dataList.get(position);
+//        MyLog.v("onBindViewHolder_datalist_size "+dataList.size());
+
+         final ConcernFans concernFans=dataList.get(position);
+
+        if(concernFans==null){
+            MyLog.e("concernFans null");
+        }else{
+            MyLog.d("concernFans not null");
+           MyLog.i("userName_ "+concernFans.getUserName());
+//            meConcernsList.size();
+        }
         // 判断是否 被  我 户关注的 状态
-        final boolean[] isConcerned3 = {meConcernsList.contains(concernFans)};
+        boolean bool=false;
+        if(meConcernsList!=null){
+             bool= meConcernsList.contains(concernFans);
+        }
+            final boolean[] isConcerned3 = {bool};
+
+
+
         //TODO 设置头像
         if(concernFans.getHeadUrl()!=null){
 

@@ -199,6 +199,7 @@ public class ConcernsActivity extends BaseActivity implements PullLoadMoreRecycl
                             return;
                         }else{//getFansList.size() !=0
                             dataListConcernFans=concernBean.getFansList();
+                            MyLog.d("还有粉丝的");
                         }
                     }else {// 选择有粉丝  isFans
                         if(concernBean.getConcernsList()==null||concernBean.getConcernsList().size()==0){
