@@ -3,6 +3,7 @@ package cn.bingoogolapple.photopicker.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatDialog;
@@ -10,10 +11,13 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -122,10 +126,21 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
         return intent.getStringArrayListExtra(EXTRA_SELECTED_IMAGES);
     }
 
+
     @Override
     protected void initView(Bundle savedInstanceState) {
         setContentView(R.layout.bga_pp_activity_photo_picker);
         mContentRv = getViewById(R.id.rv_photo_picker_content);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Log.e("hys","设置状态栏颜色0");
+            Window window = this.getWindow();
+//            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //////////////
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.rgb(90,173,241));
+        }
     }
 
     @Override
