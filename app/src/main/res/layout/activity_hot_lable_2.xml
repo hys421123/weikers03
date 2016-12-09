@@ -10,7 +10,7 @@
     <include layout="@layout/topbar_back_2" />
 
     <LinearLayout
-        android:id="@+id/lin_search_lable"
+        android:id="@+id/ll_search_lable"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_margin="10dp"

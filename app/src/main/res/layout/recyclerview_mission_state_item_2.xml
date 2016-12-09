@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    android:id="@+id/lin_itemView"
+    android:id="@+id/ll_missionState_itemView"
     android:layout_marginBottom="8dp">
 
     <View

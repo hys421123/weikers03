@@ -68,6 +68,7 @@ public class AllOrdersActivity extends BaseActivity {
             query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
         }
 
+        query.include("pubUser");
         query.addWhereEqualTo("missionTaker", MyApplication.mUser);
 
         query.findObjects(new FindListener<Mission>() {

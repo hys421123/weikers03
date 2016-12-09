@@ -234,7 +234,7 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.TakeOutV
             tv_takeoutfrm_price= (TextView) view.findViewById(R.id.tv_takeoutfrm_price);
             tv_takeoutfrm_address= (TextView) view.findViewById(R.id.tv_takeoutfrm_address);
             tv_takeoutfrm_mission= (TextView) view.findViewById(R.id.tv_takeoutfrm_mission);
-            itemView = (LinearLayout)view .findViewById(R.id.lin_itemView);
+            itemView = (LinearLayout)view .findViewById(R.id.ll_missionState_itemView);
             itemView.setOnClickListener(this);
         }
 
@@ -243,7 +243,7 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.TakeOutV
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.lin_itemView:
+                case R.id.ll_missionState_itemView:
                     MyLog.i("Lin-clicked-->"+getLayoutPosition());
                     if(MyApplication.mUser==null)
                     {

@@ -1,6 +1,7 @@
 package com.team.witkers.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,10 @@ import com.hys.mylog.MyLog;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.team.witkers.MyApplication;
 import com.team.witkers.R;
+import com.team.witkers.activity.homeitem.ClaimTaskActivity2;
+import com.team.witkers.activity.orders.OrdersDoingShowActivity;
 import com.team.witkers.bean.Mission;
+import com.team.witkers.utils.MyToast;
 
 import java.util.List;
 
@@ -44,7 +48,7 @@ public class MissionStateAdapter extends RecyclerView.Adapter<MissionStateAdapte
 
         //TODO 设置头像
         if(mission.getPubUserHeadUrl()!=null){
-            String headUrl=dataList.get(position).getPubUserHeadUrl();
+            String headUrl=dataList.get(position).getPubUser().getHeadUrl();
 //            MyLog.d("headUrl__"+headUrl);
             Glide.with(context)
                     .load(headUrl)
@@ -65,7 +69,7 @@ public class MissionStateAdapter extends RecyclerView.Adapter<MissionStateAdapte
         }
         //对于发布者来说
         if(mission.getChooseClaimant()!=null&&!mission.getFinished()&&(mission.getPubUserName().equals(MyApplication.mUser.getUsername()))  ){
-            MyLog.v("发布者");
+//            MyLog.v("发布者");
             status="正在进行中";
         }
         if(mission.getFinished()){
@@ -75,7 +79,19 @@ public class MissionStateAdapter extends RecyclerView.Adapter<MissionStateAdapte
 
         holder.tv_missionstate_details.setText(mission.getInfo());
         holder.tv_missionstate_price.setText("¥"+mission.getCharges()+"");
-    }
+
+//        final Mission finalMission = mission;
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                MyLog.v("mission_ "+ finalMission.getInfo());
+////                Intent intent3 = new Intent(context, OrdersDoingShowActivity.class);
+////                intent3.putExtra("fromMsgOrdersBeanAdapter", msgOrdersBean);
+////                intent3.putExtra("stateInfo","任务正在进行中");
+////                context.startActivity(intent3);
+//            }
+//        });
+    }//ONBindView
 
     @Override
     public int getItemCount() {
@@ -96,28 +112,23 @@ public class MissionStateAdapter extends RecyclerView.Adapter<MissionStateAdapte
             tv_missionstate_status= (TextView) view.findViewById(R.id.tv_missionstate_status);
             tv_missionstate_details= (TextView) view.findViewById(R.id.tv_missionstate_details);
             tv_missionstate_price= (TextView) view.findViewById(R.id.tv_missionstate_price);
-            itemView = (LinearLayout)view .findViewById(R.id.lin_itemView);
+            itemView = (LinearLayout)view .findViewById(R.id.ll_missionState_itemView);
             itemView.setOnClickListener(this);
         }
 
-
-        //每个itemView点击事件
         @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.lin_itemView:
-//                    MyLog.i("Lin-clicked-->"+getLayoutPosition());
-//                    if(MyApplication.mUser==null)
-//                    {
-//                        MyToast.showToast(context,"亲，你还没登录呢！");
-//                        return;
-//                    }
-//                    Mission mission=dataList.get(getLayoutPosition());
-//                    Intent intent = new Intent(context, ClaimTaskActivity2.class);
-//                    intent.putExtra("fromTakeOutMissionAdapterLIN",mission);
-//                    context.startActivity(intent);
-                    break;
+        public void onClick(View view) {
+            MyLog.i("Lin-clicked-->"+getLayoutPosition());
+            if(MyApplication.mUser==null)
+            {
+                MyToast.showToast(context,"亲，你还没登录呢！");
+                return;
             }
+            Mission mission=dataList.get(getLayoutPosition());
+            Intent intent = new Intent(context, ClaimTaskActivity2.class);
+            intent.putExtra("fromTakeOutMissionAdapterLIN",mission);
+            context.startActivity(intent);
+
         }
     }//MIssionStateViewHoler_cls
 }

@@ -88,7 +88,7 @@ public class MyClaimActivity extends BaseActivity implements View.OnClickListene
         }
 
         query.addWhereEqualTo("missionTaker", MyApplication.mUser);
-        
+        query.include("pubUser");
         query.findObjects(new FindListener<Mission>() {
             @Override
             public void done(List<Mission> list, BmobException e) {

@@ -99,7 +99,7 @@ public class ClaimTaskActivity2 extends BaseActivity implements View.OnClickList
 
     //设置按钮的可点击性
     private void setUnEditable(){
-        Log.i("hys","此任务已经认领过了");
+        MyLog.i("此任务已经认领过了");
         tv_gettask.setText("已认领此任务");
         et_price.setEnabled(false);
         rl_gettask.setBackgroundResource(R.color.complete_take_mission_bg);
