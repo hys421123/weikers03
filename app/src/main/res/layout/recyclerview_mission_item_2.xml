@@ -22,7 +22,7 @@
         android:orientation="vertical">
 
     <LinearLayout
-
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="14dp"
@@ -35,23 +35,28 @@
         <!--android:layout_alignParentLeft="true"-->
         <!--android:src="@drawable/default_head"-->
         <!--app:riv_corner_radius="5dp" />-->
+
+        <!--android:paddingTop="10dp"-->
         <!--头像-->
         <com.makeramen.roundedimageview.RoundedImageView
+
             android:clickable="true"
             android:id="@+id/round_head"
             android:layout_alignParentLeft="true"
             android:src="@drawable/ic_default_null_gray"
             app:riv_corner_radius="2dp"
-            android:layout_width="45dp"
-            android:layout_height="45dp" />
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
 
         <!-- 右边-->
         <LinearLayout
+
             android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            >
             <!--姓名 地址-->
             <LinearLayout
                 android:layout_marginLeft="@dimen/item_margin_left"
@@ -81,7 +86,6 @@
 
                     android:textColor="@color/colorLine"
                     android:textSize="12.8sp"
-                    android:singleLine="true"
                     android:ellipsize="end"/>
 
             </LinearLayout>
@@ -91,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:gravity="center"
+
                 android:orientation="vertical">
 
                 <TextView
@@ -122,7 +126,7 @@
 
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="6dp"
-                android:gravity="center"
+
                 android:orientation="vertical">
 
                 <TextView
@@ -135,9 +139,11 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:ellipsize="end"
+                    android:singleLine="true"
                     android:layout_marginTop="3dp"
                     android:gravity="center_horizontal"
-                    android:layout_width="@dimen/item_charges_width"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="佣金"
                     android:textColor="@color/colorLine"

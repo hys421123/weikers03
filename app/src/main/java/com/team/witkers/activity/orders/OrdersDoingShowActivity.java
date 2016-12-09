@@ -248,6 +248,10 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
                 MyLog.i("ib_call");
                 if (phoneNum != null) {
                     MyLog.i(phoneNum);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(new String[]{"android.permission.CALL_PHONE"}, 111);
+                    }
+
                     Intent intent3 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNum));
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         // TODO: Consider calling
@@ -259,10 +263,6 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
                         // to handle the case where the user grants the permission. See the documentation
                         // for ActivityCompat#requestPermissions for more details.
                         //android 6.0
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            requestPermissions(new String[]{"android.permission.CALL_PHONE"}, 111);
-                        }
-
                         return;
                     }
                     startActivity(intent3);

@@ -1,6 +1,7 @@
 package com.team.witkers.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -147,6 +148,11 @@ public class PublishMissionActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_task_2);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{"android.permission.ACCESS_COARSE_LOCATION"}, 111);
+        }
+
         initMap();
         initView();
         initEvents();

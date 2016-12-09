@@ -256,7 +256,7 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
                             dataList.add(lb);
                         }
 
-                        MyLog.e("mAdapter null2");
+//                        MyLog.e("mAdapter null2");
                         if(mAdapter==null){
                             mAdapter=new MissionAdapter(getActivity(),dataList);
                             mRecyclerView.setAdapter(mAdapter );
