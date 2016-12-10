@@ -82,8 +82,6 @@ public class MsgOrdersBeanAdapter extends RecyclerView.Adapter<MsgOrdersBeanAdap
 
             // 1.有认领人数的，没有确定认领人的；
             case 1:
-                // 1.任务被认领，发布方收到消息;
-
 //                    MyLog.i("你的任务xx已被xx人认领");
                 String infoStr = msgOrdersBean.getOrderContent();
                 int takerNum = msgOrdersBean.getTakerNum();
@@ -107,6 +105,7 @@ public class MsgOrdersBeanAdapter extends RecyclerView.Adapter<MsgOrdersBeanAdap
                 holder.tvTime.setText(pubTime);
                 break;
 
+            // 2.有确定认领人的，任务正在进行中的；
             case 2:
                 // 2.选择微客后，发布方收到消息;
 
@@ -134,10 +133,10 @@ public class MsgOrdersBeanAdapter extends RecyclerView.Adapter<MsgOrdersBeanAdap
                 break;
 
 
-            case 3:
-                // 3.任务完成后，发布方收到消息;
 
-//                    MyLog.i("你的任务xx正在进行中");
+            // 3.有确定认领人的，任务已经完成的；
+            case 3:
+
                 String infoStr3 = msgOrdersBean.getOrderContent();
                 String headUrl3 = msgOrdersBean.getRecentTakerUrl();
                 String time3 = msgOrdersBean.getRecentTakeTime();
@@ -242,7 +241,7 @@ public class MsgOrdersBeanAdapter extends RecyclerView.Adapter<MsgOrdersBeanAdap
                     pubTime = TimeUtils2.getDescriptionTimeFromTimestamp(
                             TimeUtils2.stringToLong(time7, TimeUtils2.FORMAT_DATE_TIME_SECOND));
                 }
-                String details7="任务"+infoStr7+"收到评价";
+                String details7="任务"+infoStr7+"   已经完成";
 
 
                 if(headUrl7==null||headUrl7.equals("")){
@@ -298,28 +297,35 @@ public class MsgOrdersBeanAdapter extends RecyclerView.Adapter<MsgOrdersBeanAdap
                     MsgOrdersBean msgOrdersBean = dataListMsgOrdersBean.get(getLayoutPosition());
                     MyLog.i("msgOrdersBean.getTextFlag()"+msgOrdersBean.getClaimFlag());
                     switch (msgOrdersBean.getClaimFlag()){
+//            0. 微客消息通知， 即你被 别人确认 选中接单
                         case 0:
                             Intent intent0 = new Intent(context, WeikersMsgActivity.class);
 //                            intent0.putExtra("fromMsgOrdersBeanAdapter", msgOrdersBean);
                             context.startActivity(intent0);
 
                             break;
+
+                        // 1.有认领人数的，没有确定认领人的；
                         case 1:
                             MyLog.v("111111");
                             Intent intent = new Intent(context, OrdersSelectActivity.class);
                             intent.putExtra("fromMsgOrdersBeanAdapter", msgOrdersBean);
                             context.startActivity(intent);
                             break;
+                        // 2.有确定认领人的，任务正在进行中的；
                         case 2:
                             MyLog.i("kind2");
                             Intent intent2 = new Intent(context, OrdersDoingShowActivity.class);
                             intent2.putExtra("fromMsgOrdersBeanAdapter", msgOrdersBean);
+                            intent2.putExtra("stateInfo","任务正在进行中");
                             context.startActivity(intent2);
                             break;
+                        // 3.有确定认领人的，任务已经完成的；
                         case 3:
+
                             Intent intent3 = new Intent(context, OrdersDoingShowActivity.class);
                             intent3.putExtra("fromMsgOrdersBeanAdapter", msgOrdersBean);
-                            intent3.putExtra("stateInfo","任务正在进行中");
+                            intent3.putExtra("stateInfo","任务已完成");
                             context.startActivity(intent3);
                             break;
                         case 4:
@@ -339,11 +345,15 @@ public class MsgOrdersBeanAdapter extends RecyclerView.Adapter<MsgOrdersBeanAdap
                             Intent intent6 = new Intent(context, OrdersDoingShowActivity.class);
                             intent6.putExtra("fromMsgOrdersBeanAdapter", msgOrdersBean);
                             intent6.putExtra("stateInfo","任务正在进行中");
+                            intent6.putExtra("taskDoing",true);
                             context.startActivity(intent6);
                             break;
 //            7.你完成了别人 指定的任务/
                         case 7:
-
+                            Intent intent7 = new Intent(context, OrdersDoingShowActivity.class);
+                            intent7.putExtra("fromMsgOrdersBeanAdapter", msgOrdersBean);
+                            intent7.putExtra("stateInfo","任务已完成");
+                            context.startActivity(intent7);
                             break;
                     }//switch getClaimFlag
 

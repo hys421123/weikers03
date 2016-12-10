@@ -334,7 +334,8 @@ public class MessagesFragment extends BaseFragment implements SwipeRefreshLayout
             msg2.setCommentTime(comment.getCommentPubtime());
             msgList.add(msg2);
         }
-        mAdapter.notifyDataSetChanged();
+        if(mAdapter!=null)
+            mAdapter.notifyDataSetChanged();
 
 
     }

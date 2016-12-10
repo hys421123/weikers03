@@ -1,6 +1,7 @@
 package com.team.witkers.activity.orders;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -8,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -44,6 +46,8 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.UpdateListener;
 
+import static com.team.witkers.R.id.btn_confirm;
+
 public class OrdersDoingShowActivity extends BaseActivity implements View.OnClickListener {
 //任务详情，任务正在进行中的界面
 
@@ -60,6 +64,9 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
     //    private ChooseClaimant claimant;
     private String phoneNum;
 
+    //别人选择你，你帮别人完成任务
+    private boolean taskDoing;
+
     @Override
     protected int setContentId() {
         return R.layout.activity_orders_doing_show_2;
@@ -68,7 +75,7 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
     @Override
     protected void initView() {
         ib_call = (ImageButton) findViewById(R.id.ib_call);
-        btnSelect = (Button) findViewById(R.id.btn_confirm);
+        btnSelect = (Button) findViewById(btn_confirm);
         ivHead = (ImageView) findViewById(R.id.iv_head);
         iv_topBack = (ImageView) findViewById(R.id.iv_topBack);
         tvName = (TextView) findViewById(R.id.tv_name);
@@ -93,9 +100,14 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
     @Override
     protected void getIntentData() {
         msgOrdersBean = (MsgOrdersBean) getIntent().getSerializableExtra("fromMsgOrdersBeanAdapter");
-        MyLog.i("content-->" + msgOrdersBean.getOrderContent() + "--stateInfo-->" + getIntent().getStringExtra("stateInfo"));
-        Mission mission = queryMission(msgOrdersBean.getMissionId());//得到mission对象，设置mission详情的显示
+//        MyLog.i("content-->" + msgOrdersBean.getOrderContent() + "--stateInfo-->" + getIntent().getStringExtra("stateInfo"));
+        mission = queryMission(msgOrdersBean.getMissionId());//得到mission对象，设置mission详情的显示
         stateStr = getIntent().getStringExtra("stateInfo");
+        MyLog.d("stateStr_ "+stateStr);
+
+        taskDoing=getIntent().getBooleanExtra("taskDoing",false);
+
+        MyLog.v("taskDoing_ "+taskDoing);
         if (stateStr == null) {
             stateStr = "default";
         }
@@ -103,11 +115,21 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
 
     @Override
     protected void showView() {
+
+
         switch (stateStr) {
             case "任务正在进行中":
-                btnSelect.setBackgroundResource(R.color.Orders_confirmed);
-                btnSelect.setClickable(false);
-                btnSelect.setText("您的任务正在进行中...");
+                if(taskDoing){
+                    btnSelect.setText("点击任务完成");
+//                    btnSelect.setBackgroundColor(Color.rgb(166,205,237));
+                }else{
+                    MyLog.i("show_view设置");
+                    btnSelect.setClickable(false);
+                    btnSelect.setText("您的任务正在进行中...");
+                    btnSelect.setBackgroundResource(R.color.Orders_confirmed);
+                }
+//                btnSelect.setBackgroundResource(R.color.Orders_confirmed);
+
                 break;
             case "任务已完成":
                 btnSelect.setBackgroundResource(R.color.Orders_confirmed);
@@ -222,27 +244,45 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
             case R.id.iv_topBack:
                 finish();
                 break;
-            case R.id.btn_confirm:
-                MyToast.showToast(this, "确定已完成！");
-                List<ClaimItems> claimItemsList = mission.getClaimItemList();
-                isSelected(claimItemsList);
-                //有问题
-                mission.getClaimItemList().get(claimPosition).setClaimFlag(0);
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss ");
-                mission.setDealTime(new Date(System.currentTimeMillis()));
-                mission.update(mission.getObjectId(), new UpdateListener() {
+            case btn_confirm:
+//                MyToast.showToast(this, "确定已完成！");
+                AlertDialog.Builder builder=new AlertDialog.Builder(this);
+                builder.setTitle("提示");
+                builder.setMessage("是否真的已经完成了任务？");
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() { //设置确定按钮
                     @Override
-                    public void done(BmobException e) {
-                        if (e == null) {
-                            MyLog.i("更新成功");
-                            btnSelect.setBackgroundResource(R.color.Orders_confirmed);
-                            btnSelect.setClickable(false);
-                            btnSelect.setText("任务已完成，等待评价");
-                        } else {
-                            MyLog.i("更新失败：" + e.getMessage() + "," + e.getErrorCode());
-                        }
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss(); //关闭dialog
+                        updateMission();
                     }
                 });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() { //设置取消按钮
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+//                        Toast.makeText(OrdersDoingShowActivity.this, "取消" + which, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.create().show();
+//                List<ClaimItems> claimItemsList = mission.getClaimItemList();
+//                isSelected(claimItemsList);
+//                //有问题
+//                mission.getClaimItemList().get(claimPosition).setClaimFlag(0);
+//                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss ");
+//                mission.setDealTime(new Date(System.currentTimeMillis()));
+//                mission.update(mission.getObjectId(), new UpdateListener() {
+//                    @Override
+//                    public void done(BmobException e) {
+//                        if (e == null) {
+//                            MyLog.i("更新成功");
+//                            btnSelect.setBackgroundResource(R.color.Orders_confirmed);
+//                            btnSelect.setClickable(false);
+//                            btnSelect.setText("任务已完成，等待评价");
+//                        } else {
+//                            MyLog.i("更新失败：" + e.getMessage() + "," + e.getErrorCode());
+//                        }
+//                    }
+//                });
                 break;
             case R.id.ib_call:
                 MyLog.i("ib_call");
@@ -271,5 +311,32 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
                    MyLog.e("phone_null");
                 break;
         }
-    }
-}
+    }//onClick
+
+    private void updateMission(){
+
+       ChooseClaimant claimant=mission.getChooseClaimant();
+        // 任务 完成标志位
+        claimant.setClaimStatus(true);
+        mission.setFinished(true);
+        // 填写 完成 交易时间
+        mission.setDealTime(new Date(System.currentTimeMillis()));
+        mission.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if(e==null){
+                    MyLog.i("任务完成 上传成功");
+                    btnSelect.setClickable(false);
+                   btnSelect.setText("任务已完成，等待评价");
+                    btnSelect.setBackgroundResource(R.color.Orders_confirmed);
+                    Toast.makeText(OrdersDoingShowActivity.this, "恭喜您已经完成了任务" , Toast.LENGTH_SHORT).show();
+
+                }else{
+                    MyLog.e("任务完成 上传失败"+e.getMessage());
+                    }//else
+            }//done
+        });
+
+    }//update mission
+
+}//OrdersDoingShowAct

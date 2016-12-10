@@ -1,6 +1,8 @@
 package com.team.witkers.activity.orders;
 
+import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
@@ -109,7 +111,7 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
                 setSelect(3);
                 break;
             case R.id.btn_pay:
-                MyToast.showToast(this,"pay");
+//                MyToast.showToast(this,"pay");
                 if(rb_bankCardPay.isChecked()&&rb_weixinPay.isChecked()&&rb_aliPay.isChecked()){
                     MyToast.showToast(this,"请选择一种支付方式");
                 }else{
@@ -198,17 +200,22 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
                 // 当code为-2,意味着用户中断了操作
                 // code为-3意味着没有安装BmobPlugin插件
                 if (code == -3) {
-                    Toast.makeText(
-                            OrdersPayActivity.this,
-                            "监测到你尚未安装支付插件,无法进行支付,请先安装插件(已打包在本地,无流量消耗),安装结束后重新支付",
-                            Toast.LENGTH_SHORT).show();
-                    installBmobPayPlugin("bp.db");
+//                    Toast.makeText(
+//                            OrdersPayActivity.this,
+//                            "监测到你尚未安装支付插件,无法进行支付,请先安装插件(已打包在本地,无流量消耗),安装结束后重新支付",
+//                            Toast.LENGTH_SHORT).show();
+//                    installBmobPayPlugin("bp.db");
+                    //去下载插件
+                        downloadPlugin();
+
+
+
                 } else {
-                    Toast.makeText(OrdersPayActivity.this, "支付中断!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OrdersPayActivity.this, "支付失败!_"+s, Toast.LENGTH_SHORT).show();
                 }
 //                tv.append(name + "'s pay status is fail, error code is \n"
 //                        + code + " ,reason is " + reason + "\n\n");
-                MyLog.d("支付失败");
+//                MyLog.d("支付失败");
                 hideDialog();
             }
 
@@ -220,6 +227,35 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
                 hideDialog();
             }
         });
+    }//pay
+
+    private void downloadPlugin(){
+        AlertDialog.Builder builder=new AlertDialog.Builder(OrdersPayActivity.this);  //先得到构造器
+        builder.setTitle("提示"); //设置标题
+        builder.setMessage("监测到你尚未安装支付插件,无法进行支付,需要下载插件吗?"); //设置内容
+//        builder.setIcon(R.mipmap.ic_launcher);//设置图标，图片id即可
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() { //设置确定按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // 访问网址下载 插件
+                String url="https://github.com/hys421123/servers/raw/master/BmobPayPlugin_7.apk";
+                Uri uri = Uri.parse(url);
+                Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(intent);
+
+//                dialog.dismiss(); //关闭dialog
+//                Toast.makeText(MainActivity.this, "确认" + which, Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() { //设置取消按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        //参数都设置完成了，创建并显示出来
+        builder.create().show();
     }
 
     // 执行订单查询

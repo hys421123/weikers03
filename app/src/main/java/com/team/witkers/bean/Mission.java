@@ -33,7 +33,7 @@ public class Mission extends BmobObject implements Serializable {
 
     private String info;//需求
     private Integer capital;//本金
-    private Date dealTime;//交易时间
+    private Date dealTime;//完成交易时间
     private String category;//类别 标签
 
 

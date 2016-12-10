@@ -155,8 +155,8 @@ public class WeikersMsgActivity extends BGAPPToolbarActivity implements PullLoad
                 String content=mission.getInfo();
                 String time =mission.getFinishTime();
                 String headUrl = mission.getClaimItemList().get(0).getClaimHeadUrl();
-
-                MsgOrdersBean msgOrdersBean = new MsgOrdersBean(content,1,headUrl,time,null,"",7);
+                String missionId=mission.getObjectId();
+                MsgOrdersBean msgOrdersBean = new MsgOrdersBean(content,1,headUrl,time,null,missionId,7);
                 beanList.add(msgOrdersBean);
 
 
