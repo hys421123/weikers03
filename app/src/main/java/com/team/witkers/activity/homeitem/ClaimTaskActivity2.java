@@ -123,7 +123,7 @@ public class ClaimTaskActivity2 extends BaseActivity implements View.OnClickList
                 TimeUtils2.stringToLong(date, TimeUtils2.FORMAT_DATE_TIME_SECOND));
         tv_time.setText(time);
         if(myMission!=null&&myMission.getPubUserHeadUrl()!=null){
-            String headUrl=myMission.getPubUserHeadUrl();
+            String headUrl=myMission.getPubUser().getHeadUrl();
             Glide.with(this)
                     .load(headUrl)
                     .into(iv_head);
