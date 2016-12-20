@@ -3,6 +3,7 @@ package com.team.witkers.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.gc.materialdesign.widgets.ProgressDialog;
 import com.hys.mylog.MyLog;
@@ -33,7 +34,7 @@ public class MissionActivity extends BGAPPToolbarActivity implements PullLoadMor
     private String userName;
     private PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private List<Mission> dataList=new ArrayList<Mission>();
-
+    private TextView tv_no3;
 //    private static final int STATE_FIRST = 0;// 第一次载入
 //    private static final int STATE_REFRESH = 1;// 下拉刷新
 //    private ProgressDialog mDialog;
@@ -44,6 +45,7 @@ public class MissionActivity extends BGAPPToolbarActivity implements PullLoadMor
     protected void initView(Bundle savedInstanceState) {
         //直接套用 别人现成的xml
         setContentView(R.layout.fragment_message_orders3);
+        tv_no3= (TextView) findViewById(R.id.tv_no3);
         mPullLoadMoreRecyclerView= (PullLoadMoreRecyclerView) findViewById(R.id.pullLoadMoreRecyclerView);
         mPullLoadMoreRecyclerView= (PullLoadMoreRecyclerView) findViewById(R.id.pullLoadMoreRecyclerView);
         mPullLoadMoreRecyclerView.setLinearLayout();
@@ -100,6 +102,7 @@ public class MissionActivity extends BGAPPToolbarActivity implements PullLoadMor
 
                     if(list.size()==0){
                         MyLog.v("任务数为零");
+                        tv_no3.setVisibility(View.VISIBLE);
                     }else{
                         dataList=list;
 
