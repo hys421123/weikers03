@@ -53,6 +53,7 @@ public class ConcernsActivity extends BaseActivity implements PullLoadMoreRecycl
     private ProgressDialog mDialog;
     private static final int STATE_FIRST = 0;// 第一次载入
     private static final int STATE_REFRESH = 1;// 下拉刷新
+
     private static final int STATE_MORE = 2;// 加载更多
     private static final int STATE_NONE = 3;//adapter为空时
     private int curPage = 0;        // 当前页的编号，从0开始

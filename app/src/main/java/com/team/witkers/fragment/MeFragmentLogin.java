@@ -13,6 +13,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.team.witkers.MyApplication;
 import com.team.witkers.R;
 import com.team.witkers.activity.LoginActivity;
+import com.team.witkers.activity.MissionActivity;
 import com.team.witkers.activity.concernFans.ConcernsActivity;
 import com.team.witkers.activity.editInfo.EditPersonalInfoActivity;
 import com.team.witkers.activity.pubclaim.MyClaimActivity;
@@ -139,9 +140,13 @@ public class MeFragmentLogin extends BaseFragment implements View.OnClickListene
                 MyLog.i("edit detail");
                 break;
 
+//            点击进入我的任务
             case R.id.ll_pubMissions:
                 MyLog.i("ll_pubMissions");
-
+                Intent intentl=new Intent(getActivity(),MissionActivity.class);
+                intentl.putExtra("userName1",MyApplication.mUser.getUsername());
+                intentl.putExtra("title1","我的任务");
+                getActivity().startActivity(intentl);
                 break;
 
             //点击进入我的 关注

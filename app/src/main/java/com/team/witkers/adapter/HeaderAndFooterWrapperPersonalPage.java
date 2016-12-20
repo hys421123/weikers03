@@ -15,6 +15,7 @@ import com.hys.mylog.MyLog;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.team.witkers.MyApplication;
 import com.team.witkers.R;
+import com.team.witkers.activity.MissionActivity;
 import com.team.witkers.activity.concernFans.ConcernsActivity;
 import com.team.witkers.bean.ConcernBean;
 import com.team.witkers.bean.ConcernFans;
@@ -261,35 +262,6 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                         fansBean.getFansList().add(fans);
                     }
 
-
-
-
-//                    // 修改person中 的 粉丝信息fansList， 主要是对 isConcerned(是否互相关注) 属性进行修改
-//                    //复制 getConcernsList() 值，而不破坏其中的值
-//                    List<ConcernFans> intersectionFansList2=new ArrayList<ConcernFans>();
-//                    //得到 关注列表
-//                    intersectionFansList2.addAll(fansBean.getFansList()) ;
-//
-//
-//                    if(fansBean.getConcernsList()!=null){
-//                        //取 交集
-//                    intersectionFansList2.retainAll(concernBean.getConcernsList());
-//                        if (intersectionFansList2.size() != 0) {// 粉丝、关注 两者有交集
-//                            fansBean.getFansList().removeAll(intersectionFansList2);//取 差集
-//
-//                            // 修改 交集的 isConcerned 属性
-//                            for (ConcernFans fans2:intersectionFansList2) {
-//                                fans2.setConcerned(true);
-//                            }
-//
-//                            //修改属性后，  并集  ,此时 完成 对getConcernsList的修改
-//                            fansBean.getFansList().addAll(intersectionFansList2);
-//                        }//有交集
-//
-//                    }//getConcernsList not null
-
-
-
                     fansBean.update(new UpdateListener() {
                         @Override
                         public void done(BmobException e) {
@@ -327,12 +299,6 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                         concernBean.getConcernsList().remove(concern);
                     }
 
-                    //若 含有关注的人被 取消，则去掉互粉
-//                    if(concernBean.getFansList()!=null&&concernBean.getFansList().contains(concern)){
-//                         int position=   concernBean.getFansList().indexOf(concern);
-////                        concernBean.getFansList().get(position).setConcerned(false);
-//                    }
-
                     concernBean.update(new UpdateListener() {
                         @Override
                         public void done(BmobException e) {
@@ -349,8 +315,6 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
                 }
             }
         });
-
-
 
         // 取消 被关注者(其他人)的 粉丝信息
         BmobQuery<ConcernBean> query2 = new BmobQuery<ConcernBean>();
@@ -416,8 +380,14 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
         @Override
         public void onClick(View view) {
             switch (view.getId()){
+
+//                他的任务
                 case R.id.ll_rv_pubMissions:
                     MyLog.i("ll_rv_pubMissions");
+                    Intent intentl=new Intent(context,MissionActivity.class);
+                    intentl.putExtra("userName1",person.getUsername());
+                    intentl.putExtra("title1","他的任务");
+                    context.startActivity(intentl);
                     break;
 
                 case R.id.ll_rv_concerns:
