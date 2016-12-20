@@ -10,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_takeoutfrm"
             android:layout_width="match_parent"
@@ -36,5 +38,18 @@
         android:layout_height="160dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/tv_no"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="15sp"
+        android:text="附近没有任务"
+        android:paddingBottom="20dp"
+        />
+
 
 </RelativeLayout>

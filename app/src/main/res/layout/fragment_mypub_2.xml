@@ -3,6 +3,17 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+<TextView
+    android:visibility="gone"
+    android:id="@+id/tv_no2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="没有相关订单"
+    android:textSize="13sp"
+    android:gravity="center"
+    android:paddingBottom="50dp"
+
+    />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_takeoutfrm"

@@ -109,6 +109,16 @@
         android:layout_width="match_parent"
         android:background="@color/division_line" />
 
+    <TextView
+        android:id="@+id/tv_no1"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:text="没有相关已完成订单"
+        android:paddingBottom="15dp"
+        />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/mRecyclerView"
         android:layout_width="match_parent"

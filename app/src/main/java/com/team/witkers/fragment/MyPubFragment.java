@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.hys.mylog.MyLog;
 import com.team.witkers.MyApplication;
@@ -39,6 +40,7 @@ public class MyPubFragment extends BaseFragment {
     private int LIMIT = 8;        // 每页的数据是8条
     private LinearLayoutManager linearLayoutManager;
     private MissionStateAdapter mAdapter;
+    private TextView tv_no2;
     private String lastTime = "";
     @Override
     protected int setContentId() {
@@ -57,6 +59,7 @@ public class MyPubFragment extends BaseFragment {
         mRecyclerView= (RecyclerView) view.findViewById(R.id.rv_takeoutfrm);
         linearLayoutManager=new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(linearLayoutManager);
+        tv_no2= (TextView) view.findViewById(R.id.tv_no2);
     }
 
     @Override
@@ -82,10 +85,11 @@ public class MyPubFragment extends BaseFragment {
             public void done(List<Mission> object, BmobException e) {
                 if(e==null){
                     if (object.size() == 0) {
-                        MyToast.showToast(getActivity(),"没有数据,快去发布吧!");
+//                        MyToast.showToast(getActivity(),"没有数据,快去发布吧!");
 //                        if (mDialog != null) {
 //                            mDialog.dismiss();
 //                        }
+                        tv_no2.setVisibility(View.VISIBLE);
                         return;
                     }
                     // TODO Auto-generated method stub

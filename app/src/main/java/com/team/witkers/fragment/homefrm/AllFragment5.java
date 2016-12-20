@@ -43,7 +43,7 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
 
     private ProgressWheel progressWheel;
 
-    private TextView tv_takeoutfrm_empty;
+    private TextView tv_takeoutfrm_empty,tv_no;
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private LinearLayoutManager linearLayoutManager;
@@ -84,6 +84,8 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
         tv_takeoutfrm_empty= (TextView) view.findViewById(R.id.tv_takeoutfrm_empty);
         mSwipeRefreshLayout= (SwipeRefreshLayout) view.findViewById(R.id.mSwipeRefreshLayout);
         mRecyclerView= (RecyclerView) view.findViewById(R.id.rv_takeoutfrm);
+        tv_no= (TextView) view.findViewById(R.id.tv_no);
+
         linearLayoutManager=new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(90,173,241));
@@ -125,10 +127,14 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
 //                            mDialog.dismiss();
 //                        }
                         progressWheel.stopSpinning();
+                        tv_no.setVisibility(View.VISIBLE);
                         return;
                     }
+
                     // TODO Auto-generated method stub
                     lastTime = object.get(object.size() - 1).getCreatedAt();
+
+
                     // Log.d("lastTime", lastTime);
                     // 将本次查询的数据添加到lostList中
                     for (Mission lb : object) {

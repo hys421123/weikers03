@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hys.mylog.MyLog;
 import com.team.witkers.MyApplication;
@@ -34,6 +35,7 @@ public class MyClaimActivity extends BaseActivity implements View.OnClickListene
     private RecyclerView mRecyclerView;
     private LinearLayoutManager linearLayoutManager;
     private LinearLayout ll_allOrders;
+    private TextView tv_no1;
 
     private int LIMIT = 8;        // 每页的数据是8条
     private List<Mission> dataList = new ArrayList<>();
@@ -45,7 +47,7 @@ public class MyClaimActivity extends BaseActivity implements View.OnClickListene
     }
     @Override
     protected void initToolBar() {
-        toolbar.setTitle("我的认领");
+        toolbar.setTitle("微客中心");
         setSupportActionBar(toolbar);
     }
     @Override
@@ -53,6 +55,7 @@ public class MyClaimActivity extends BaseActivity implements View.OnClickListene
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         mRecyclerView= (RecyclerView)findViewById(R.id.mRecyclerView);
         ll_allOrders= (LinearLayout) findViewById(R.id.ll_allOrders);
+        tv_no1= (TextView) findViewById(R.id.tv_no1);
 
         linearLayoutManager=new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -95,7 +98,9 @@ public class MyClaimActivity extends BaseActivity implements View.OnClickListene
                 if(e==null){
                     MyLog.i("查询mission成功 size_"+list.size());
                     if (list.size() == 0) {
+                        tv_no1.setVisibility(View.VISIBLE);
                         MyToast.showToast(MyClaimActivity.this,"没有数据,快去发布吧!");
+                        MyLog.v("no data");
 //                        if (mDialog != null) {
 //                            mDialog.dismiss();
 //                        }
@@ -111,6 +116,10 @@ public class MyClaimActivity extends BaseActivity implements View.OnClickListene
 
 //                        MyLog.i("pubUsername_ "+lb.getPubUser().getUsername());
 
+                    }
+//                    MyLog.i("dataList_size "+dataList.size());
+                    if (dataList.size() == 0) {
+                        tv_no1.setVisibility(View.VISIBLE);
                     }
                     mAdapter = new MissionStateAdapter(MyClaimActivity.this,dataList);
                     mRecyclerView.setAdapter(mAdapter );
