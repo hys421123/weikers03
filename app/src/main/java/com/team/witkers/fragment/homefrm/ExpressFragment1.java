@@ -106,8 +106,19 @@ public class ExpressFragment1 extends BaseFragmentForDelayLoad implements SwipeR
     protected void loadDataForFirstTime() {
 //        final ProgressDialog mDialog = new ProgressDialog(getActivity(), "正在加载");
 //        mDialog.show();
+
+
+
         dataList.clear();
         BmobQuery<Mission> query = new BmobQuery<>();
+
+        myPoint = (BmobGeoPoint) getArguments().getSerializable("myPoint");
+//        查询附近的人
+        query.addWhereNear("missionLocation",myPoint);
+//        指定距离范围2千米
+        query.addWhereWithinKilometers("missionLocation",myPoint,2.0);
+//        执行查询方法
+
         query.addWhereEqualTo("category","快递");
         // 按时间降序查询
 //        query.addWhereNear("missionLocation",myPoint);
@@ -213,6 +224,13 @@ public class ExpressFragment1 extends BaseFragmentForDelayLoad implements SwipeR
         // 按时间降序查询
 //        query.addWhereNear("missionLocation",myPoint);
 //        query.addWhereWithinKilometers("missionLocation",myPoint,1.0);
+
+        myPoint = (BmobGeoPoint) getArguments().getSerializable("myPoint");
+//        查询附近的人
+        query.addWhereNear("missionLocation",myPoint);
+//        指定距离范围2千米
+        query.addWhereWithinKilometers("missionLocation",myPoint,2.0);
+//        执行查询方法
         query.order("-createdAt");
 //        query.include("myUser");
         // 如果是加载更多

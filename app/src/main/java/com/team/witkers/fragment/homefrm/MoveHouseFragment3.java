@@ -113,8 +113,8 @@ public class MoveHouseFragment3 extends BaseFragmentForDelayLoad implements Swip
         BmobQuery<Mission> query = new BmobQuery<>();
         query.addWhereEqualTo("category","搬家");
         // 按时间降序查询
-//        query.addWhereNear("missionLocation",myPoint);
-//        query.addWhereWithinKilometers("missionLocation",myPoint,1.0);
+        query.addWhereNear("missionLocation",myPoint);
+        query.addWhereWithinKilometers("missionLocation",myPoint,2.0);
         query.order("-createdAt");
         //返回8条数据，
         query.setLimit(LIMIT);
@@ -215,8 +215,8 @@ public class MoveHouseFragment3 extends BaseFragmentForDelayLoad implements Swip
         BmobQuery<Mission> query = new BmobQuery<>();
         query.addWhereEqualTo("category","搬家");
         // 按时间降序查询
-//        query.addWhereNear("missionLocation",myPoint);
-//        query.addWhereWithinKilometers("missionLocation",myPoint,1.0);
+        query.addWhereNear("missionLocation",myPoint);
+        query.addWhereWithinKilometers("missionLocation",myPoint,2.0);
         query.order("-createdAt");
 //        query.include("myUser");
         // 如果是加载更多
@@ -242,7 +242,7 @@ public class MoveHouseFragment3 extends BaseFragmentForDelayLoad implements Swip
 
 
         boolean isCache = query.hasCachedResult(Mission.class);
-        MyLog.i("isCacheAllFrm111 "+isCache);
+//        MyLog.i("isCacheAllFrm111 "+isCache);
         if(NetworkUtils.isNetWorkConnet(getActivity()))
             query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ONLY);
         else

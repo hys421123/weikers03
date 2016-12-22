@@ -93,8 +93,16 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @Override
     protected void loadDataAfterView() {
+
+
         myPoint = (BmobGeoPoint) getArguments().getSerializable("myPoint");
-        MyLog.i("allFragment5----latitude->"+myPoint.getLatitude()+",longitude->"+myPoint.getLongitude());
+
+        if(myPoint!=null) {
+            double lat = myPoint.getLatitude();
+            double lon = myPoint.getLongitude();
+            MyLog.d("myPoint_ " + lat + "// " + lon);
+        }else
+            MyLog.e("myPoint null");
 
 //        final ProgressDialog mDialog = new ProgressDialog(getActivity(), "正在加载");
 //        mDialog.show();
@@ -105,11 +113,11 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
         //返回8条数据，
         query.setLimit(LIMIT);
 
-        //查询附近的人
-//        query.addWhereNear("missionLocation",myPoint);
-        //指定距离范围1千米
-//        query.addWhereWithinKilometers("missionLocation",myPoint,1.0);
-        //执行查询方法
+//        查询附近的人
+        query.addWhereNear("missionLocation",myPoint);
+//        指定距离范围2千米
+        query.addWhereWithinKilometers("missionLocation",myPoint,2.0);
+//        执行查询方法
         boolean isCache = query.hasCachedResult(Mission.class);
         if(isCache){
             query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
@@ -207,6 +215,13 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
      */
     private void queryData(int page, final int actionType) {
         BmobQuery<Mission> query = new BmobQuery<>();
+
+//        查询附近的人
+        query.addWhereNear("missionLocation",myPoint);
+//        指定距离范围2千米
+        query.addWhereWithinKilometers("missionLocation",myPoint,2.0);
+//        执行查询方法
+
         // 按时间降序查询
         query.order("-createdAt");
 //        query.addWhereNear("missionLocation",myPoint);
@@ -225,7 +240,7 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
             query.addWhereLessThanOrEqualTo("createdAt", new BmobDate(date));
             // 跳过之前页数并去掉重复数据
             query.setSkip(page * LIMIT + 1);
-            MyLog.i("skip");
+//            MyLog.i("skip");
         } else {
             page = 0;
             query.setSkip(page);
@@ -235,7 +250,7 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
         // 查找数据
 
       boolean isCache = query.hasCachedResult(Mission.class);
-        MyLog.i("isCacheAllFrm111 "+isCache);
+//        MyLog.i("isCacheAllFrm111 "+isCache);
         if(NetworkUtils.isNetWorkConnet(getActivity()))
             query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ONLY);
         else

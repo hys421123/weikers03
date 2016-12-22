@@ -101,8 +101,8 @@ public class RentCarFragment4 extends BaseFragmentForDelayLoad implements SwipeR
         BmobQuery<Mission> query = new BmobQuery<>();
         query.addWhereEqualTo("category","租车");
         // 按时间降序查询
-//        query.addWhereNear("missionLocation",myPoint);
-//        query.addWhereWithinKilometers("missionLocation",myPoint,1.0);
+        query.addWhereNear("missionLocation",myPoint);
+        query.addWhereWithinKilometers("missionLocation",myPoint,2.0);
         query.order("-createdAt");
         //返回8条数据，
         query.setLimit(LIMIT);
@@ -203,8 +203,8 @@ public class RentCarFragment4 extends BaseFragmentForDelayLoad implements SwipeR
         BmobQuery<Mission> query = new BmobQuery<>();
         query.addWhereEqualTo("category","租车");
         // 按时间降序查询
-//        query.addWhereNear("missionLocation",myPoint);
-//        query.addWhereWithinKilometers("missionLocation",myPoint,1.0);
+        query.addWhereNear("missionLocation",myPoint);
+        query.addWhereWithinKilometers("missionLocation",myPoint,2.0);
         query.order("-createdAt");
 //        query.include("myUser");
         // 如果是加载更多

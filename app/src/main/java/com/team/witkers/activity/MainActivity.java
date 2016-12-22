@@ -91,13 +91,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_2);
-        myPoint = new BmobGeoPoint(114.398331,30.506929);
+//        myPoint = new BmobGeoPoint(114.398331,30.506929);
         MyLog.d("MainAct create");
         initToolBar();
         initView();
         initEvent();
-        setSelect(0);
-//        initMap();
+//        setSelect(0);
+        initMap();
 
 
         //加载点赞相关事件

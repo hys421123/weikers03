@@ -40,10 +40,11 @@
             android:textColor="@color/colorBlack"/>
 
         <com.team.witkers.views.ClearEditText
+
             android:id="@+id/et_address_search"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:editable="true"
+            android:editable="false"
             android:layout_weight="5"
             android:layout_marginRight="8dp"
             android:paddingLeft="10dp"
