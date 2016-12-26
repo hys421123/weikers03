@@ -128,45 +128,45 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.btn_register:
                 //简单版，通过用户名密码注册
 
-                MyUser myUser =new MyUser();
-                myUser.setUsername(et_username.getText().toString().trim());
-                myUser.setPassword(et_password.getText().toString().trim());
-                if(userHeadUrl!=null) {
-                    MyLog.v("register_headUrl "+userHeadUrl);
-                    myUser.setHeadUrl(userHeadUrl);
-                }else
-                    MyLog.e("userHeadUrl_null");
-
-                mDialog = new ProgressDialog(this, "正在注册");
-                mDialog.show();
-                MyLog.i("register");
-                myUser.signUp(new SaveListener<MyUser>() {
-                    @Override
-                    public void done(MyUser myUser, BmobException e) {
-                        if(e==null){
-
-                            ConcernBean concernBean = new ConcernBean();
-                            concernBean.setName(myUser.getUsername());
-                            concernBean.save(new SaveListener<String>() {
-                                @Override
-                                public void done(String s, BmobException e) {
-                                    if(e==null){
-                                        MyLog.v("注册成功");
-                                        Toast.makeText(RegisterActivity.this,"注册成功:",Toast.LENGTH_SHORT).show();
-                                        mDialog.dismiss();
-                                        finish();
-                                    }else{
-                                        mDialog.dismiss();
-                                        Toast.makeText(RegisterActivity.this,"注册失败,"+"--msg--" + e.getMessage(),Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-                        }else{
-                            mDialog.dismiss();
-                            Toast.makeText(RegisterActivity.this,"注册失败,"+"--msg--" + e.getMessage(),Toast.LENGTH_SHORT).show();
-                        }//else
-                    }
-                });
+//                MyUser myUser =new MyUser();
+//                myUser.setUsername(et_username.getText().toString().trim());
+//                myUser.setPassword(et_password.getText().toString().trim());
+//                if(userHeadUrl!=null) {
+//                    MyLog.v("register_headUrl "+userHeadUrl);
+//                    myUser.setHeadUrl(userHeadUrl);
+//                }else
+//                    MyLog.e("userHeadUrl_null");
+//
+//                mDialog = new ProgressDialog(this, "正在注册");
+//                mDialog.show();
+//                MyLog.i("register");
+//                myUser.signUp(new SaveListener<MyUser>() {
+//                    @Override
+//                    public void done(MyUser myUser, BmobException e) {
+//                        if(e==null){
+//
+//                            ConcernBean concernBean = new ConcernBean();
+//                            concernBean.setName(myUser.getUsername());
+//                            concernBean.save(new SaveListener<String>() {
+//                                @Override
+//                                public void done(String s, BmobException e) {
+//                                    if(e==null){
+//                                        MyLog.v("注册成功");
+//                                        Toast.makeText(RegisterActivity.this,"注册成功:",Toast.LENGTH_SHORT).show();
+//                                        mDialog.dismiss();
+//                                        finish();
+//                                    }else{
+//                                        mDialog.dismiss();
+//                                        Toast.makeText(RegisterActivity.this,"注册失败,"+"--msg--" + e.getMessage(),Toast.LENGTH_SHORT).show();
+//                                    }
+//                                }
+//                            });
+//                        }else{
+//                            mDialog.dismiss();
+//                            Toast.makeText(RegisterActivity.this,"注册失败,"+"--msg--" + e.getMessage(),Toast.LENGTH_SHORT).show();
+//                        }//else
+//                    }
+//                });
 
 
 
@@ -189,29 +189,29 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 //                });
 
                 //下面是完整版的，关联手机号
-//                String phoneNum=et_phonenum.getText().toString().trim();
-//                //判断输入的是否是手机号
-//                if (!isPhoneNumber(phoneNum)) {
-//                    Toast.makeText(this,"手机号不正确,请重新输入",Toast.LENGTH_SHORT).show();
-//                    return;
-//                }else{
-//                    MyUser2 myUser2=new MyUser2();
-//                    if(userHeadUrl!=null) {
-//                        MyLog.v("register_headUrl "+userHeadUrl);
-//                        myUser2.setHeadUrl(userHeadUrl);
-//                    }else
-//                        MyLog.e("userHeadUrl_null");
-//
-//                    myUser2.setUsername(et_username.getText().toString().trim());
-//                    myUser2.setMobilePhoneNumber(et_phonenum.getText().toString().trim());
-//                    myUser2.setPassword(et_password.getText().toString().trim());
-//                    //请求验证码
-//                    if(userHeadUrl==null||userHeadUrl.equals("")){
-//                        userHeadUrl="error";
-//                    }
-//                    myUser2.setHeadUrl(userHeadUrl);
-//                   sendSms(myUser2);
-//                }//if
+                String phoneNum=et_phonenum.getText().toString().trim();
+                //判断输入的是否是手机号
+                if (!isPhoneNumber(phoneNum)) {
+                    Toast.makeText(this,"手机号不正确,请重新输入",Toast.LENGTH_SHORT).show();
+                    return;
+                }else{
+                    MyUser myUser2=new MyUser();
+                    if(userHeadUrl!=null) {
+                        MyLog.v("register_headUrl "+userHeadUrl);
+                        myUser2.setHeadUrl(userHeadUrl);
+                    }else
+                        MyLog.e("userHeadUrl_null");
+
+                    myUser2.setUsername(et_username.getText().toString().trim());
+                    myUser2.setMobilePhoneNumber(et_phonenum.getText().toString().trim());
+                    myUser2.setPassword(et_password.getText().toString().trim());
+                    //请求验证码
+                    if(userHeadUrl==null||userHeadUrl.equals("")){
+                        userHeadUrl="error";
+                    }
+                    myUser2.setHeadUrl(userHeadUrl);
+                   sendSms(myUser2);
+                }//if
 
                 break;
             case R.id.tv_register_terms:

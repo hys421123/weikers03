@@ -146,10 +146,14 @@ public class MessagesFragment extends BaseFragment implements SwipeRefreshLayout
 //                    queryBmobData(0, STATE_REFRESH);
 //                    return;
 //                }
-                if (newState == RecyclerView.SCROLL_STATE_IDLE){
-                    queryBmobData(0, STATE_REFRESH);
-                    return;
-                }
+
+
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE){
+//                    queryBmobData(0, STATE_REFRESH);
+//                    return;
+//                }
+
+
 
 //                switch (newState) {
 //                    case  RecyclerView.SCROLL_STATE_IDLE:

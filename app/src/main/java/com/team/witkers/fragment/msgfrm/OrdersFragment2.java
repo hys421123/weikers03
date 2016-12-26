@@ -150,6 +150,7 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
 //                                    mPullLoadMoreRecyclerView.setAdapter(msgOrdersBeanAdapter);
 //                                    MyLog.i("去掉对话框，去掉刷新");
                                     if(mDialog!=null){ mDialog.dismiss();}
+                                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 //                                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                                     return;
                                 }else {//size not 0

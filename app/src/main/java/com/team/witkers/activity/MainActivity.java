@@ -1,6 +1,7 @@
 package com.team.witkers.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -92,6 +93,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_2);
 //        myPoint = new BmobGeoPoint(114.398331,30.506929);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{"android.permission.ACCESS_COARSE_LOCATION"}, 111);
+        }
+
         MyLog.d("MainAct create");
         initToolBar();
         initView();
