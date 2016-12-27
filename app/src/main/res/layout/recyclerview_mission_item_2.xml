@@ -102,14 +102,14 @@
                     android:id="@+id/tv_takeoutfrm_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:text=""
 
                     android:textColor="@color/black_light"
                     android:textSize="15sp"
                     android:gravity="center_horizontal" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
                     android:text="完成"
@@ -143,7 +143,7 @@
                     android:singleLine="true"
                     android:layout_marginTop="3dp"
                     android:gravity="center_horizontal"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="佣金"
                     android:textColor="@color/colorLine"

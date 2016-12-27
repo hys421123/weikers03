@@ -87,6 +87,9 @@ public class TendencyActivity extends BaseActivity implements SwipeRefreshLayout
     private BmobRelation relation ;
     private boolean isRefresh=false;//是否需要刷新
 
+    private String userName;
+    private String title;
+
     @Override
     protected int setContentId() {
         return R.layout.activity_find_tendency_2;
@@ -101,6 +104,12 @@ public class TendencyActivity extends BaseActivity implements SwipeRefreshLayout
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.mSwipeRefreshLayout);
 //        ll_sendComment= (LinearLayout) findViewById(R.id.ll_sendComment);
 
+    }
+
+    @Override
+    protected void getIntentData() {
+        userName=getIntent().getStringExtra("userName1");
+        title=getIntent().getStringExtra("title1");
     }
 
     @Override
@@ -207,6 +216,10 @@ public class TendencyActivity extends BaseActivity implements SwipeRefreshLayout
                 break;
         }//switch
 
+        if(userName!=null&&!userName.equals("")){
+            query.addWhereEqualTo("friendName",userName);
+        }
+
         query.include("pubUser");
         query.findObjects(new FindListener<TendItems>() {
             @Override
@@ -273,7 +286,10 @@ public class TendencyActivity extends BaseActivity implements SwipeRefreshLayout
 
     @Override
     protected void initToolBar() {
-        toolbar.setTitle("动态");
+        if(title.equals("")||title==null)
+            toolbar.setTitle("动态");
+        else
+            toolbar.setTitle(title);
         setSupportActionBar(toolbar);
     }
 

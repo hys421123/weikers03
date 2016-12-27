@@ -16,6 +16,7 @@ import com.team.witkers.activity.LoginActivity;
 import com.team.witkers.activity.MissionActivity;
 import com.team.witkers.activity.concernFans.ConcernsActivity;
 import com.team.witkers.activity.editInfo.EditPersonalInfoActivity;
+import com.team.witkers.activity.find.TendencyActivity;
 import com.team.witkers.activity.pubclaim.MyClaimActivity;
 import com.team.witkers.activity.pubclaim.MyPubActivity;
 import com.team.witkers.activity.setting.SettingActivity;
@@ -24,6 +25,7 @@ import com.team.witkers.bean.ConcernBean;
 import com.team.witkers.bean.ConcernFans;
 import com.team.witkers.bean.Mission;
 import com.team.witkers.bean.MyUser;
+import com.team.witkers.bean.TendItems;
 import com.team.witkers.utils.MyToast;
 import com.team.witkers.utils.liteasysuits.Log;
 import com.team.witkers.views.MyPubItem;
@@ -49,7 +51,7 @@ public class MeFragmentLogin extends BaseFragment implements View.OnClickListene
     private TextView tv_introduce,tv_tendencies,tv_focus,tv_fans;
     private LinearLayout ll_pubMissions,ll_concerns,ll_fans;
 
-    private int pubMissionNum,concernNum,fansNum;
+    private int tendsNum,concernNum,fansNum;
     private Handler myHandler = new Handler();
 
     private static final int REQUESTCODE_MELOG2 = 1;//从Mefragment中退出登录，若返回，则至主界面
@@ -73,7 +75,7 @@ public class MeFragmentLogin extends BaseFragment implements View.OnClickListene
         tv_focus = (TextView) view.findViewById(R.id.tv_focus);
         tv_fans = (TextView) view.findViewById(R.id.tv_fans);
 
-        ll_pubMissions= (LinearLayout) view.findViewById(R.id.ll_pubMissions);
+        ll_pubMissions= (LinearLayout) view.findViewById(R.id.ll_tends);
         ll_concerns=(LinearLayout) view.findViewById(R.id.ll_concerns);
         ll_fans= (LinearLayout) view.findViewById(R.id.ll_fans);
     }
@@ -140,12 +142,12 @@ public class MeFragmentLogin extends BaseFragment implements View.OnClickListene
                 MyLog.i("edit detail");
                 break;
 
-//            点击进入我的任务
-            case R.id.ll_pubMissions:
+//            点击进入我的动态
+            case R.id.ll_tends:
                 MyLog.i("ll_pubMissions");
-                Intent intentl=new Intent(getActivity(),MissionActivity.class);
+                Intent intentl=new Intent(getActivity(), TendencyActivity.class);
                 intentl.putExtra("userName1",MyApplication.mUser.getUsername());
-                intentl.putExtra("title1","我的任务");
+                intentl.putExtra("title1","我的动态");
                 getActivity().startActivity(intentl);
                 break;
 
@@ -180,6 +182,8 @@ public class MeFragmentLogin extends BaseFragment implements View.OnClickListene
         else {
             myUser = user;
             getPubMissionNum();//设置三个数量
+
+            getTendsNum(); //设置动态数
             if ( myUser.getHeadUrl() != null) {
                 setUserHead();
             }
@@ -193,6 +197,31 @@ public class MeFragmentLogin extends BaseFragment implements View.OnClickListene
         }//else
     }//loadDataonResume
 
+    //查询动态数
+    private void getTendsNum(){
+        BmobQuery<TendItems> query2=new BmobQuery<>();
+        query2.addWhereEqualTo("friendName",myUser.getUsername());
+        query2.findObjects(new FindListener<TendItems>() {
+            @Override
+            public void done(List<TendItems> list, BmobException e) {
+                if(e!=null){
+                    MyToast.showToast(getActivity(),"查询失败"+e);
+                }else {
+//                    MyLog.i("查询任务数成功" + list.size());
+                    tendsNum=list.size();
+                    myHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            tv_tendencies.setText(tendsNum+"");
+                         
+                        }
+                    });
+                    
+                }
+            }
+        });
+    }//getTendsNum
+
     private void getPubMissionNum(){
         //查询这个用户发布过的所有任务
         BmobQuery<Mission> query = new BmobQuery<Mission>();
@@ -204,7 +233,7 @@ public class MeFragmentLogin extends BaseFragment implements View.OnClickListene
                     MyToast.showToast(getActivity(),"查询失败"+e);
                 }else {
 //                    MyLog.i("查询任务数成功" + list.size());
-                    pubMissionNum = list.size();
+                    tendsNum = list.size();
                     getConcernNumAndFansNum();
                 }
             }//done
@@ -239,7 +268,7 @@ public class MeFragmentLogin extends BaseFragment implements View.OnClickListene
                     myHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            tv_tendencies.setText(pubMissionNum+"");
+//                            tv_tendencies.setText(tendsNum+"");
                             tv_focus.setText(concernNum+"");
                             tv_fans.setText(fansNum+"");
                         }
