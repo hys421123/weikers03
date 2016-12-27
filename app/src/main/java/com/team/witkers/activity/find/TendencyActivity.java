@@ -87,8 +87,8 @@ public class TendencyActivity extends BaseActivity implements SwipeRefreshLayout
     private BmobRelation relation ;
     private boolean isRefresh=false;//是否需要刷新
 
-    private String userName;
-    private String title;
+    private String userName="";
+    private String title="";
 
     @Override
     protected int setContentId() {
@@ -286,7 +286,7 @@ public class TendencyActivity extends BaseActivity implements SwipeRefreshLayout
 
     @Override
     protected void initToolBar() {
-        if(title.equals("")||title==null)
+        if(title==null||title.equals(""))
             toolbar.setTitle("动态");
         else
             toolbar.setTitle(title);
