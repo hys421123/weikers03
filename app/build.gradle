@@ -75,4 +75,6 @@ dependencies {
     compile project(':magicasukura-library')
     compile project(':scissors-library')
     compile project(':emition-library')
+
+    compile 'com.github.czy1121:badgebutton:1.0.0'
 }

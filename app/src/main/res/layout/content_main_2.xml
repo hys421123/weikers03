@@ -59,6 +59,7 @@
             android:orientation="vertical" >
 
             <ImageButton
+                android:visibility="gone"
                 android:id="@+id/ibtn_index_msg"
                 android:layout_width="@dimen/tab_icon_size"
                 android:layout_height="@dimen/tab_icon_size"
@@ -66,6 +67,17 @@
                 android:scaleType="fitCenter"
                 android:clickable="false"
                 android:src="@drawable/ic_index_msg" />
+
+            <com.github.czy1121.view.BadgeButton
+                android:id="@+id/msgBtn"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+               app:btnBadgeVisible="true"
+                android:drawableTop="@drawable/ic_index_msg2"
+                android:padding="2dp"
+
+
+                />
 
         </LinearLayout>
         <!-- 中间按钮 -->

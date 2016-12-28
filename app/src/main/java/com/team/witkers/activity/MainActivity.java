@@ -19,6 +19,7 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.github.czy1121.view.BadgeButton;
 import com.hys.mylog.MyLog;
 import com.team.witkers.MyApplication;
 import com.team.witkers.R;
@@ -70,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton ibtn_index_msg;
     private ImageButton ibtn_index_like;
     private ImageButton ibtn_index_me;
+    private BadgeButton msgBtn;
+
 
     private LinearLayout mIndexLayout;
     private LinearLayout mNewsLayout;
@@ -92,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_2);
-//        myPoint = new BmobGeoPoint(114.398331,30.506929);
+        myPoint = new BmobGeoPoint(114.398331,30.506929);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{"android.permission.ACCESS_COARSE_LOCATION"}, 111);
         }
@@ -206,6 +209,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mPubLayout = (LinearLayout) findViewById(R.id.ll_tab_publish);
         ibtn_index_home = (ImageButton) findViewById(R.id.ibtn_index_home);
         ibtn_index_msg = (ImageButton) findViewById(R.id.ibtn_index_msg);
+        msgBtn= (BadgeButton) findViewById(R.id.msgBtn);
         ibtn_index_like = (ImageButton) findViewById(R.id.ibtn_index_like);
         ibtn_index_me = (ImageButton) findViewById(R.id.ibtn_index_me);
     }
@@ -329,6 +333,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 }
                 ibtn_index_msg.setImageResource(R.drawable.ic_index_msg_selected);
+                msgBtn.setIcon(getResources().getDrawable(R.drawable.ic_index_msg_selected2));
+                msgBtn.setBadgeVisible(true);
                 break;
             case 2:
                 mToolbar.setTitle("发现");
@@ -447,6 +453,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ibtn_index_msg.setImageResource(R.drawable.ic_index_msg);
         ibtn_index_like.setImageResource(R.drawable.ic_index_like);
         ibtn_index_me.setImageResource(R.drawable.ic_index_me);
+        msgBtn.setIcon(getResources().getDrawable(R.drawable.ic_index_msg2));
+        msgBtn.setBadgeVisible(false);
     }
 
     @Override
