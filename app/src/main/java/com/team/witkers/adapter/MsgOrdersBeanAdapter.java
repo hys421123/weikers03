@@ -76,7 +76,7 @@ public class MsgOrdersBeanAdapter extends RecyclerView.Adapter<MsgOrdersBeanAdap
                 // 设置 微客消息通知
                 Glide.with(context).load(R.drawable.notice).into(holder.ivPubUser);
                 holder.tvDetails.setText("微客消息通知");
-                holder.tvTime.setText(pubTime);
+                holder.tvTime.setVisibility(View.GONE);
                 break;
 
 
