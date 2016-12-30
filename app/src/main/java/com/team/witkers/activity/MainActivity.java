@@ -20,12 +20,17 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.github.czy1121.view.BadgeButton;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import com.hys.mylog.MyLog;
 import com.team.witkers.MyApplication;
 import com.team.witkers.R;
 import com.team.witkers.activity.find.SearchActivity;
 import com.team.witkers.bean.MyUser;
 import com.team.witkers.bean.TendItems;
+import com.team.witkers.eventbus.ChooseNotify;
+import com.team.witkers.eventbus.CropAvatarEvent;
 import com.team.witkers.fragment.FindFragment;
 import com.team.witkers.fragment.HomeFragment;
 import com.team.witkers.fragment.MeFragmentLogin;
@@ -95,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_2);
+
+       EventBus.getDefault().register(this);
         myPoint = new BmobGeoPoint(114.398331,30.506929);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{"android.permission.ACCESS_COARSE_LOCATION"}, 111);
@@ -334,7 +341,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 ibtn_index_msg.setImageResource(R.drawable.ic_index_msg_selected);
                 msgBtn.setIcon(getResources().getDrawable(R.drawable.ic_index_msg_selected2));
-                msgBtn.setBadgeVisible(true);
+//                msgBtn.setBadgeVisible(true);
                 break;
             case 2:
                 mToolbar.setTitle("发现");
@@ -507,10 +514,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         outState.putInt("position", position);
     }
 
+    @Subscribe
+    public void onEventMainThread(ChooseNotify event) {
+        MyToast.showToast(this,"有人选择了你接单，快去看看微客消息通知吧!");
+        MyLog.e("有人选择了你接单，快去看看微客消息通知吧!");
+        msgBtn.setIcon(getResources().getDrawable(R.drawable.ic_index_msg2));
+        msgBtn.setBadgeVisible(true);
+    }
+
     @Override
     protected void onDestroy() {
         MyLog.i("MainAct destroy");
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }//MainAct_cls
 

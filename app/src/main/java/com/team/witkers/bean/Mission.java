@@ -1,6 +1,7 @@
 package com.team.witkers.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,12 +37,19 @@ public class Mission extends BmobObject implements Serializable {
     private Date dealTime;//完成交易时间
     private String category;//类别 标签
 
-
-
     private double latitude;
     private double longitude;
-
     private BmobGeoPoint missionLocation;
+
+    private Integer times=0 ;// 更新数据次数, 用来判断是否是 新发布的任务
+
+    public void setTimes(Integer times) {
+        this.times = times;
+    }
+
+    public Integer getTimes() {
+        return times;
+    }
 
     public void setName(String name) {
         this.name = name;

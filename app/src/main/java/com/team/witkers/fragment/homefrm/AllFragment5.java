@@ -15,6 +15,8 @@ import com.team.witkers.R;
 import com.team.witkers.adapter.MissionAdapter;
 import com.team.witkers.base.BaseFragment;
 import com.team.witkers.bean.Mission;
+import com.team.witkers.eventbus.MsgEvent;
+import com.team.witkers.eventbus.OrdersMsgEvent2;
 import com.team.witkers.eventbus.PubMissionEvent;
 import com.team.witkers.utils.MyToast;
 import com.team.witkers.utils.NetworkUtils;
@@ -326,6 +328,18 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
         else
             queryData(0, STATE_REFRESH);
     }
+
+    @Subscribe
+    public void onEventMainThread(OrdersMsgEvent2 event) {
+        // 下拉刷新(从第一页开始装载数据)
+//        MyToast.showToast(getActivity(),"有人发布任务啦啦");
+        MyLog.i("有人发布新任务啦");
+        if(mAdapter==null)
+            queryData(0, STATE_NONE);
+        else
+            queryData(0, STATE_REFRESH);
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();

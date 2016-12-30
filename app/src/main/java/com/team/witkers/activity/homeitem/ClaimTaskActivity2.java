@@ -326,6 +326,7 @@ public class ClaimTaskActivity2 extends BaseActivity implements View.OnClickList
                   headUrl,curTime,0));
       }
         myMission.setMissionTaker(relation);
+        myMission.increment("times"); // 更新数据
         myMission.update(myMission.getObjectId(),new UpdateListener() {
             @Override
             public void done(BmobException e) {

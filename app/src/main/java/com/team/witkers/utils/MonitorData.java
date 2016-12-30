@@ -27,6 +27,7 @@ import cn.bmob.v3.listener.ValueEventListener;
  * Created by hys on 2016/8/26.
  */
 public class MonitorData {
+    //监听  动态消息的
     private static BmobRealTimeData    bmobRealTimeData;
     private static JSONObject jsonData;
     public static void monitorData(){
@@ -38,7 +39,7 @@ public class MonitorData {
                 if( bmobRealTimeData.isConnected()){
                     // 监听动态项表更新
                     bmobRealTimeData.subTableUpdate("TendItems");
-                    bmobRealTimeData.subTableUpdate("Mission");
+//                    bmobRealTimeData.subTableUpdate("Mission");
                 }
             }
 
@@ -59,7 +60,7 @@ public class MonitorData {
 
 //            JSON.parseObject(jsonObj, TendItems.class);
            jsonData= jsonObj.getJSONObject("data");
-            MyLog.e("data_ "+jsonData.toString().substring(0,10));
+//            MyLog.e("data_ "+jsonData.toString());
             MyLog.e("friendName_ "+jsonData.getString("friendName"));
 
             String friendName=jsonData.getString("friendName");
@@ -120,22 +121,7 @@ public class MonitorData {
         } catch (JSONException e) {
             e.printStackTrace();
             MyLog.e("json解析失败"+e.getMessage());
-            try {
-                JSONObject jsonObj1= jsonData.getJSONObject("chooseClaimant");
-              String claimName=  jsonObj1.getString("claimName");
-                String pubUserName=jsonObj1.getString("pubUserName");
-                MyLog.v("claimName_ "+claimName);
-                if(MyApplication.mUser.getUsername().equals(claimName)){
-                    MyLog.v("你被"+pubUserName+"选为接单者，赶紧去完成任务吧!");
-                    //通知 显示小红点
-                    EventBus.getDefault().post(new ChooseNotify());
-                }
-
-            } catch (JSONException e1) {
-                e1.printStackTrace();
-                MyLog.e("json第二次解析失败"+e1.getMessage());
-            }
-        }
+        }//catch
     }//jsonParse
 
     public static void stopMonitor(){
