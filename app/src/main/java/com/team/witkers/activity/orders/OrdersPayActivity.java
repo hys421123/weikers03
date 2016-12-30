@@ -91,7 +91,7 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
         //如果只有单个claimItem传进来，则无法更新mission类，加入chooseClaimant
         mission = (Mission) getIntent().getSerializableExtra("fromOrdersShow");
         position = getIntent().getIntExtra("position",0);
-        MyLog.i("position-->"+position);
+//        MyLog.i("position-->"+position);
         MyLog.i("info-->"+mission.getInfo()+",price-->"+mission.getClaimItemList().get(position).getClaimMoney());
     }
 
@@ -138,6 +138,39 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
         double price = mission.getClaimItemList().get(position).getClaimMoney();
 //        一下代码是为了防止小米手机支付出错添加的
         //        这段代码加在BP.pay方法调用之前
+
+        //*************************支付暂时不能用，跳过这里************************
+        //只有付款确认后才能填写选定认领人
+        //选定认领项,并填入选定认领人，上传到mission类中
+        final ClaimItems claimItem= mission.getClaimItemList().get(position);
+        ChooseClaimant chooseClaimant=new ChooseClaimant();
+        chooseClaimant.setClaimName(claimItem.getClaimName());
+        chooseClaimant.setClaimMoney(claimItem.getClaimMoney());
+        chooseClaimant.setClaimStatus(false);
+        chooseClaimant.setClaimHeadUrl(claimItem.getClaimHeadUrl());
+        mission.setChooseClaimant(chooseClaimant);
+        mission.setClaimName(claimItem.getClaimName());
+        mission.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if(e==null){
+                    MyLog.d("添加选定认领人成功");
+                    hideDialog();
+                    Intent intent=new Intent();
+                    intent.putExtra("claimItem", claimItem);
+                    setResult(RESULT_CODE,intent);
+                    finish();
+                }else{
+                    MyLog.d("添加选定认领人失败"+e.getMessage());
+                }//else
+            }
+        });
+
+        //*************************支付暂时不能用，跳过这里************************
+
+// 以下是 原来的可支付的代码
+/*
+
         try {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -170,7 +203,7 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
                 //只有付款确认后才能填写选定认领人
                 //选定认领项,并填入选定认领人，上传到mission类中
                final ClaimItems claimItem= mission.getClaimItemList().get(position);
-                ChooseClaimant chooseClaimant=new ChooseClaimant();
+                ChooseNotify chooseClaimant=new ChooseNotify();
                 chooseClaimant.setClaimName(claimItem.getClaimName());
                 chooseClaimant.setClaimMoney(claimItem.getClaimMoney());
                 chooseClaimant.setClaimStatus(false);
@@ -227,6 +260,7 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
                 hideDialog();
             }
         });
+        */
     }//pay
 
     private void downloadPlugin(){

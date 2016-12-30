@@ -326,7 +326,7 @@ public class HotBoomFragment2 extends BaseFragmentForDelayLoad implements SwipeR
     @Override
     public void onDestroy() {
         super.onDestroy();
-        MyLog.v("AllFrm destroy");
+//        MyLog.v("AllFrm destroy");
         EventBus.getDefault().unregister(this);
     }
 }

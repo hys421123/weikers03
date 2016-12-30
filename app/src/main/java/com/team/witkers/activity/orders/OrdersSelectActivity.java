@@ -110,7 +110,7 @@ public class OrdersSelectActivity extends BaseActivity implements View.OnClickLi
         ordersShowAdapter.setOnItemClickListener(new OrdersShowAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, String data, int position) {
-                MyToast.showToast(OrdersSelectActivity.this,"data--->"+data+"----position--->"+position);
+//                MyToast.showToast(OrdersSelectActivity.this,"data--->"+data+"----position--->"+position);
                 takerName = data;
                 OrdersSelectActivity.this.position = position;
             }

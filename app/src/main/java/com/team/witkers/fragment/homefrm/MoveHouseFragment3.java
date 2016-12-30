@@ -325,7 +325,7 @@ public class MoveHouseFragment3 extends BaseFragmentForDelayLoad implements Swip
     @Override
     public void onDestroy() {
         super.onDestroy();
-        MyLog.v("AllFrm destroy");
+//        MyLog.v("AllFrm destroy");
         EventBus.getDefault().unregister(this);
     }
 }

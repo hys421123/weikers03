@@ -329,7 +329,7 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void onDestroy() {
         super.onDestroy();
-        MyLog.v("AllFrm destroy");
+//        MyLog.v("AllFrm destroy");
         EventBus.getDefault().unregister(this);
     }
 

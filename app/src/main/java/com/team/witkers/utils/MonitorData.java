@@ -6,7 +6,9 @@ import com.team.witkers.MyApplication;
 import com.team.witkers.bean.MyUser;
 import com.team.witkers.bean.TendComments;
 import com.team.witkers.bean.TendItems;
+import com.team.witkers.eventbus.ChooseNotify;
 import com.team.witkers.eventbus.MonitorEvent;
+import com.team.witkers.eventbus.PubMissionEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -26,6 +28,7 @@ import cn.bmob.v3.listener.ValueEventListener;
  */
 public class MonitorData {
     private static BmobRealTimeData    bmobRealTimeData;
+    private static JSONObject jsonData;
     public static void monitorData(){
          bmobRealTimeData= new BmobRealTimeData();
         bmobRealTimeData.start(new ValueEventListener() {
@@ -35,7 +38,7 @@ public class MonitorData {
                 if( bmobRealTimeData.isConnected()){
                     // 监听动态项表更新
                     bmobRealTimeData.subTableUpdate("TendItems");
-//                    bmobRealTimeData.subTableUpdate("Mission");
+                    bmobRealTimeData.subTableUpdate("Mission");
                 }
             }
 
@@ -55,8 +58,14 @@ public class MonitorData {
         try {
 
 //            JSON.parseObject(jsonObj, TendItems.class);
-            JSONObject jsonData= jsonObj.getJSONObject("data");
+           jsonData= jsonObj.getJSONObject("data");
+            MyLog.e("data_ "+jsonData.toString().substring(0,10));
+            MyLog.e("friendName_ "+jsonData.getString("friendName"));
+
             String friendName=jsonData.getString("friendName");
+
+            if(friendName==null)
+                MyLog.e("friendName_ null");
 //            MyLog.i("TendItems_Name_ "+friendName);
             //若监听的好友不是当前用户，不予返回监听内容
             //即  只监听当前登录用户的更新状态
@@ -110,7 +119,22 @@ public class MonitorData {
 
         } catch (JSONException e) {
             e.printStackTrace();
-            MyLog.e("json解析失败");
+            MyLog.e("json解析失败"+e.getMessage());
+            try {
+                JSONObject jsonObj1= jsonData.getJSONObject("chooseClaimant");
+              String claimName=  jsonObj1.getString("claimName");
+                String pubUserName=jsonObj1.getString("pubUserName");
+                MyLog.v("claimName_ "+claimName);
+                if(MyApplication.mUser.getUsername().equals(claimName)){
+                    MyLog.v("你被"+pubUserName+"选为接单者，赶紧去完成任务吧!");
+                    //通知 显示小红点
+                    EventBus.getDefault().post(new ChooseNotify());
+                }
+
+            } catch (JSONException e1) {
+                e1.printStackTrace();
+                MyLog.e("json第二次解析失败"+e1.getMessage());
+            }
         }
     }//jsonParse
 

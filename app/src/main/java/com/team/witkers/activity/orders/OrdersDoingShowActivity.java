@@ -61,7 +61,7 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
     private int claimPosition;
     private String stateStr;
     private ImageButton ib_call;
-    //    private ChooseClaimant claimant;
+    //    private ChooseNotify claimant;
     private String phoneNum;
 
     //别人选择你，你帮别人完成任务

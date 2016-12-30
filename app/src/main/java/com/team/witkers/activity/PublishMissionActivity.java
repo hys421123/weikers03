@@ -357,7 +357,7 @@ public class PublishMissionActivity extends AppCompatActivity implements View.On
         mission.setMissionLocation(new BmobGeoPoint(longitude,latitude));
 
         ///////////
-//        ChooseClaimant claimant=new ChooseClaimant();
+//        ChooseNotify claimant=new ChooseNotify();
 //        mission.setChooseClaimant(claimant);
 
         final ProgressDialog dialog = new ProgressDialog(this, "发布中...");
