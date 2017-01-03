@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main_2);
 
        EventBus.getDefault().register(this);
-        myPoint = new BmobGeoPoint(114.398331,30.506929);
+//        myPoint = new BmobGeoPoint(114.398331,30.506929);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{"android.permission.ACCESS_COARSE_LOCATION"}, 111);
         }
