@@ -40,6 +40,8 @@ import cn.bmob.v3.listener.FindListener;
  * Created by shanyao on 2016/6/17.
  */
 public class MessagesFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,MsgTendAdapter.onRecyclerViewItemClickListener {
+    //动态消息窗口
+
     private RecyclerView mRecyclerView;
     private LinearLayoutManager linearLayoutManager;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -60,13 +62,6 @@ public class MessagesFragment extends BaseFragment implements SwipeRefreshLayout
 //        super.onCreate(savedInstanceState);
 //        MyLog.i("msgFrm create ");
 //    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-//        MyLog.i("msgFrm onattach ");
-    }
-
 
 //    @Override
 //    public void onCreate( Bundle savedInstanceState) {
@@ -135,17 +130,18 @@ public class MessagesFragment extends BaseFragment implements SwipeRefreshLayout
     @Override
     protected void setListener() {
         mSwipeRefreshLayout.setOnRefreshListener(this);
+        //底下应该是针对 上拉加载更多设置的
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
 //                super.onScrollStateChanged(recyclerView, newState);
 
                 MyLog.i("onScrollStateChanged");
-//                if (mAdapter == null) {
-////                    MyLog.i("mAdapter_null");
-//                    queryBmobData(0, STATE_REFRESH);
-//                    return;
-//                }
+                if (mAdapter == null) {
+//                    MyLog.i("mAdapter_null");
+                    queryBmobData(0, STATE_REFRESH);
+                    return;
+                }
 
 
 //                if (newState == RecyclerView.SCROLL_STATE_IDLE){
@@ -169,8 +165,8 @@ public class MessagesFragment extends BaseFragment implements SwipeRefreshLayout
 //                        //手指用力滑动,离开ListView后,由于惯性继续滚动
 //                        break;
 //                }
-                
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mAdapter.getItemCount()) {
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE &&mAdapter!=null&& lastVisibleItem + 1 == mAdapter.getItemCount()) {
 //                    MyToast.showToast(getActivity(), "Scroll to refresh");
                     MyLog.i("state more!!");
                     queryBmobData(curPage, STATE_MORE);
