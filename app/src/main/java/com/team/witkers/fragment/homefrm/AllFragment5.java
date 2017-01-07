@@ -178,12 +178,12 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
 //                && lastVisibleItem + 1 ==adapter.getItemCount()
 
-//                if(mAdapter==null){
-//                    MyLog.i("mAdapter_null");
-//
-//                    queryData(0, STATE_NONE);
-//                    return;
-//                }
+                if(mAdapter==null){
+                    MyLog.i("mAdapter_null");
+
+                    queryData(0, STATE_NONE);
+                    return;
+                }
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 ==mAdapter.getItemCount()){
                     MyToast.showToast(getActivity(), "Scroll to refresh");
                     queryData(curPage, STATE_MORE);

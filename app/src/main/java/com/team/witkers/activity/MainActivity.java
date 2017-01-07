@@ -1,6 +1,9 @@
 package com.team.witkers.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -38,8 +41,11 @@ import com.team.witkers.fragment.MsgFragment;
 import com.team.witkers.service.MyService;
 import com.team.witkers.utils.MyToast;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import cn.bmob.v3.BmobBatch;
 import cn.bmob.v3.BmobObject;
@@ -101,11 +107,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_2);
 
+//      MyLog.v("SHA1_ "+sHA1(this));
+
        EventBus.getDefault().register(this);
 //        myPoint = new BmobGeoPoint(114.398331,30.506929);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{"android.permission.ACCESS_COARSE_LOCATION"}, 111);
         }
+
+//        AMapLocationClient.setApiKey();
+
 
         MyLog.d("MainAct create");
         initToolBar();
@@ -527,6 +538,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MyLog.i("MainAct destroy");
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    public static String sHA1(Context context) {
+        try {
+            PackageInfo info = context.getPackageManager().getPackageInfo(
+                    context.getPackageName(), PackageManager.GET_SIGNATURES);
+            byte[] cert = info.signatures[0].toByteArray();
+            MessageDigest md = MessageDigest.getInstance("SHA1");
+            byte[] publicKey = md.digest(cert);
+            StringBuffer hexString = new StringBuffer();
+            for (int i = 0; i < publicKey.length; i++) {
+                String appendString = Integer.toHexString(0xFF & publicKey[i])
+                        .toUpperCase(Locale.US);
+                if (appendString.length() == 1)
+                    hexString.append("0");
+                hexString.append(appendString);
+                hexString.append(":");
+            }
+            String result = hexString.toString();
+            return result.substring(0, result.length()-1);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }//MainAct_cls
 

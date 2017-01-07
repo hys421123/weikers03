@@ -121,13 +121,12 @@
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="4b68b26b09c4cde8a613354c5a3ff0d1" />
+            android:value="91b72947a08a2b74a9e3b78d8fde306f" />
 
-        <!-- 4cb89e93340a2da116bf2ea9d6f04d11  后来weike 的key -->
-        <!-- b73a3f9bb4f52979c34beb26df9eda14   原来的key -->
-        <!--e70ee7b023de09604e5fe41e09cf40e2   彭进的key-->
+
         <!--4b68b26b09c4cde8a613354c5a3ff0d1   dell的key-->
         <!--89754d2e985829107b11bffc08dab2b7  labtory's key-->
+        <!--91b72947a08a2b74a9e3b78d8fde306f   0107_dell-->
 
         <!--订单fragment相关-->
         <activity
