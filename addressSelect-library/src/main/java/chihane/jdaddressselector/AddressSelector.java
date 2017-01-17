@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,12 +73,13 @@ public class AddressSelector implements AdapterView.OnItemClickListener {
                 case WHAT_COUNTIES_PROVIDED:
                     counties = (List<County>) msg.obj;
                     countyAdapter.notifyDataSetChanged();
-                    if (Lists.notEmpty(counties)) {
-                        listView.setAdapter(countyAdapter);
-                        tabIndex = INDEX_TAB_COUNTY;
-                    } else {
-                        callbackInternal();
-                    }
+                    callbackInternal();
+//                    if (Lists.notEmpty(counties)) {
+//                        listView.setAdapter(countyAdapter);
+//                        tabIndex = INDEX_TAB_COUNTY;
+//                    } else {
+//                        callbackInternal();
+//                    }
 
                     break;
 
@@ -88,6 +90,7 @@ public class AddressSelector implements AdapterView.OnItemClickListener {
                         listView.setAdapter(streetAdapter);
                         tabIndex = INDEX_TAB_STREET;
                     } else {
+                        Log.i("hys","dao zhe li1");
                         callbackInternal();
                     }
 
@@ -98,6 +101,7 @@ public class AddressSelector implements AdapterView.OnItemClickListener {
             updateProgressVisibility();
             updateIndicator();
 
+            Log.i("hys","return true 了");
             return true;
         }
     });
@@ -160,8 +164,8 @@ public class AddressSelector implements AdapterView.OnItemClickListener {
     private void updateTabsVisibility() {
         textViewProvince.setVisibility(Lists.notEmpty(provinces) ? View.VISIBLE : View.GONE);
         textViewCity.setVisibility(Lists.notEmpty(cities) ? View.VISIBLE : View.GONE);
-        textViewCounty.setVisibility(Lists.notEmpty(counties) ? View.VISIBLE : View.GONE);
-        textViewStreet.setVisibility(Lists.notEmpty(streets) ? View.VISIBLE : View.GONE);
+//        textViewCounty.setVisibility(Lists.notEmpty(counties) ? View.VISIBLE : View.GONE);
+//        textViewStreet.setVisibility(Lists.notEmpty(streets) ? View.VISIBLE : View.GONE);
 
         textViewProvince.setEnabled(tabIndex != INDEX_TAB_PROVINCE);
         textViewCity.setEnabled(tabIndex != INDEX_TAB_CITY);
