@@ -142,7 +142,8 @@ public class EditPersonalInfoActivity extends BaseActivity implements View.OnCli
                         addressDialog.dismiss();
                         showView();
                     }
-                    MyToast.showToast(EditPersonalInfoActivity.this,"更新成功");
+//                    MyToast.showToast(EditPersonalInfoActivity.this,"更新成功");
+                    MyLog.v("更新我的信息资料成功");
                 }else{
                     MyToast.showToast(EditPersonalInfoActivity.this,"更新失败"+e.getMessage()+","+e.getErrorCode());
                 }
@@ -259,7 +260,7 @@ public class EditPersonalInfoActivity extends BaseActivity implements View.OnCli
 //                        (street == null ? "" : street.name);
         String location = (province == null ? "" : province.name) +
                 (city == null ? "" : city.name) ;
-        Toast.makeText(this,location, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,location, Toast.LENGTH_SHORT).show();
         myUser.setLocation(location);
         pubPersonalInfo();
     }
