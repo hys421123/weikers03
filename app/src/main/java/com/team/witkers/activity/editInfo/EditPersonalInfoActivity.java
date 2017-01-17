@@ -252,11 +252,13 @@ public class EditPersonalInfoActivity extends BaseActivity implements View.OnCli
     }
 
     @Override
-    public void onAddressSelected(Province province, City city, County county, Street street) {
+    public void onAddressSelected(Province province, City city) {
+//        String location = (province == null ? "" : province.name) +
+//                        (city == null ? "" : city.name) +
+//                        (county == null ? "" : county.name) +
+//                        (street == null ? "" : street.name);
         String location = (province == null ? "" : province.name) +
-                        (city == null ? "" : city.name) +
-                        (county == null ? "" : county.name) +
-                        (street == null ? "" : street.name);
+                (city == null ? "" : city.name) ;
         Toast.makeText(this,location, Toast.LENGTH_SHORT).show();
         myUser.setLocation(location);
         pubPersonalInfo();

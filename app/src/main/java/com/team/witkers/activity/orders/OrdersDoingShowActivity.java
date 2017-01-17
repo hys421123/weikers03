@@ -1,6 +1,7 @@
 package com.team.witkers.activity.orders;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hys.mylog.MyLog;
+import com.team.witkers.MyApplication;
 import com.team.witkers.R;
 import com.team.witkers.activity.homeitem.NoUnderlineClickableSpan;
 //import com.team.witkers.activity.homeitem.TaskDetailsActivity;
@@ -168,18 +170,26 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
                         tvCompleteTime.setText(mission.getFinishTime());
                         tvAddress.setText(mission.getAddress());
                         ChooseClaimant claimant = mission.getChooseClaimant();
+                        String pubUserName=mission.getPubUserName();
                         Glide.with(OrdersDoingShowActivity.this).load(claimant.getClaimHeadUrl()).into(iv_selectedhead);
                         tv_selectedname.setText(claimant.getClaimName());
                         tv_selectedprice.setText(claimant.getClaimMoney() + "");
-                        queryClaimant(claimant);
+                        queryClaimant(claimant,pubUserName);
 
                     }
                 });
             }
 
-            private void queryClaimant(ChooseClaimant claimant) {
+            private void queryClaimant(ChooseClaimant claimant,String pubUserName) {
                 BmobQuery<MyUser> query2 = new BmobQuery<MyUser>();
-                query2.addWhereEqualTo("username", claimant.getClaimName());
+                String name="";
+                // 若获取的 用户名是本机用户，则不必显示本机用户电话号码，显示他人的
+                if(claimant.getClaimName().equals(MyApplication.mUser.getUsername())){
+                    name=pubUserName;
+                }else{
+                    name=claimant.getClaimName();
+                }
+                query2.addWhereEqualTo("username", name);
                 query2.findObjects(new FindListener<MyUser>() {
                     @Override
                     public void done(List<MyUser> list, BmobException e) {
@@ -291,21 +301,40 @@ public class OrdersDoingShowActivity extends BaseActivity implements View.OnClic
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         requestPermissions(new String[]{"android.permission.CALL_PHONE"}, 111);
                     }
+                    AlertDialog.Builder builder2 = new AlertDialog.Builder(OrdersDoingShowActivity.this);
+                    builder2.setTitle("确认拨打电话 "+phoneNum+" 吗？");
 
-                    Intent intent3 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNum));
-                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        MyLog.e("check error");
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                        //android 6.0
-                        return;
-                    }
-                    startActivity(intent3);
+                    builder2.setPositiveButton("确定",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+
+                                    Intent intent3 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNum));
+                                    if (ActivityCompat.checkSelfPermission(OrdersDoingShowActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                        // TODO: Consider calling
+                                        MyLog.e("check error");
+                                        //    ActivityCompat#requestPermissions
+                                        // here to request the missing permissions, and then overriding
+                                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                        //                                          int[] grantResults)
+                                        // to handle the case where the user grants the permission. See the documentation
+                                        // for ActivityCompat#requestPermissions for more details.
+                                        //android 6.0
+                                        return;
+                                    }
+                                    startActivity(intent3);
+                                }
+                            });
+
+                    builder2.setNegativeButton("取消",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    builder2.show();
+
+
+
                 }
                 else
                    MyLog.e("phone_null");

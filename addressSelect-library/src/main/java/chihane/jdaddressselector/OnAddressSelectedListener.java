@@ -6,5 +6,6 @@ import chihane.jdaddressselector.model.Province;
 import chihane.jdaddressselector.model.Street;
 
 public interface OnAddressSelectedListener {
-    void onAddressSelected(Province province, City city, County county, Street street);
+//    void onAddressSelected(Province province, City city, County county, Street street);
+    void onAddressSelected(Province province, City city);
 }

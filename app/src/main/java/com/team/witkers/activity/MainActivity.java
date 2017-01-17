@@ -107,6 +107,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_2);
 
+        PackageManager manager = this.getPackageManager();
+        PackageInfo info = null;
+        try {
+            info = manager.getPackageInfo(this.getPackageName(), 0);
+            String version = info.versionName;
+            MyLog.v("version_ "+version);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            MyLog.e("version error");
+        }
+
+
 //      MyLog.v("SHA1_ "+sHA1(this));
 
        EventBus.getDefault().register(this);

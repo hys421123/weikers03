@@ -33,15 +33,17 @@ public class HomeAddressSelectActivity extends BaseActivity implements OnAddress
     }
 
     @Override
-    public void onAddressSelected(Province province, City city, County county, Street street) {
+    public void onAddressSelected(Province province, City city) {
         String s =
                 (province == null ? "" : province.name) +
-                        (city == null ? "" : "\n" + city.name) +
-                        (county == null ? "" : "\n" + county.name) +
-                        (street == null ? "" : "\n" + street.name);
+                        (city == null ? "" : "\n" + city.name);
+
+//        +
+//                (county == null ? "" : "\n" + county.name) +
+//                (street == null ? "" : "\n" + street.name)
 
 
-        MyLog.i(province.name+","+city.name+","+county.name);
+//        MyLog.i(province.name+","+city.name+","+county.name);
 
         Intent intent = new Intent(this,MainActivity.class);
         intent.putExtra("location",s);
