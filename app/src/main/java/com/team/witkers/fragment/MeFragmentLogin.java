@@ -276,6 +276,8 @@ public class MeFragmentLogin extends BaseFragment implements View.OnClickListene
 
                 }else{
                     MyLog.e("查询关注失败"+e.getMessage());
+                    tv_focus.setText(0+"");
+                    tv_fans.setText(0+"");
                 }
 
             }//done

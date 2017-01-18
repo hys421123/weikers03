@@ -284,7 +284,9 @@ public class AddTendActivity2 extends BGAPPToolbarActivity implements BGASortabl
 //        默认当前 用户不为 null
         String userName = myUser.getUsername();
         String headUrl = myUser.getHeadUrl();
-//            MyLog.v("myUser_name/head"+userName+"//"+headUrl);
+
+            MyLog.v("AddTendAct_ myUser_name/head"+userName+"//"+headUrl);
+
 
         tend.setPubUser(myUser);
         tend.setFriendName(userName);
@@ -303,7 +305,7 @@ public class AddTendActivity2 extends BGAPPToolbarActivity implements BGASortabl
                 tend.setPicUrlList(picUrlList0);
 
         }
-
+        MyLog.v("pubUser__ "+tend.getPubUser().getUsername());
 
         ////////////////////////////////////////
 

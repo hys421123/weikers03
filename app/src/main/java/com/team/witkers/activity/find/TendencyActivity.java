@@ -97,6 +97,7 @@ public class TendencyActivity extends BaseActivity implements SwipeRefreshLayout
 
     @Override
     protected void initView() {
+        MyLog.v("Tendency Activity");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_tendencies);
         linearLayoutManager = new LinearLayoutManager(this);
