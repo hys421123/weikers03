@@ -189,7 +189,7 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
                     return;
                 }
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 ==mAdapter.getItemCount()){
-                    MyToast.showToast(getActivity(), "Scroll to refresh");
+                    MyToast.showToast(getActivity(), "下拉刷新");
                     queryData(curPage, STATE_MORE);
                 }//if
             }//onScrollStateChanged
@@ -307,7 +307,8 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
                     }
 
                 }else{//查找数据失败
-                    MyToast.showToast(getActivity(),"数据加载失败"+e.getMessage());
+                    MyToast.showToast(getActivity(),"数据加载失败");
+                    MyLog.e("查询失败"+e.getMessage());
                     if (mSwipeRefreshLayout != null) {
                         mSwipeRefreshLayout.setRefreshing(false);
                     }

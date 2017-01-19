@@ -256,8 +256,9 @@ public class TakeOutFragment0 extends BaseFragmentForDelayLoad implements SwipeR
 
                             for (Mission lb : list) {
 //                      MyLog.i("pubUsername_ "+lb.getPubUser().getUsername());
+
                                 if(lb.getChooseClaimant()==null)
-                                dataList.add(lb);
+                                        dataList.add(lb);
                             }
                             mAdapter = new MissionAdapter(getActivity(),dataList);
                             mRecyclerView.setAdapter(mAdapter );
@@ -272,7 +273,8 @@ public class TakeOutFragment0 extends BaseFragmentForDelayLoad implements SwipeR
                     }
 
                 }else{//查找数据失败
-                    MyToast.showToast(getActivity(),"数据加载失败"+e.getMessage());
+                    MyToast.showToast(getActivity(),"数据加载失败");
+                    MyLog.e(e.getMessage());
                     if (mSwipeRefreshLayout != null) {
                         mSwipeRefreshLayout.setRefreshing(false);
                     }

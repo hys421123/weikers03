@@ -313,7 +313,8 @@ public class ExpressFragment1 extends BaseFragmentForDelayLoad implements SwipeR
                     }
 
                 }else{//查找数据失败
-                    MyToast.showToast(getActivity(),"数据加载失败"+e.getMessage());
+                    MyToast.showToast(getActivity(),"数据加载失败");
+                    MyLog.e(e.getMessage());
                     if (mSwipeRefreshLayout != null) {
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
