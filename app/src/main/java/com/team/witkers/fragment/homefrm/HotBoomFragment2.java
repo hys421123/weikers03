@@ -146,6 +146,7 @@ public class HotBoomFragment2 extends BaseFragmentForDelayLoad implements SwipeR
                     // 将本次查询的数据添加到lostList中
                     for (Mission lb : object) {
 //                        MyLog.i("pubUsername_ "+lb.getPubUser().getUsername());
+                        if(lb.getChooseClaimant()==null)
                         dataList.add(lb);
                     }
                     mAdapter = new MissionAdapter(getActivity(),dataList);
@@ -267,6 +268,7 @@ public class HotBoomFragment2 extends BaseFragmentForDelayLoad implements SwipeR
                             // 将本次查询的数据添加到bankCards中
                             for (Mission lb : list) {
 //                      MyLog.i("pubUsername_ "+lb.getPubUser().getUsername());
+                                if(lb.getChooseClaimant()==null)
                                 dataList.add(lb);
                             }
                             mAdapter.notifyDataSetChanged();
@@ -281,6 +283,7 @@ public class HotBoomFragment2 extends BaseFragmentForDelayLoad implements SwipeR
                             // 将本次查询的数据添加到bankCards中
                             for (Mission lb : list) {
 //                      MyLog.i("pubUsername_ "+lb.getPubUser().getUsername());
+                                if(lb.getChooseClaimant()==null)
                                 dataList.add(lb);
                             }
                             mAdapter = new MissionAdapter(getActivity(),dataList);

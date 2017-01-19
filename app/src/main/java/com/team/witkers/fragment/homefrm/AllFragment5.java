@@ -127,10 +127,13 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
             query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
         }
         query.include("pubUser");
+        // 已经选择微客的任务 去掉， chooseClaimant==null 即还没选择微客
+//        query.addWhereEqualTo("chooseClaimant",null);   无效啊
         query.findObjects(new FindListener<Mission>() {
             @Override
             public void done(List<Mission> object, BmobException e) {
                 if(e==null){
+//                    MyLog.v("chooseClaimant_ null");
                     if (object.size() == 0) {
                         MyToast.showToast(getActivity(),"没有数据,快去发布吧!");
 //                        if (mDialog != null) {
@@ -149,7 +152,8 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
                     // 将本次查询的数据添加到lostList中
                     for (Mission lb : object) {
 //                        MyLog.i("pubUsername_ "+lb.getPubUser().getUsername());
-                        dataList.add(lb);
+                        if(lb.getChooseClaimant()==null)
+                           dataList.add(lb);
                     }
                     mAdapter = new MissionAdapter(getActivity(),dataList);
                     mRecyclerView.setAdapter(mAdapter );
@@ -277,7 +281,8 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
                         // 将本次查询的数据添加到bankCards中
                         for (Mission lb : list) {
 //                      MyLog.i("pubUsername_ "+lb.getPubUser().getUsername());
-                            dataList.add(lb);
+                            if(lb.getChooseClaimant()==null)
+                                dataList.add(lb);
                         }
 
 //                        MyLog.e("mAdapter null2");

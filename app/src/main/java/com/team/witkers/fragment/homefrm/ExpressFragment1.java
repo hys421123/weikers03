@@ -152,6 +152,8 @@ public class ExpressFragment1 extends BaseFragmentForDelayLoad implements SwipeR
                     // 将本次查询的数据添加到lostList中
                     for (Mission lb : object) {
 //                        MyLog.i("pubUsername_ "+lb.getPubUser().getUsername());
+
+                        if(lb.getChooseClaimant()==null)
                         dataList.add(lb);
                     }
                     mAdapter = new MissionAdapter(getActivity(),dataList);
@@ -280,7 +282,8 @@ public class ExpressFragment1 extends BaseFragmentForDelayLoad implements SwipeR
                             // 将本次查询的数据添加到bankCards中
                             for (Mission lb : list) {
 //                      MyLog.i("pubUsername_ "+lb.getPubUser().getUsername());
-                                dataList.add(lb);
+                                if(lb.getChooseClaimant()==null)
+                                    dataList.add(lb);
                             }
                             mAdapter.notifyDataSetChanged();
                             // 这里在每次加载完数据后，将当前页码+1，这样在上拉刷新的onPullUpToRefresh方法中就不需要操作  curPage了
@@ -294,7 +297,8 @@ public class ExpressFragment1 extends BaseFragmentForDelayLoad implements SwipeR
                             // 将本次查询的数据添加到bankCards中
                             for (Mission lb : list) {
 //                      MyLog.i("pubUsername_ "+lb.getPubUser().getUsername());
-                                dataList.add(lb);
+                                if(lb.getChooseClaimant()==null)
+                                    dataList.add(lb);
                             }
                             mAdapter = new MissionAdapter(getActivity(),dataList);
                             mRecyclerView.setAdapter(mAdapter );

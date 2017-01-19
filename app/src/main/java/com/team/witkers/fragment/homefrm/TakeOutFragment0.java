@@ -125,7 +125,8 @@ public class TakeOutFragment0 extends BaseFragmentForDelayLoad implements SwipeR
                     // 将本次查询的数据添加到lostList中
                     for (Mission lb : object) {
 //                        MyLog.i("pubUsername_ "+lb.getPubUser().getUsername());
-                        dataList.add(lb);
+                        if(lb.getChooseClaimant()==null)
+                            dataList.add(lb);
                     }
                     mAdapter = new MissionAdapter(getActivity(),dataList);
                     mRecyclerView.setAdapter(mAdapter);
@@ -239,6 +240,7 @@ public class TakeOutFragment0 extends BaseFragmentForDelayLoad implements SwipeR
                             // 将本次查询的数据添加到bankCards中
                             for (Mission lb : list) {
 //                      MyLog.i("pubUsername_ "+lb.getPubUser().getUsername());
+                                if(lb.getChooseClaimant()==null)
                                 dataList.add(lb);
                             }
                             mAdapter.notifyDataSetChanged();
@@ -251,8 +253,10 @@ public class TakeOutFragment0 extends BaseFragmentForDelayLoad implements SwipeR
                             // 获取最后时间
                             lastTime = list.get(list.size() - 1).getCreatedAt();
                             // 将本次查询的数据添加到bankCards中
+
                             for (Mission lb : list) {
 //                      MyLog.i("pubUsername_ "+lb.getPubUser().getUsername());
+                                if(lb.getChooseClaimant()==null)
                                 dataList.add(lb);
                             }
                             mAdapter = new MissionAdapter(getActivity(),dataList);
