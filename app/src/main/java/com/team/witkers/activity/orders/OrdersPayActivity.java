@@ -44,8 +44,8 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
     private TextView tv_num1,tv_num2,tv_num3,tv_num4,tv_topTitle;
     private Button btn_pay;
     private ImageView iv_topBack;
-    private RelativeLayout rel_bankCarPay,rel_weixinPay,rel_aliPay;
-    private RadioButton rb_bankCardPay,rb_weixinPay,rb_aliPay;
+    private RelativeLayout rel_bankCarPay,rel_weixinPay,rel_aliPay,rel_offlinePay;
+    private RadioButton rb_bankCardPay,rb_weixinPay,rb_aliPay,rb_offlinePay;
     private Mission mission;
     private int position;
 
@@ -63,9 +63,12 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
         tv_num3 = (TextView) findViewById(R.id.tv_num3);
         tv_num4 = (TextView) findViewById(R.id.tv_num4);
         btn_pay = (Button) findViewById(R.id.btn_pay);
+        rel_offlinePay= (RelativeLayout) findViewById(R.id.rel_offlinePay);
         rel_bankCarPay = (RelativeLayout) findViewById(R.id.rel_bankCardPay);
         rel_weixinPay = (RelativeLayout) findViewById(R.id.rel_weixinPay);
         rel_aliPay = (RelativeLayout) findViewById(R.id.rel_aliPay);
+
+        rb_offlinePay= (RadioButton) findViewById(R.id.rb_offlinePay);
         rb_bankCardPay = (RadioButton) findViewById(R.id.rb_bankCardPay);
         rb_weixinPay = (RadioButton) findViewById(R.id.tb_weixinPay);
         rb_aliPay = (RadioButton) findViewById(R.id.rb_aliPay);
@@ -84,6 +87,7 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
         rel_bankCarPay.setOnClickListener(this);
         rel_weixinPay.setOnClickListener(this);
         rel_aliPay.setOnClickListener(this);
+        rel_offlinePay.setOnClickListener(this);
     }
 
     @Override
@@ -101,6 +105,9 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
             case R.id.iv_topBack:
                 finish();
                 break;
+            case R.id.rel_offlinePay:
+                setSelect(0);
+                break;
             case R.id.rel_bankCardPay:
                 setSelect(1);
                 break;
@@ -110,6 +117,7 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
             case R.id.rel_aliPay:
                 setSelect(3);
                 break;
+
             case R.id.btn_pay:
 //                MyToast.showToast(this,"pay");
                 if(rb_bankCardPay.isChecked()&&rb_weixinPay.isChecked()&&rb_aliPay.isChecked()){
@@ -369,6 +377,11 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
 
     private void setSelect(int Flag){
         switch (Flag){
+            case 0:
+                resetSelect();
+                rb_offlinePay.setChecked(true);
+
+                break;
             case 1:
                 resetSelect();
                 rb_bankCardPay.setChecked(true);

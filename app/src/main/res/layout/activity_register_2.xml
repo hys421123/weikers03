@@ -61,17 +61,16 @@
 
                     >
 
-
                     <ImageView
                         android:clickable="true"
                         android:layout_marginLeft="10dp"
-                       android:id="@+id/iv_add_photo"
-                        android:layout_alignParentRight="true"
+                        android:id="@+id/iv_add_photo"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@drawable/ic_camera"
 
-                        />
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true" />
 
                     <com.team.witkers.views.KeyEditText
                         android:layout_alignBottom="@id/iv_add_photo"
@@ -91,6 +90,8 @@
                         app:drawableLeftTint="@color/selector_focus"
                         android:textSize="14sp"
                         />
+
+
                 </RelativeLayout>
 
 

@@ -21,6 +21,7 @@ import com.gc.materialdesign.widgets.ProgressDialog;
 import com.hys.mylog.MyLog;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
+import com.team.witkers.MyApplication;
 import com.team.witkers.R;
 import com.team.witkers.bean.ConcernBean;
 import com.team.witkers.bean.MyUser;
@@ -199,8 +200,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     if(userHeadUrl!=null) {
                         MyLog.v("register_headUrl "+userHeadUrl);
                         myUser2.setHeadUrl(userHeadUrl);
-                    }else
+                    }else {
                         MyLog.e("userHeadUrl_null");
+                        myUser2.setHeadUrl(MyApplication.default_roundUrl);
+                    }
 
                     myUser2.setUsername(et_username.getText().toString().trim());
                     myUser2.setMobilePhoneNumber(et_phonenum.getText().toString().trim());

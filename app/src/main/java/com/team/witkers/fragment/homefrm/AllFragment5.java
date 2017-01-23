@@ -118,7 +118,7 @@ public class AllFragment5 extends BaseFragment implements SwipeRefreshLayout.OnR
 //        查询附近的人
         query.addWhereNear("missionLocation",myPoint);
 //        指定距离范围2千米
-        query.addWhereWithinKilometers("missionLocation",myPoint,2.0);
+//        query.addWhereWithinKilometers("missionLocation",myPoint,2.0);
 //        执行查询方法
         boolean isCache = query.hasCachedResult(Mission.class);
         if(isCache){

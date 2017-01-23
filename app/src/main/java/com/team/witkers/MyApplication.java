@@ -40,7 +40,7 @@ public class MyApplication extends Application implements ThemeUtils.switchColor
     public static boolean   SETLOGOUT=false;
     public static MyUser mUser;//当前登录用户
     public static String objId;
-
+    public static String default_roundUrl="http://bmob-cdn-5224.b0.upaiyun.com/2017/01/23/b9b314f20abf44d9bd06bd131f4161f6.webp";
 
     @Override
     public void onCreate() {
