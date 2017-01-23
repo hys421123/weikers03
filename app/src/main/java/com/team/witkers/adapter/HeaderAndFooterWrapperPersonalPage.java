@@ -140,8 +140,10 @@ public class HeaderAndFooterWrapperPersonalPage<T> extends RecyclerView.Adapter<
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (isHeaderViewPos(position))
         {
-            Glide.with(context).load(person.getHeadUrl()).error(R.drawable.ic_default_null_gray)
+//            MyLog.e("PersonalPage_ ");
+            Glide.with(context).load(person.getHeadUrl()).error(R.drawable.default_round2)
                     .into(((MyViewHolder)holder).roundIv_personpage_head);
+
 //            MyLog.i(pubMissionNum+"---"+concernNum+"----"+fansNum+"---"+isConcerned);
             if(meConcerned){//关注中
                 ((MyViewHolder)holder).rl_concern.setBackgroundResource(R.drawable.img_cancel_concern);

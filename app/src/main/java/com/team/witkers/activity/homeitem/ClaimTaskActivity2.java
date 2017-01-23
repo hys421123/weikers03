@@ -126,10 +126,11 @@ public class ClaimTaskActivity2 extends BaseActivity implements View.OnClickList
             String headUrl=myMission.getPubUser().getHeadUrl();
             Glide.with(this)
                     .load(headUrl)
+                    .error(R.drawable.default_round2)
                     .into(iv_head);
         }else{
             Glide.with(this)
-                    .load(R.drawable.default_head)
+                    .load(R.drawable.default_round2)
                     .into(iv_head);
         }
 

@@ -25,6 +25,7 @@ import com.team.witkers.activity.homeitem.NoUnderlineClickableSpan;
 import com.team.witkers.activity.homeitem.PersonalHomePageActivity2;
 import com.team.witkers.bean.Mission;
 import com.team.witkers.bean.MyUser;
+import com.team.witkers.eventbus.ChooseNotify;
 import com.team.witkers.utils.DigitsUtils;
 import com.team.witkers.utils.MyToast;
 import com.team.witkers.utils.liteasysuits.Log;
@@ -89,19 +90,21 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.TakeOutV
 
         Mission mission=new Mission();
         mission=dataList.get(position);
-
+//    MyLog.e("MissionAdapter_ ");
         //TODO 设置头像
-        if(mission.getPubUserHeadUrl()!=null){
-            String headUrl=dataList.get(position).getPubUser().getHeadUrl();
+        if(mission.getPubUser().getUsername()!=null){
+            String headUrl=mission.getPubUser().getHeadUrl();
 
-//         MyLog.e(dataList.get(position).getPubUser().getHeadUrl());
-//            MyLog.d("headUrl__"+headUrl);
+//         MyLog.e("userName_ "+mission.getPubUser().getUsername());
+            MyLog.d("headUrl__"+headUrl);
+
             Glide.with(context)
                     .load(headUrl)
                     .into(holder.round_head);
         }else{
+//            MyLog.d("headUrl null");
             Glide.with(context)
-                    .load(R.drawable.default_head)
+                    .load(R.drawable.default_round2)
                     .into(holder.round_head);
         }
 
@@ -132,8 +135,13 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.TakeOutV
 //        MyLog.i("infoTemp-->"+infoTemp);
         final int index1 = infoTemp.indexOf("#");
         //如果没有这个字符就返回-1
+//        MyLog.v("index1 _ "+index1);
+
+
         if (index1!=-1) {
             int index2 = infoTemp.indexOf("#", index1 + 1);
+
+//            MyLog.v("index2 _ "+index2);
 //            MyLog.v("new String_ "+builder.toString());
             SpannableString spannableString = null;
             if (index2 != -1) {
@@ -203,6 +211,50 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.TakeOutV
                         ds.setColor(Color.rgb(74,125,174));       //设置文件颜色
                     }
                 }, index1, index2 + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+/////////////  其他文字 部分
+                if(index1!=0){//即标签在中间，设置 标签前面的非标签文字
+                    spannableString.setSpan(new NoUnderlineClickableSpan(){
+                        //  前端绿色文字
+                        @Override
+                        public void updateDrawState(TextPaint ds) {
+                            super.updateDrawState(ds);
+                            ds.setColor(context.getResources().getColor(R.color.black_light));       //设置文件颜色
+                        }
+
+                        @Override
+                        public void onClick(View widget) {
+//                            MyLog.d("前端文字");
+                            Mission mission=dataList.get(position);
+                            Intent intent = new Intent(context, ClaimTaskActivity2.class);
+                            intent.putExtra("fromTakeOutMissionAdapterLIN",mission);
+                            context.startActivity(intent);
+                        }
+                    },0,index1,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+
+//                MyLog.v("spannableString_length_ "+spannableString.length());
+                if(index2!=spannableString.length()-2){// 不相等时， 即结束标签不在最后， 要设置后端文字
+                    spannableString.setSpan(new NoUnderlineClickableSpan(){
+                        // 后端红色文字
+                        @Override
+                        public void updateDrawState(TextPaint ds) {
+                            super.updateDrawState(ds);
+                            ds.setColor(context.getResources().getColor(R.color.black_light));       //设置文件颜色
+                        }
+
+
+                        @Override
+                        public void onClick(View widget) {
+//                            MyLog.d("后端文字");
+                            Mission mission=dataList.get(position);
+                            Intent intent = new Intent(context, ClaimTaskActivity2.class);
+                            intent.putExtra("fromTakeOutMissionAdapterLIN",mission);
+                            context.startActivity(intent);
+                        }
+                    },index2+1,spannableString.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+
+
                 holder.tv_takeoutfrm_mission.setText(spannableString);
             }else{
                 holder.tv_takeoutfrm_mission.setText(infoTemp);
