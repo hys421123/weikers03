@@ -153,7 +153,7 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
-            android:src="@drawable/pay_offline" />
+            android:src="@drawable/pay_offline2" />
 
         <TextView
             android:textColor="@color/black"
@@ -170,7 +170,7 @@
             android:textSize="17sp" />
 
         <RadioButton
-            android:shadowColor="@color/blue_dark"
+            android:shadowColor="@color/login_blue_toolbar"
             android:id="@+id/rb_offlinePay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="30dp"
             android:layout_marginRight="30dp"
-            android:buttonTint="@color/black"
+            android:buttonTint="@color/login_blue_toolbar"
             android:focusable="false"
             android:clickable="false" />
     </RelativeLayout>
@@ -201,7 +201,7 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
-            android:src="@drawable/pay_upcash" />
+            android:src="@drawable/pay_upcash2" />
 
         <TextView
             android:textColor="@color/black"
@@ -250,7 +250,7 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
-            android:src="@drawable/pay_wechat" />
+            android:src="@drawable/pay_wechat2" />
 
         <TextView
             android:textColor="@color/black"
@@ -298,7 +298,7 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
-            android:src="@drawable/pay_zfb" />
+            android:src="@drawable/pay_zfb2" />
 
         <TextView
             android:textColor="@color/black"
