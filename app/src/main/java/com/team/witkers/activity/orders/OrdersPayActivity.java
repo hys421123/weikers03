@@ -1,11 +1,15 @@
 package com.team.witkers.activity.orders;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -142,6 +146,38 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
      * 调用支付
      */
     private void pay(boolean bool) {//bool为false微信支付， true为支付宝支付
+
+        if (bool) {//true 为支付宝
+            if (!checkPackageInstalled("com.eg.android.AlipayGphone",
+                    "https://www.alipay.com")) { // 支付宝支付要求用户已经安装支付宝客户端
+                Toast.makeText(OrdersPayActivity.this, "请安装支付宝客户端", Toast.LENGTH_SHORT)
+                        .show();
+                return;
+            }
+        } else {// else 为微信
+            if (checkPackageInstalled("com.tencent.mm", "http://weixin.qq.com")) {// 需要用微信支付时，要安装微信客户端，然后需要插件
+                // 有微信客户端，看看有无微信支付插件
+                int pluginVersion = BP.getPluginVersion(this);
+                if (pluginVersion < PLUGINVERSION) {// 为0说明未安装支付插件,
+                    // 否则就是支付插件的版本低于官方最新版
+                    Toast.makeText(
+                            OrdersPayActivity.this,
+                            pluginVersion == 0 ? "监测到本机尚未安装支付插件,无法进行支付,请先安装插件(无流量消耗)"
+                                    : "监测到本机的支付插件不是最新版,最好进行更新,请先更新插件(无流量消耗)",
+                            Toast.LENGTH_SHORT).show();
+//                    installBmobPayPlugin("bp.db");
+
+                    installApk("bp.db");
+                    return;
+                }
+            } else {// 没有安装微信
+                Toast.makeText(OrdersPayActivity.this, "请安装微信客户端", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
+
+
         showDialog("正在获取订单...");
         String title = "";
         if(bool)
@@ -220,8 +256,6 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
                 MyLog.d("支付成功");
                 hideDialog();
 
-               ;
-
                 //只有付款确认后才能填写选定认领人
                 //选定认领项,并填入选定认领人，上传到mission类中
                final ClaimItems claimItem= mission.getClaimItemList().get(position);
@@ -248,7 +282,7 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
                     }
                 });
 
-            }
+            }//succeed
 
             @Override
             public void fail(int code, String s) {
@@ -261,9 +295,7 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
 //                            Toast.LENGTH_SHORT).show();
 //                    installBmobPayPlugin("bp.db");
                     //去下载插件
-                        downloadPlugin();
-
-
+                    installApk("bp.db");
 
                 } else {
                     Toast.makeText(OrdersPayActivity.this, "支付失败!_", Toast.LENGTH_SHORT).show();
@@ -273,7 +305,7 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
 //                        + code + " ,reason is " + reason + "\n\n");
 //                MyLog.d("支付失败");
                 hideDialog();
-            }
+            }//fail
 
             @Override
             public void unknow() {
@@ -281,10 +313,46 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
 //                tv.append(name + "'s pay status is unknow\n\n");
                 MyToast.showToast(OrdersPayActivity.this,"支付结果未知,请稍后手动查询");
                 hideDialog();
-            }
-        });
+            }//unknow
+        });//BP.pay
 
     }//pay
+
+    private boolean checkPackageInstalled(String packageName, String browserUrl) {
+        try {
+            // 检查是否有支付宝客户端
+            getPackageManager().getPackageInfo(packageName, 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            // 没有安装支付宝，跳转到应用市场
+            try {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("market://details?id=" + packageName));
+                startActivity(intent);
+            } catch (Exception ee) {// 连应用市场都没有，用浏览器去支付宝官网下载
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(browserUrl));
+                    startActivity(intent);
+                } catch (Exception eee) {
+                    Toast.makeText(OrdersPayActivity.this,
+                            "您的手机上没有没有应用市场也没有浏览器，我也是醉了，你去想办法安装支付宝/微信吧",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+        return false;
+    }// checkPackageInstalled
+
+    private static final int REQUESTPERMISSION = 101;
+    private void installApk(String s) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            //申请权限
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUESTPERMISSION);
+        } else {
+            installBmobPayPlugin(s);
+        }
+    }
 
     private void downloadPlugin(){
         AlertDialog.Builder builder=new AlertDialog.Builder(OrdersPayActivity.this);  //先得到构造器

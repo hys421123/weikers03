@@ -1,6 +1,7 @@
 package com.team.witkers.fragment.msgfrm;
 
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.team.witkers.bean.ClaimItems;
 import com.team.witkers.bean.Mission;
 import com.team.witkers.bean.MsgOrdersBean;
 import com.team.witkers.bean.MyUser;
+import com.team.witkers.eventbus.ChooseNotify;
 import com.team.witkers.eventbus.OrdersMsgEvent2;
 import com.team.witkers.utils.MyToast;
 import com.team.witkers.utils.NetworkUtils;
@@ -61,6 +63,7 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
     private String lastTime = "";   //最后一条的时间
     private int LIMIT = 6;        // 每页的数据是10条
     private Button btn_click;
+    private boolean isNotify=false; //是否有通知你被选为接单者， 用来 清除 微客接单消息的小红点
     @Override
     protected int setContentId() {
         return R.layout.fragment_message_orders3;
@@ -114,6 +117,7 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
             MyToast.showToast(getActivity(),"亲，请先登录好吗");
             return;
         }
+        myUser=MyApplication.mUser;
         mDialog = new ProgressDialog(getActivity(), "正在加载");
         mDialog.show();
         queryBmobData(0,STATE_FIRST);
@@ -122,7 +126,8 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
 
     private void queryBmobData(int page, final int actionType) {
 
-        // 查询这个用户认领的认领的所有mission
+        // 查询这个用户认领的所有mission
+        // 先查询认领者，在查询 发布者 ,一定要按照先后顺序，否则无法 都显示出来
         BmobQuery<Mission> query1 = new BmobQuery<Mission>();
         query1.order("-createdAt");
         if (actionType == STATE_MORE) {
@@ -150,7 +155,10 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
             query1.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ONLY);
         else
             query1.setCachePolicy(BmobQuery.CachePolicy.CACHE_ONLY);
-        query1.addWhereRelatedTo("takeMissions", new BmobPointer(myUser));
+
+//        MyLog.v("myUserName_ "+myUser.getUsername());
+
+        query1.addWhereEqualTo("claimName", myUser.getUsername());
         query1.findObjects(new FindListener<Mission>() {
             @Override
             public void done(final List<Mission> takeMissionList, BmobException e) {
@@ -182,9 +190,10 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
                                     if(actionType==STATE_MORE){
                                         msgOrdersBeanAdapter.notifyDataSetChanged();
                                     }else{//刷新或初始化
-                                        lastTime=pubMissionList.get(pubMissionList.size()-1).getCreatedAt();
+                                        if(pubMissionList.size()!=0)
+                                            lastTime=pubMissionList.get(pubMissionList.size()-1).getCreatedAt();
                                         dataListMsgBean=new ArrayList<MsgOrdersBean>();
-                                        dataListMsgBean = getBeanList(pubMissionList);
+                                        dataListMsgBean = getBeanList(takeMissionList,pubMissionList);
 //                                        if(msgOrdersBeanAdapter==null){
 //                                            MyLog.e("adapter null");
                                             msgOrdersBeanAdapter=new  MsgOrdersBeanAdapter(getActivity(),dataListMsgBean);
@@ -217,7 +226,7 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
     }//queryBmobData
 
     //将数据封装到 MsgOrdersBean里
-    private List<MsgOrdersBean>  getBeanList(List<Mission> list){
+    private List<MsgOrdersBean>  getBeanList(List<Mission> takeMissionList,List<Mission> pubMissionList){
         MyLog.i("getBeanList里面");
         List<MsgOrdersBean> beanList = new ArrayList<MsgOrdersBean>();
 
@@ -230,8 +239,9 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
 
         MsgOrdersBean msgOrdersBean0 = new MsgOrdersBean(content0,takerNum0,headUrl0,time0,null,null,0);
         beanList.add(msgOrdersBean0);
+        MyLog.v("msgsOrderBean0__");
 
-        for(Mission mission:list){
+        for(Mission mission:pubMissionList){
             //一个mission 发布任务需要分为有三种分类，
             // 0.没人认领的，跳过封装；  mission.getClaimItemList()==null
             // 1.有认领人数的，没有确定认领人的；  mission.getChooseClaimant()==null(大多数) ,msgOrdersBean.getClaimFlag=1
@@ -320,11 +330,45 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
         MyLog.i("有数据发生了改变22 ----》");
     }
 
+    @Subscribe
+    public void onEventMainThread(ChooseNotify event) {
+//        MyToast.showToast(getActivity(),"有人选择了你接单，快去看看微客消息通知吧!");
+        MyLog.i("------ 有人选择了你接单，快去看看微客消息通知吧!");
+        MyLog.d("小红点显示");
+        MyLog.v("OrdersFrm2_ onEvent");
+
+        isNotify=true;
+        String content0="";
+        int takerNum0=0;
+        // headUrl 0 表示无红点， 1 表示有红点
+        String headUrl0="1";
+        String time0="";
+
+        MsgOrdersBean msgOrdersBean0 = new MsgOrdersBean(content0,takerNum0,headUrl0,time0,null,null,0);
+        dataListMsgBean.set(0,msgOrdersBean0);
+
+        msgOrdersBeanAdapter.notifyItemChanged(0);
+    }
+
 
     @Override
     public void onResume() {
         super.onResume();
         myUser = BmobUser.getCurrentUser(MyUser.class);
+        MyLog.v("OrdersFrm2_ onResume");
+        if(isNotify){// 若之前有通知， 即有小红点 接单通知，这次要清楚掉
+            isNotify=false;
+            String content0="";
+            int takerNum0=0;
+            // headUrl 0 表示无红点， 1 表示有红点
+            String headUrl0="0";
+            String time0="";
+
+            MsgOrdersBean msgOrdersBean0 = new MsgOrdersBean(content0,takerNum0,headUrl0,time0,null,null,0);
+            dataListMsgBean.set(0,msgOrdersBean0);
+
+            msgOrdersBeanAdapter.notifyItemChanged(0);
+        }
         if(myUser==null){
             MyToast.showToast(getActivity(),"请你登陆");
             return;
