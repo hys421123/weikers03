@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 
 import com.gc.materialdesign.widgets.ProgressDialog;
 import com.hys.mylog.MyLog;
@@ -59,6 +60,7 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
     private int curPage = 0;        // 当前页的编号，从0开始
     private String lastTime = "";   //最后一条的时间
     private int LIMIT = 6;        // 每页的数据是10条
+    private Button btn_click;
     @Override
     protected int setContentId() {
         return R.layout.fragment_message_orders3;
@@ -77,8 +79,29 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
         //设置下拉刷新颜色
         mPullLoadMoreRecyclerView.setColorSchemeResources(R.color.swipe_refresh_color);
+        btn_click= (Button) view.findViewById(R.id.btn_click);
+
+        btn_click.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyLog.d("小红点显示");
+
+                String content0="";
+                int takerNum0=0;
+                // headUrl 0 表示无红点， 1 表示有红点
+                String headUrl0="1";
+                String time0="";
+
+                MsgOrdersBean msgOrdersBean0 = new MsgOrdersBean(content0,takerNum0,headUrl0,time0,null,null,0);
+                dataListMsgBean.set(0,msgOrdersBean0);
+
+                msgOrdersBeanAdapter.notifyItemChanged(0);
+            }
+        });
+
 
     }
+
 
     @Override
     protected void setListener() {
@@ -175,7 +198,7 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
                                     }// 刷新或初始化
 
 
-                                    MyLog.i("去掉对话框，去掉刷新");
+//                                    MyLog.i("去掉对话框，去掉刷新");
                                     if(mDialog!=null){ mDialog.dismiss();}
                                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                                 }//size>0
@@ -198,10 +221,11 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
         MyLog.i("getBeanList里面");
         List<MsgOrdersBean> beanList = new ArrayList<MsgOrdersBean>();
 
-//         把微客消息处理 装进去
+//         把微客消息通知 装进去
         String content0="";
         int takerNum0=0;
-        String headUrl0="";
+        // headUrl 0 表示无红点， 1 表示有红点
+        String headUrl0="0";
         String time0="";
 
         MsgOrdersBean msgOrdersBean0 = new MsgOrdersBean(content0,takerNum0,headUrl0,time0,null,null,0);

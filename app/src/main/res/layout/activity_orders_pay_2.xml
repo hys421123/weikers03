@@ -142,6 +142,7 @@
         android:layout_marginTop="20dp"/>
 
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/rel_offlinePay"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -184,11 +185,6 @@
             android:clickable="false" />
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:background="@color/gray_light"
-        android:layout_height="1px" />
-
     <RelativeLayout
         android:id="@+id/rel_bankCardPay"
         android:layout_width="match_parent"
@@ -218,8 +214,8 @@
             android:textSize="17sp" />
 
         <RadioButton
-            android:visibility="gone"
-            android:shadowColor="@color/blue_dark"
+            android:shadowColor="@color/blue"
+
             android:id="@+id/rb_bankCardPay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -228,10 +224,11 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="30dp"
             android:layout_marginRight="30dp"
-            android:buttonTint="@color/black"
+            android:buttonTint="@color/blue"
             android:focusable="false"
             android:clickable="false" />
     </RelativeLayout>
+
 
     <View
         android:layout_width="match_parent"
@@ -267,7 +264,8 @@
             android:textSize="17sp" />
 
         <RadioButton
-            android:visibility="gone"
+            android:shadowColor="@color/blue"
+
             android:id="@+id/tb_weixinPay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -276,7 +274,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="30dp"
             android:layout_marginRight="30dp"
-            android:buttonTint="@color/black"
+            android:buttonTint="@color/blue"
             android:focusable="false"
             android:clickable="false" />
     </RelativeLayout>
@@ -315,7 +313,7 @@
             android:textSize="17sp" />
 
         <RadioButton
-            android:visibility="gone"
+            android:shadowColor="@color/blue"
             android:id="@+id/rb_aliPay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -324,7 +322,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="30dp"
             android:layout_marginRight="30dp"
-            android:buttonTint="@color/black"
+            android:buttonTint="@color/blue"
             android:clickable="false"
             android:focusable="false" />
 

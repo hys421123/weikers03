@@ -21,6 +21,7 @@ import com.team.witkers.base.BaseActivity;
 import com.team.witkers.bean.ChooseClaimant;
 import com.team.witkers.bean.ClaimItems;
 import com.team.witkers.bean.Mission;
+import com.team.witkers.eventbus.ChooseNotify;
 import com.team.witkers.utils.MyToast;
 
 import java.io.File;
@@ -56,7 +57,7 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     protected void initView() {
-        BP.init(this, BmobID);
+//        BP.init(this, BmobID);
 
         tv_num1 = (TextView) findViewById(R.id.tv_num1);
         tv_num2 = (TextView) findViewById(R.id.tv_num2);
@@ -126,10 +127,11 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
                     if(rb_bankCardPay.isChecked()){
                         MyToast.showToast(this,"银行卡支付还未开通");
                     }else if(rb_aliPay.isChecked()){
-                        MyToast.showToast(this,"支付宝支付还未开通");
+//                        MyToast.showToast(this,"支付宝支付还未开通");
+                        pay(true);
                     }else if(rb_weixinPay.isChecked()){
-                        //选择已经开通的支付宝支付
-                        pay();
+                        //选择已经开通的 微信支付
+                        pay(false);
                     }
                 }
                 break;
@@ -139,15 +141,21 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
     /**
      * 调用支付
      */
-    private void pay() {
+    private void pay(boolean bool) {//bool为false微信支付， true为支付宝支付
         showDialog("正在获取订单...");
-        String title = "微客支付";
+        String title = "";
+        if(bool)
+            title="支付宝支付";
+        else
+            title="微信支付";
+
         final String info = mission.getInfo().trim();
         double price = mission.getClaimItemList().get(position).getClaimMoney();
 //        一下代码是为了防止小米手机支付出错添加的
         //        这段代码加在BP.pay方法调用之前
 
-        //*************************支付暂时不能用，跳过这里************************
+        /*
+        //*************************支付暂时不能用的代码************************
         //只有付款确认后才能填写选定认领人
         //选定认领项,并填入选定认领人，上传到mission类中
         final ClaimItems claimItem= mission.getClaimItemList().get(position);
@@ -176,9 +184,11 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
         });
 
         //*************************支付暂时不能用，跳过这里************************
+*/
+
 
 // 以下是 原来的可支付的代码
-/*
+
 
         try {
             Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -188,14 +198,17 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
             intent.setComponent(cn);
             this.startActivity(intent);
         } catch (Throwable e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            MyLog.e(e.getMessage());
         }
+
 //支付类型，true为支付宝支付,false为微信支付
-        BP.pay(title,info,price,false, new PListener() {
+        // 有bug， 这里的title 实际上对应 订单描述
+        BP.pay(title,"商品描述",price,bool, new PListener() {
             @Override
             public void orderId(String s) {
                 // 此处应该保存订单号,比如保存进数据库等,以便以后查询
-                MyToast.showToast(OrdersPayActivity.this,"orderId-->"+s);
+//                MyToast.showToast(OrdersPayActivity.this,"orderId-->"+s);
 //                tv.append(name + "'s orderid is " + orderId + "\n\n");
                 showDialog("获取订单成功!请等待跳转到支付页面~");
             }
@@ -212,7 +225,7 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
                 //只有付款确认后才能填写选定认领人
                 //选定认领项,并填入选定认领人，上传到mission类中
                final ClaimItems claimItem= mission.getClaimItemList().get(position);
-                ChooseNotify chooseClaimant=new ChooseNotify();
+                ChooseClaimant chooseClaimant=new ChooseClaimant();
                 chooseClaimant.setClaimName(claimItem.getClaimName());
                 chooseClaimant.setClaimMoney(claimItem.getClaimMoney());
                 chooseClaimant.setClaimStatus(false);
@@ -253,7 +266,8 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
 
 
                 } else {
-                    Toast.makeText(OrdersPayActivity.this, "支付失败!_"+s, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OrdersPayActivity.this, "支付失败!_", Toast.LENGTH_SHORT).show();
+                    MyLog.e("支付失败_ "+s);
                 }
 //                tv.append(name + "'s pay status is fail, error code is \n"
 //                        + code + " ,reason is " + reason + "\n\n");
@@ -269,7 +283,7 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
                 hideDialog();
             }
         });
-        */
+
     }//pay
 
     private void downloadPlugin(){
@@ -312,6 +326,7 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
             public void succeed(String status) {
                 Toast.makeText(OrdersPayActivity.this, "查询成功!该订单状态为 : " + status,
                         Toast.LENGTH_SHORT).show();
+                MyLog.d("success_ "+status);
 //                tv.append("pay status of" + orderId + " is " + status + "\n\n");
                 hideDialog();
             }
@@ -321,6 +336,7 @@ public class OrdersPayActivity extends BaseActivity implements View.OnClickListe
                 Toast.makeText(OrdersPayActivity.this, "查询失败"+reason, Toast.LENGTH_SHORT).show();
 //                tv.append("query order fail, error code is " + code
 //                        + " ,reason is \n" + reason + "\n\n");
+                MyLog.e("fail_ "+reason);
                 hideDialog();
             }
         });

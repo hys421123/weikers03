@@ -5,6 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:id="@+id/btn_click"
+        android:text="小红点显示"
+        />
+
     <TextView
         android:id="@+id/tv_no3"
         android:visibility="gone"

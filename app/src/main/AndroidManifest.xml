@@ -146,6 +146,8 @@
         <activity
             android:name=".activity.orders.OrdersEvaluateShowActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name="cn.bmob.pay.v3.act.PayAct" />
         <activity
             android:name=".activity.orders.OrdersPayActivity"
             android:theme="@style/AppTheme.NoActionBar" />

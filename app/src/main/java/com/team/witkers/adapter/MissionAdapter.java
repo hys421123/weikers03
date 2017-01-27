@@ -96,7 +96,7 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.TakeOutV
             String headUrl=mission.getPubUser().getHeadUrl();
 
 //         MyLog.e("userName_ "+mission.getPubUser().getUsername());
-            MyLog.d("headUrl__"+headUrl);
+//            MyLog.d("headUrl__"+headUrl);
 
             Glide.with(context)
                     .load(headUrl)

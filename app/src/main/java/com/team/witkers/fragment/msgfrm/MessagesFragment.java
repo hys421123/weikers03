@@ -229,7 +229,7 @@ public class MessagesFragment extends BaseFragment implements SwipeRefreshLayout
                     }//内if
 
                     MyLog.i("查询回复消息成功list_size_ "+list.size());
-                    MyLog.v("curpage_ "+curPage);
+//                    MyLog.v("curpage_ "+curPage);
                     for(int i=0;i<list.size();i++) {
                         MsgTendBean msg2 = new MsgTendBean();
                         TendItems tend1 = list.get(i).getTendItems();

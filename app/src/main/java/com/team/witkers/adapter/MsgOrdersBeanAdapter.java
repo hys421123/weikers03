@@ -74,8 +74,15 @@ public class MsgOrdersBeanAdapter extends RecyclerView.Adapter<MsgOrdersBeanAdap
 //            0. 微客消息通知， 即你被 别人确认 选中接单
             case 0:
                 // 设置 微客消息通知
-                Glide.with(context).load(R.drawable.notice).into(holder.ivPubUser);
-                holder.tvDetails.setText("微客消息通知");
+
+             String s=   msgOrdersBean.getRecentTakerUrl();
+                MyLog.v("urlNum_ "+s);
+                if(s.equals("0"))//若为0,则为无 小红点
+                      Glide.with(context).load(R.drawable.notice2).into(holder.ivPubUser);
+                else// 若为1， 则为有小红点的
+                    Glide.with(context).load(R.drawable.notice2_red).into(holder.ivPubUser);
+
+                holder.tvDetails.setText("接单消息");
                 holder.tvTime.setVisibility(View.GONE);
                 break;
 
