@@ -333,8 +333,8 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
     @Subscribe
     public void onEventMainThread(ChooseNotify event) {
 //        MyToast.showToast(getActivity(),"有人选择了你接单，快去看看微客消息通知吧!");
-        MyLog.i("------ 有人选择了你接单，快去看看微客消息通知吧!");
-        MyLog.d("小红点显示");
+        MyLog.i("------ 有人选择了你接单，快去看看微客消息通知吧!--小红点显示");
+//        MyLog.d("");
 //        MyLog.v("OrdersFrm2_ onEvent");
 
         isNotify=true;
