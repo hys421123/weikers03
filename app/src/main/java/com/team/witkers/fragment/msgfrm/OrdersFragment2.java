@@ -335,7 +335,7 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
 //        MyToast.showToast(getActivity(),"有人选择了你接单，快去看看微客消息通知吧!");
         MyLog.i("------ 有人选择了你接单，快去看看微客消息通知吧!");
         MyLog.d("小红点显示");
-        MyLog.v("OrdersFrm2_ onEvent");
+//        MyLog.v("OrdersFrm2_ onEvent");
 
         isNotify=true;
         String content0="";
@@ -355,7 +355,7 @@ public class OrdersFragment2 extends BaseFragment implements PullLoadMoreRecycle
     public void onResume() {
         super.onResume();
         myUser = BmobUser.getCurrentUser(MyUser.class);
-        MyLog.v("OrdersFrm2_ onResume");
+//        MyLog.v("OrdersFrm2_ onResume");
         if(isNotify){// 若之前有通知， 即有小红点 接单通知，这次要清楚掉
             isNotify=false;
             String content0="";
