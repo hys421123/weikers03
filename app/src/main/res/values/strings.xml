@@ -20,7 +20,7 @@
     <string name="money">佣金</string>
     <string name="add_lable">添加标签</string>
     <string name="pub">发布</string>
-    <string name="pab_new_need">发布新的需求(字数不大于200)...</string>
+    <string name="pab_new_need">发布新的需求(至少添加一个标签)...</string>
     <string name="niming">匿名任务</string>
 
 

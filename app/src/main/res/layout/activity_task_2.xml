@@ -79,12 +79,11 @@
 
 
     <ScrollView
-        android:layout_above="@id/rl_pub"
-        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        >
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentStart="true">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

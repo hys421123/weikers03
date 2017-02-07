@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
        android:id="@+id/btn_click"
         android:text="小红点显示"
+        android:visibility="gone"
         />
 
     <TextView
