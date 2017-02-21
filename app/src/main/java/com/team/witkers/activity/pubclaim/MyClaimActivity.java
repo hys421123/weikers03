@@ -35,11 +35,12 @@ public class MyClaimActivity extends BaseActivity implements View.OnClickListene
     private RecyclerView mRecyclerView;
     private LinearLayoutManager linearLayoutManager;
     private LinearLayout ll_allOrders;
-    private TextView tv_no1;
+    private TextView tv_no1,tv_totalIncome;
 
     private int LIMIT = 8;        // 每页的数据是8条
     private List<Mission> dataList = new ArrayList<>();
     private MissionStateAdapter mAdapter;
+    private float totalIncome=0.0f;
 
     @Override
     protected int setContentId() {
@@ -56,6 +57,7 @@ public class MyClaimActivity extends BaseActivity implements View.OnClickListene
         mRecyclerView= (RecyclerView)findViewById(R.id.mRecyclerView);
         ll_allOrders= (LinearLayout) findViewById(R.id.ll_allOrders);
         tv_no1= (TextView) findViewById(R.id.tv_no1);
+        tv_totalIncome= (TextView) findViewById(R.id.tv_totalIncome);
 
         linearLayoutManager=new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -108,6 +110,8 @@ public class MyClaimActivity extends BaseActivity implements View.OnClickListene
                     }
 
                     for (Mission mission: list) {
+                        //总收益从全部订单中得到
+                        totalIncome=totalIncome+mission.getCharges();
                         //若该任务确定的认领人正是这个missionTaker的话，说明该任务待完成、正在进行中
                         if(mission.getChooseClaimant()!=null&&mission.getChooseClaimant().getClaimName().equals(MyApplication.mUser.getUsername()))
                         {
@@ -117,6 +121,7 @@ public class MyClaimActivity extends BaseActivity implements View.OnClickListene
 //                        MyLog.i("pubUsername_ "+lb.getPubUser().getUsername());
 
                     }
+                    tv_totalIncome.setText("¥"+totalIncome);
 //                    MyLog.i("dataList_size "+dataList.size());
                     if (dataList.size() == 0) {
                         tv_no1.setVisibility(View.VISIBLE);
